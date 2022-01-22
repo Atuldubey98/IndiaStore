@@ -106,7 +106,6 @@ const updateProduct = async (req, res) => {
       },
     };
     const product = await docClient.get(params).promise();
-    console.log(product);
     if (typeof product.Item === "undefined") {
       const error = new Error();
       error.status = 404;
@@ -142,10 +141,48 @@ const updateProduct = async (req, res) => {
   }
 };
 
+const uploadImageById = async (req, res) => {
+  try {
+    const productId = req.query.productId;
+    const location = req.file.location;
+    const params = {
+      TableName: Products,
+      Key: {
+        productId,
+      },
+    };
+    const product = await docClient.get(params).promise();
+    if (typeof product.Item === "undefined") {
+      const error = new Error();
+      error.status = 404;
+      error.message = "Product Does not exist !";
+      throw error;
+    }
+    if (location) {
+      const updateProduct = await docClient
+        .update({
+          ...params,
+          ReturnValues: "UPDATED_NEW",
+          UpdateExpression: "set productImageURL = :productImageURL",
+          ExpressionAttributeValues: {
+            ":productImageURL": location,
+          },
+        })
+        .promise();
+      if (updateProduct.$response.data) {
+        return res.status(200).json({ status: true, updateProduct });
+      }
+    }
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
 module.exports = {
   getProduct,
   getProducts,
   addProduct,
   deleteById,
+  uploadImageById,
   updateProduct,
 };
