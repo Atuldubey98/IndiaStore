@@ -92,9 +92,60 @@ const deleteById = async (req, res) => {
   }
 };
 
+const updateProduct = async (req, res) => {
+  try {
+    const productName = req.body.productName;
+    const productDescription = req.body.productDescription;
+    const productImageURL = req.body.productImageURL;
+    const productPrice = req.body.productPrice;
+    const productId = req.query.productId;
+    const params = {
+      TableName: Products,
+      Key: {
+        productId,
+      },
+    };
+    const product = await docClient.get(params).promise();
+    console.log(product);
+    if (typeof product.Item === "undefined") {
+      const error = new Error();
+      error.status = 404;
+      error.message = "Product Does not exist !";
+      throw error;
+    }
+    const updatedProduct = productItem(
+      productId,
+      productName,
+      productDescription,
+      productImageURL,
+      productPrice
+    );
+    const update = await docClient
+      .update({
+        ...params,
+        ReturnValues: "UPDATED_NEW",
+        UpdateExpression:
+          "set productName = :productName, productDescription = :productDescription, productImageURL = :productImageURL, productPrice = :productPrice",
+        ExpressionAttributeValues: {
+          ":productName": productName,
+          ":productDescription": productDescription,
+          ":productImageURL": productImageURL,
+          ":productPrice": productPrice,
+        },
+      })
+      .promise();
+    if (update.$response.data) {
+      return res.status(200).json({ status: true, updated: updatedProduct });
+    }
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
 module.exports = {
   getProduct,
   getProducts,
   addProduct,
   deleteById,
+  updateProduct,
 };
