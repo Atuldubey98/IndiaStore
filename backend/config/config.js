@@ -6,6 +6,7 @@ const ACCESS_KEY_ID= process.env.ACCESS_KEY_ID;
 const Products= process.env.Products;
 const REGION = process.env.REGION
 const BUCKET = process.env.BUCKET
+const Users = process.env.Users;
 
 module.exports = {
     PORT,
@@ -13,5 +14,6 @@ module.exports = {
     ACCESS_KEY_ID,
     Products,
     REGION,
-    BUCKET
+    BUCKET,
+    Users
 }

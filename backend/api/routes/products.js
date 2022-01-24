@@ -1,5 +1,6 @@
 const express = require("express");
 const { upload } = require("../awsSetup");
+
 const {
   getProduct,
   getProducts,
@@ -16,6 +17,6 @@ router.post("/", addProduct);
 router.delete("/", deleteById);
 router.patch("/", updateProduct);
 router.get("/all", getProducts);
-router.post("/upload", upload.single('avatar'), uploadImageById)
+router.post("/upload", upload.single("avatar"), uploadImageById);
 
 module.exports = router;

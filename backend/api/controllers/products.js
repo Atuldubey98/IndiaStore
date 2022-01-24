@@ -1,7 +1,7 @@
 const AWS = require("aws-sdk");
 const uuid = require("uuid");
 require("../awsSetup");
-const Products = require("../../config").Products;
+const Products = require("../../config/config").Products;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const productItem = require("../../models/products");
 
