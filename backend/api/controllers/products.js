@@ -4,7 +4,7 @@ require("../awsSetup");
 const Products = require("../../config/config").Products;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const productItem = require("../../models/products");
-
+const errorHandler = require('../errorHandler');
 const getProduct = async (req, res) => {
   try {
     const productId = req.query.productId;
@@ -178,6 +178,38 @@ const uploadImageById = async (req, res) => {
   }
 };
 
+const addManyProducts = (req, res) => {
+  try {
+    const products = req.body.products;
+    if (products.length > 5) {
+      errorHandler({
+        status: false,
+        message: "Number of Products should be less than 5",
+      });
+    }
+    products.forEach(async (p) => {
+      const product = productItem(
+        uuid.v4(),
+        p.productName,
+        p.productDescription,
+        p.productImageURL,
+        p.productPrice
+      );
+      await docClient
+        .put({
+          TableName: Products,
+          Item: {
+            ...product,
+          },
+        })
+        .promise();
+      
+    });
+    return res.status(200).json({ status: true, message: "Products Created!" });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
 module.exports = {
   getProduct,
   getProducts,
@@ -185,4 +217,5 @@ module.exports = {
   deleteById,
   uploadImageById,
   updateProduct,
+  addManyProducts,
 };
