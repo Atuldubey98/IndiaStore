@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const SECRET_ACCESS_KEY= process.env.SECRET_ACCESS_KEY;
 const ACCESS_KEY_ID= process.env.ACCESS_KEY_ID;
