@@ -16,7 +16,11 @@ const router = express.Router();
 
 router.get("/", passport.authenticate("jwt", { session: false }), getProduct);
 router.post("/", passport.authenticate("jwt", { session: false }), addProduct);
-router.post("/all",addManyProducts);
+router.post(
+  "/all",
+  passport.authenticate("jwt", { session: false }),
+  addManyProducts
+);
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
