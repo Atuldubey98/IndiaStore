@@ -1,6 +1,7 @@
 const express = require("express");
 const { upload } = require("../awsSetup");
-
+const passport = require("passport");
+require("../../config/passport")(passport);
 const {
   getProduct,
   getProducts,
@@ -12,11 +13,28 @@ const {
 
 const router = express.Router();
 
-router.get("/", getProduct);
-router.post("/", addProduct);
-router.delete("/", deleteById);
-router.patch("/", updateProduct);
-router.get("/all", getProducts);
-router.post("/upload", upload.single("avatar"), uploadImageById);
+router.get("/", passport.authenticate("jwt", { session: false }), getProduct);
+router.post("/", passport.authenticate("jwt", { session: false }), addProduct);
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  deleteById
+);
+router.patch(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  updateProduct
+);
+router.get(
+  "/all",
+  passport.authenticate("jwt", { session: false }),
+  getProducts
+);
+router.post(
+  "/upload",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("avatar"),
+  uploadImageById
+);
 
 module.exports = router;

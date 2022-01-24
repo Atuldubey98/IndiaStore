@@ -2,8 +2,10 @@ const passport = require("passport");
 require("../../config/passport")(passport);
 const bcrypt = require("bcrypt");
 const AWS = require("aws-sdk");
+const jwt = require("jsonwebtoken");
 const uuid = require("uuid");
 const TableName = require("../../config/config").Users;
+const SECRET_ACCESS_KEY = require("../../config/config").SECRET_ACCESS_KEY;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const getUserModel = require("../../models/users");
 const errorHandler = require("../errorHandler");
@@ -67,10 +69,18 @@ const login = async (req, res) => {
     if (!isAuth) {
       errorHandler({ status: false, message: "Authentication failed !" });
     }
-
+    const token = jwt.sign(
+      {
+        id: user.Item.id,
+        email: user.Item.email,
+        name: user.Item.name,
+      },
+      SECRET_ACCESS_KEY,
+      { expiresIn: 3600 }
+    );
     return res
       .status(200)
-      .json({ status: true, message: `Email authenticated ! + ${email}` });
+      .json({ status: true, token: `Bearer ${token}` });
   } catch (error) {
     return res.status(400).json(error);
   }
