@@ -52,8 +52,16 @@ const getAllCategory = async (req, res) => {
     res.status(400).json(error);
   }
 };
+const getCategoryById = (req, res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 
 module.exports = {
   addCategory,
   getAllCategory,
+  getCategoryById
 };
