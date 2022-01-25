@@ -1,9 +1,24 @@
 const express = require("express");
-const { addCategory, getAllCategory , getCategoryById} = require("../controllers/category");
+const passport = require("passport");
+require("../../config/passport")(passport);
+
+const {
+  addCategory,
+  getAllCategory,
+  getCategoryById,
+} = require("../controllers/category");
 
 const router = express.Router();
 
-router.post("/", addCategory);
-router.get("/all", getAllCategory);
-router.get('/', getCategoryById);
+router.post("/", passport.authenticate("jwt", { session: false }), addCategory);
+router.get(
+  "/all",
+  passport.authenticate("jwt", { session: false }),
+  getAllCategory
+);
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  getCategoryById
+);
 module.exports = router;
