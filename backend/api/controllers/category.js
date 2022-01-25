@@ -52,16 +52,25 @@ const getAllCategory = async (req, res) => {
     res.status(400).json(error);
   }
 };
-const getCategoryById = (req, res)=>{
-    try {
-        
-    } catch (error) {
-        
+const getCategoryById = async (req, res) => {
+  try {
+    const categoryId = req.query.categoryId;
+    if (categoryId == null || categoryId == undefined || isEmpty(categoryId)) {
+      errorHandler({ status: false, message: "Enter the correct categoryId" });
     }
-}
+    const categoryPromise = await docClient
+      .get({ TableName, Key: { categoryId } })
+      .promise();
+    return res
+      .status(200)
+      .json({ status: false, category: categoryPromise.Item });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
 
 module.exports = {
   addCategory,
   getAllCategory,
-  getCategoryById
+  getCategoryById,
 };
