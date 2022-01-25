@@ -6,7 +6,7 @@ const Products= process.env.Products;
 const REGION = process.env.REGION
 const BUCKET = process.env.BUCKET
 const Users = process.env.Users;
-
+const Category = process.env.Category;
 module.exports = {
     PORT,
     SECRET_ACCESS_KEY,
@@ -14,5 +14,10 @@ module.exports = {
     Products,
     REGION,
     BUCKET,
-    Users
+    Users,
+    Category
 }
+
+
+// 21000 ka course me ye nahi karega wo jo abi kiya h maine
+//Environment variables set kiye hai

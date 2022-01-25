@@ -24,3 +24,4 @@ const productItem = (
 };
 
 module.exports = productItem;
+
