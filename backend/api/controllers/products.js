@@ -6,8 +6,6 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const productItem = require("../../models/products");
 const errorHandler = require("../errorHandler");
 
-//jasdjahsjdkajsd
-//hajsdkjasd
 const getProduct = async (req, res) => {
   try {
     const productId = req.query.productId;
