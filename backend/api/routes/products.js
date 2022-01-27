@@ -42,5 +42,4 @@ router.post(
   upload.single("avatar"),
   uploadImageById
 );
-
 module.exports = router;

@@ -192,28 +192,29 @@ const addManyProducts = (req, res) => {
     }
 
     products.forEach(async (p) => {
-        const product = productItem(
-          uuid.v4(),
-          p.productName,
-          p.productDescription,
-          p.productImageURL,
-          p.productPrice
-        );
-        await docClient
-          .put({
-            TableName: Products,
-            Item: {
-              ...product,
-            },
-          })
-          .promise();
-        counter++;      
+      const product = productItem(
+        uuid.v4(),
+        p.productName,
+        p.productDescription,
+        p.productImageURL,
+        p.productPrice
+      );
+      await docClient
+        .put({
+          TableName: Products,
+          Item: {
+            ...product,
+          },
+        })
+        .promise();
+      counter++;
     });
     return res.status(200).json({ status: true, message: "Products Created!" });
   } catch (error) {
     return res.status(400).json(error);
   }
 };
+
 module.exports = {
   getProduct,
   getProducts,
