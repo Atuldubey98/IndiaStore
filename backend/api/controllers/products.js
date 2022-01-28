@@ -2,38 +2,31 @@ const AWS = require("aws-sdk");
 const uuid = require("uuid");
 require("../awsSetup");
 const Products = require("../../config/config").Products;
+const {
+  getProductsDal,
+  getProductByIdDal,
+  addProductDal,
+} = require("../dal/product");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const productItem = require("../../models/products");
 const errorHandler = require("../errorHandler");
-
+const { getCategoryById } = require("../dal/category");
 const getProduct = async (req, res) => {
   try {
     const productId = req.query.productId;
-    const params = {
-      TableName: Products,
-      Key: {
-        productId: productId,
-      },
-    };
-    const product = await docClient.get(params).promise();
-    if (!product.Item) {
-      throw new Error("Product not found !");
+    const product = await getProductByIdDal(productId);
+    if (product) {
+      return res.status(200).json({ status: true, product: product });
     }
-    return res.status(200).json({ status: true, product: product });
+    errorHandler({ status: false, message: "Product Not found" });
   } catch (error) {
-    return res.status(400).json({ status: false, error: error.message });
+    return res.status(400).json(error);
   }
 };
 
 const getProducts = async (req, res) => {
   try {
-    const params = {
-      TableName: Products,
-    };
-    const products = await docClient.scan(params).promise();
-    if (products.Items.length === 0) {
-      throw new Error("Product not found !");
-    }
+    const products = await getProductsDal();
     return res.status(200).json({ status: true, products: products });
   } catch (error) {
     return res.status(400).json({ status: false, error: error.message });
@@ -42,29 +35,21 @@ const getProducts = async (req, res) => {
 
 const addProduct = async (req, res) => {
   const productId = uuid.v4();
-  const productName = req.body.productName;
-  const productDescription = req.body.productDescription;
-  const productImageURL = req.body.productImageURL;
-  const productPrice = req.body.productPrice;
   try {
-    const params = {
-      TableName: Products,
-      Item: productItem(
-        productId,
-        productName,
-        productDescription,
-        productImageURL,
-        productPrice
-      ),
-    };
-    await docClient.put(params).promise();
-    return res.status(200).json({
-      status: true,
-      product: params.Item,
-      url: `/api/v1/products?productId=${productId}`,
+    const product = await addProductDal({ ...req.body, productId });
+    if (product) {
+      return res.status(200).json({
+        status: true,
+        product: product,
+        url: `/api/v1/products?productId=${productId}`,
+      });
+    }
+    errorHandler({
+      status: false,
+      message: "Error Occured",
     });
   } catch (error) {
-    return res.status(400).json({ status: false, error: error.message });
+    return res.status(400).json(error);
   }
 };
 
@@ -216,6 +201,29 @@ const addManyProducts = (req, res) => {
   }
 };
 
+const updateProductCategory = async (req, res) => {
+  try {
+    const categoryId = req.body.categoryId;
+    const productId = req.body.productId;
+    const category = await getCategoryById(categoryId);
+    if (!category) {
+      errorHandler({ status: false, message: "Error occured" });
+    }
+    await docClient.update({
+      TableName : Products,
+      Key: { productId },
+      ReturnValues: "UPDATED_NEW",
+      UpdateExpression: "set categoryId = :categoryId",
+      ExpressionAttributeValues: {
+        ":categoryId": categoryId,
+      },
+    }).promise();
+    return res.status(200).json({status : true, message : `Category Updated for product`})
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error);
+  }
+};
 module.exports = {
   getProduct,
   getProducts,
@@ -224,4 +232,5 @@ module.exports = {
   uploadImageById,
   updateProduct,
   addManyProducts,
+  updateProductCategory,
 };

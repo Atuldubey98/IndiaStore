@@ -1,27 +1,19 @@
 const { isEmpty } = require("validator");
-const productItem = (
-  productId,
-  productName,
-  productDescription,
-  productImageURL,
-  productPrice
-) => {
+const productItem = (product) => {
+
   if (
-    !isEmpty(productName) &&
-    productName != null &&
-    productName != undefined &&
-    typeof productPrice === "number"
+    product.productId === undefined ||
+    product.productName === undefined ||
+    product.productDescription === undefined ||
+    product.productPrice === undefined ||
+    isEmpty(product.productId) ||
+    isEmpty(product.productName) ||
+    isEmpty(product.productDescription) ||
+    product.productPrice <= 0
   ) {
-    return {
-      productId,
-      productName,
-      productDescription,
-      productImageURL,
-      productPrice,
-    };
+    throw new Error("Product cannot be created");
   }
-  throw new Error("Product cannot be created");
+  return product;
 };
 
 module.exports = productItem;
-

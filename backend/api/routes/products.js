@@ -10,6 +10,7 @@ const {
   updateProduct,
   uploadImageById,
   addManyProducts,
+  updateProductCategory,
 } = require("../controllers/products");
 
 const router = express.Router();
@@ -41,5 +42,10 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   upload.single("avatar"),
   uploadImageById
+);
+router.post(
+  "/category",
+  passport.authenticate("jwt", { session: false }),
+  updateProductCategory
 );
 module.exports = router;
