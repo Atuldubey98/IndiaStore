@@ -7,6 +7,8 @@ const REGION = process.env.REGION
 const BUCKET = process.env.BUCKET
 const Users = process.env.Users;
 const Category = process.env.Category;
+const Orders = process.env.Orders;
+
 module.exports = {
     PORT,
     SECRET_ACCESS_KEY,
@@ -15,7 +17,8 @@ module.exports = {
     REGION,
     BUCKET,
     Users,
-    Category
+    Category,
+    Orders
 }
 
 
