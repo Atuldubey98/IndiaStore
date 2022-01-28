@@ -5,7 +5,7 @@ require("../../config/passport")(passport);
 const {
   addCategory,
   getAllCategory,
-  getCategoryById,
+  getCategoryByIdS,
 } = require("../controllers/category");
 
 const router = express.Router();
@@ -13,12 +13,10 @@ const router = express.Router();
 router.post("/", passport.authenticate("jwt", { session: false }), addCategory);
 router.get(
   "/all",
-  passport.authenticate("jwt", { session: false }),
   getAllCategory
 );
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
-  getCategoryById
+  getCategoryByIdS
 );
 module.exports = router;

@@ -4,6 +4,7 @@ const { isEmpty } = require("validator");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const TableName = require("../../config/config").Category;
 const errorHandler = require("../errorHandler");
+const { getAllCategories , getCategoryById} = require("../dal/category");
 
 const addCategory = async (req, res) => {
   try {
@@ -39,31 +40,28 @@ const addCategory = async (req, res) => {
 
 const getAllCategory = async (req, res) => {
   try {
-    // Acha Code
-    //Pro Code optimized
-    const promiseCategory = await docClient.scan({ TableName }).promise();
-    if (promiseCategory.Items.length === 0) {
-      errorHandler({ status: false, message: "No category found !" });
+    const categories = await getAllCategories();
+    if (categories === null) {
+      errorHandler({status : false, message : "There was an error"});
     }
     return res
       .status(200)
-      .json({ status: false, categories: promiseCategory.Items });
+      .json({ status: true, categories: categories });
   } catch (error) {
     res.status(400).json(error);
   }
 };
-const getCategoryById = async (req, res) => {
+const getCategoryByIdS = async (req, res) => {
   try {
     const categoryId = req.query.categoryId;
-    if (categoryId == null || categoryId == undefined || isEmpty(categoryId)) {
-      errorHandler({ status: false, message: "Enter the correct categoryId" });
+    const category = await getCategoryById(categoryId);
+    console.log(category);
+    if (category) {
+      return res
+        .status(200)
+        .json({ status: false, category: category });
     }
-    const categoryPromise = await docClient
-      .get({ TableName, Key: { categoryId } })
-      .promise();
-    return res
-      .status(200)
-      .json({ status: false, category: categoryPromise.Item });
+    errorHandler({status : false , message : "Error Occured"})
   } catch (error) {
     return res.status(400).json(error);
   }
@@ -72,5 +70,5 @@ const getCategoryById = async (req, res) => {
 module.exports = {
   addCategory,
   getAllCategory,
-  getCategoryById,
+  getCategoryByIdS,
 };
