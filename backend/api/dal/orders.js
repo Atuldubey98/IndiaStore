@@ -55,14 +55,16 @@ const getOrdersByUserIdDal = async (userId) => {
     if (!userId) {
       return null;
     }
-    const orders = await docClient.scan({
-      TableName,
-      FilterExpression: "#userId = :userId",
-      ExpressionAttributeNames: { "#userId": "userId" },
-      ExpressionAttributeValues: { ":userId": userId },
-    }).promise();
+    const orders = await docClient
+      .scan({
+        TableName,
+        FilterExpression: "#userId = :userId",
+        ExpressionAttributeNames: { "#userId": "userId" },
+        ExpressionAttributeValues: { ":userId": userId },
+      })
+      .promise();
     if (orders.Count <= 0) {
-      return null
+      return null;
     }
     return orders.Items;
   } catch (error) {
@@ -70,7 +72,26 @@ const getOrdersByUserIdDal = async (userId) => {
     return null;
   }
 };
+
+const updateOrderStatus = async (orderId, status) => {
+  if (!orderId) {
+    return false;
+  }
+  await docClient
+    .update({
+      TableName,
+      Key: { orderId },
+      ReturnValues: "UPDATED_NEW",
+      UpdateExpression: "set status = :status",
+      ExpressionAttributeValues: {
+        ":status": status,
+      },
+    })
+    .promise();
+    return true;
+};
 module.exports = {
   addOrderDal,
-  getOrdersByUserIdDal
+  getOrdersByUserIdDal,
+  updateOrderStatus
 };
