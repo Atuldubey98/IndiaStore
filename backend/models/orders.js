@@ -1,20 +1,25 @@
-const getOrder = (order) => {
+const getOrders = (orders) => {
   if (
-    order.orderId === undefined ||
-    order.userId === undefined ||
-    order.status === undefined ||
-    order.subTotal === undefined ||
-    order.tax === undefined ||
-    order.discount === undefined ||
-    order.grandTotal === undefined ||
-    order.name === undefined ||
-    order.mobile === undefined ||
-    order.city === undefined ||
-    order.country === undefined
+    orders.orderId === undefined ||
+    orders.userId === undefined ||
+    orders.status === undefined ||
+    orders.subTotal === undefined ||
+    isNaN(orders.subTotal) ||
+    orders.tax === undefined ||
+    isNaN(orders.tax)||
+    orders.discount === undefined ||
+    isNaN(orders.discount)||
+    orders.grandTotal === undefined ||
+    orders.name === undefined ||
+    orders.mobile === undefined ||
+    orders.city === undefined ||
+    orders.country === undefined ||
+    orders.orderedItems === undefined ||
+    orders.orderedItems.lengh <= 0
   ) {
-      throw new Error("Order schema error");
+      throw new Error("Orders schema error");
   }
-  return order;
+  return orders;
 };
 
-module.exports = getOrder;
+module.exports = getOrders;

@@ -76,7 +76,7 @@ const login = async (req, res) => {
         name: user.Item.name,
       },
       SECRET_ACCESS_KEY,
-      { expiresIn: 3600 }
+      { expiresIn: 36000 }
     );
     return res
       .status(200)
