@@ -1,5 +1,10 @@
-const { addOrderDal, getOrdersByUserIdDal } = require("../dal/orders");
+const {
+  addOrderDal,
+  getOrdersByUserIdDal,
+  updateOrderStatusDal,
+} = require("../dal/orders");
 const uuid = require("uuid");
+const errorHandler = require("../errorHandler");
 const postOrder = async (req, res) => {
   try {
     const orderId = uuid.v4();
@@ -24,6 +29,23 @@ const getOrdersByUserId = async (req, res) => {
     if (orders) {
       return res.status(200).json({ status: false, orders: orders });
     }
+    errorHandler({ status: false, message: "Error Occured" });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+const updateOrderStatus = async (req, res) => {
+  try {
+    const orderId = req.body.orderId;
+    const status = req.body.status;
+    const updated = await updateOrderStatusDal(orderId, status);
+    if (updated) {
+      return res
+        .status(200)
+        .json({ status: true, order: `Updated with status ${status}` });
+    }
+    errorHandler({ status: false, message: "Error Occured" });
   } catch (error) {
     return res.status(400).json(error);
   }
@@ -31,4 +53,5 @@ const getOrdersByUserId = async (req, res) => {
 module.exports = {
   postOrder,
   getOrdersByUserId,
+  updateOrderStatus,
 };

@@ -73,8 +73,11 @@ const getOrdersByUserIdDal = async (userId) => {
   }
 };
 
-const updateOrderStatus = async (orderId, status) => {
+const updateOrderStatusDal = async (orderId, status) => {
   if (!orderId) {
+    return false;
+  }
+  if (status !== 'Picking' || status !== "Shipped") {
     return false;
   }
   await docClient
@@ -93,5 +96,5 @@ const updateOrderStatus = async (orderId, status) => {
 module.exports = {
   addOrderDal,
   getOrdersByUserIdDal,
-  updateOrderStatus
+  updateOrderStatusDal
 };
