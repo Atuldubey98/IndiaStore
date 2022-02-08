@@ -11,12 +11,6 @@ const {
 const router = express.Router();
 
 router.post("/", passport.authenticate("jwt", { session: false }), addCategory);
-router.get(
-  "/all",
-  getAllCategory
-);
-router.get(
-  "/",
-  getCategoryByIdS
-);
+router.get("/all", getAllCategory);
+router.get("/", getCategoryByIdS);
 module.exports = router;
