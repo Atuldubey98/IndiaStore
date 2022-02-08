@@ -3,12 +3,14 @@ const {
   getOrdersByUserIdDal,
   updateOrderStatusDal,
   cancelOrderByIdDal,
+  getOrderByIdDal,
 } = require("../dal/orders");
 const uuid = require("uuid");
 const errorHandler = require("../errorHandler");
 const postOrder = async (req, res) => {
   try {
     const orderId = uuid.v4();
+
     const order = await addOrderDal({
       ...req.body,
       orderId,
@@ -17,8 +19,8 @@ const postOrder = async (req, res) => {
     if (order) {
       return res.status(200).json({ status: true, order: order });
     }
+    errorHandler({ status: false, message: "Error occured" });
   } catch (error) {
-    console.error(error);
     return res.status(400).json(error);
   }
 };
@@ -38,12 +40,10 @@ const getOrdersByUserId = async (req, res) => {
 
 const updateOrderStatus = async (req, res) => {
   try {
-    const orderId = req.body.orderId;
-    const status = req.body.status;
-    console.log(status);
-    console.log(orderId);
+    const orderId = req.body.orderId ?? " ";
+    const status = req.body.status ?? " ";
+
     const updated = await updateOrderStatusDal(orderId, status);
-    console.log(updated);
     if (updated) {
       return res
         .status(200)
@@ -59,7 +59,6 @@ const cancelOrderById = async (req, res) => {
   try {
     const orderId = req.query.orderId || " ";
     const isDeleted = await cancelOrderByIdDal(orderId);
-    console.log(isDeleted);
     if (isDeleted) {
       return res.status(200).json({ status: true, message: "Order Cancelled" });
     }
@@ -68,9 +67,23 @@ const cancelOrderById = async (req, res) => {
     return res.status(400).json(error);
   }
 };
+
+const getOrderById = async (req, res) => {
+  try {
+    const orderId = req.query.orderId ?? " ";
+    const order = await getOrderByIdDal(orderId);
+    if (!order) {
+      errorHandler({ status: false, message: "Order not avalaible" });
+    }
+    return res.status(200).json({ status: true, order });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
 module.exports = {
   postOrder,
   getOrdersByUserId,
   updateOrderStatus,
-  cancelOrderById
+  cancelOrderById,
+  getOrderById,
 };

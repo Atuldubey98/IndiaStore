@@ -2,7 +2,6 @@ const getOrders = (orders) => {
   if (
     orders.orderId === undefined ||
     orders.userId === undefined ||
-    orders.status === undefined ||
     orders.subTotal === undefined ||
     isNaN(orders.subTotal) ||
     orders.tax === undefined ||

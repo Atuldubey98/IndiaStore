@@ -15,7 +15,6 @@ const addOrderDal = async (order) => {
       ...order,
       subTotal,
       tax,
-      status: "Booked",
       discount: 0,
       grandTotal,
     });
@@ -32,7 +31,7 @@ const addOrderDal = async (order) => {
           discount: discount,
           tax: tax,
           orderedItems,
-          status: "Booked",
+          orderStatus: "Booked",
         },
       })
       .promise();
@@ -42,7 +41,7 @@ const addOrderDal = async (order) => {
       grandTotal: grandTotal,
       discount: discount,
       tax: tax,
-      status: "Booked",
+      orderStatus: "Booked",
     };
   } catch (error) {
     console.error(error);
@@ -75,22 +74,27 @@ const getOrdersByUserIdDal = async (userId) => {
 
 const updateOrderStatusDal = async (orderId, statusValue) => {
   try {
-    if (!orderId) {
+    if (orderId === ' ' && statusValue === ' ') {
       return false;
     }
+
     if (
       statusValue === "Picked" ||
       statusValue === "Shipped" ||
       statusValue === "Delivered"
     ) {
+      const order = await getOrderByIdDal(orderId);
+      if (!order) {
+        return false;
+      }
       await docClient
         .update({
           TableName,
           Key: { orderId },
           ReturnValues: "UPDATED_NEW",
-          UpdateExpression: "set status = :status",
+          UpdateExpression: "set orderStatus = :orderStatus",
           ExpressionAttributeValues: {
-            ":status": statusValue,
+            ":orderStatus": statusValue,
           },
         })
         .promise();
@@ -126,6 +130,7 @@ const cancelOrderByIdDal = async (orderId) => {
     return false;
   }
 };
+
 module.exports = {
   addOrderDal,
   getOrdersByUserIdDal,

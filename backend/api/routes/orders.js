@@ -4,6 +4,7 @@ const {
   getOrdersByUserId,
   updateOrderStatus,
   cancelOrderById,
+  getOrderById,
 } = require("../controllers/orders");
 const passport = require("passport");
 require("../../config/passport")(passport);
@@ -20,6 +21,13 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   getOrdersByUserId
 );
+
+router.get(
+  "/byOrderId",
+  passport.authenticate("jwt", { session: false }),
+  getOrderById
+);
+
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
