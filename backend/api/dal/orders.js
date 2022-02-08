@@ -73,28 +73,33 @@ const getOrdersByUserIdDal = async (userId) => {
   }
 };
 
-const updateOrderStatusDal = async (orderId, status) => {
-  if (!orderId) {
+const updateOrderStatusDal = async (orderId, statusValue) => {
+  try {
+    if (!orderId) {
+      return false;
+    }
+    if (statusValue === "Picked" || statusValue === "Shipped" || statusValue === "Delivered") {
+      await docClient
+        .update({
+          TableName,
+          Key: { orderId },
+          ReturnValues: "UPDATED_NEW",
+          UpdateExpression: "set status = :status",
+          ExpressionAttributeValues: {
+            ":status": statusValue,
+          },
+        })
+        .promise();
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
     return false;
   }
-  if (status !== 'Picking' || status !== "Shipped") {
-    return false;
-  }
-  await docClient
-    .update({
-      TableName,
-      Key: { orderId },
-      ReturnValues: "UPDATED_NEW",
-      UpdateExpression: "set status = :status",
-      ExpressionAttributeValues: {
-        ":status": status,
-      },
-    })
-    .promise();
-    return true;
 };
 module.exports = {
   addOrderDal,
   getOrdersByUserIdDal,
-  updateOrderStatusDal
+  updateOrderStatusDal,
 };

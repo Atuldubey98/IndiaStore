@@ -39,7 +39,10 @@ const updateOrderStatus = async (req, res) => {
   try {
     const orderId = req.body.orderId;
     const status = req.body.status;
+    console.log(status);
+    console.log(orderId);
     const updated = await updateOrderStatusDal(orderId, status);
+    console.log(updated);
     if (updated) {
       return res
         .status(200)
