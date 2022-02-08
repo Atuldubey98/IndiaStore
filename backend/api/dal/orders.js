@@ -78,7 +78,11 @@ const updateOrderStatusDal = async (orderId, statusValue) => {
     if (!orderId) {
       return false;
     }
-    if (statusValue === "Picked" || statusValue === "Shipped" || statusValue === "Delivered") {
+    if (
+      statusValue === "Picked" ||
+      statusValue === "Shipped" ||
+      statusValue === "Delivered"
+    ) {
       await docClient
         .update({
           TableName,
@@ -98,8 +102,34 @@ const updateOrderStatusDal = async (orderId, statusValue) => {
     return false;
   }
 };
+
+const getOrderByIdDal = async (orderId) => {
+  try {
+    const order = await docClient.get({ TableName, Key: { orderId } }).promise();
+    if (order.Item) {
+      return order.Item;
+    }
+    return null;
+  } catch (error) {
+    return null
+  }
+};
+const cancelOrderByIdDal = async (orderId) => {
+  try {
+    const order = await getOrderByIdDal(orderId);
+    if (order) {
+      await docClient.delete({ TableName, Key: { orderId } }).promise();
+      return true;
+    }
+    return false;
+  } catch (error) {
+    return false;
+  }
+};
 module.exports = {
   addOrderDal,
   getOrdersByUserIdDal,
   updateOrderStatusDal,
+  cancelOrderByIdDal,
+  getOrderByIdDal
 };

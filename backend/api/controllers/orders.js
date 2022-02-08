@@ -2,6 +2,7 @@ const {
   addOrderDal,
   getOrdersByUserIdDal,
   updateOrderStatusDal,
+  cancelOrderByIdDal,
 } = require("../dal/orders");
 const uuid = require("uuid");
 const errorHandler = require("../errorHandler");
@@ -53,8 +54,23 @@ const updateOrderStatus = async (req, res) => {
     return res.status(400).json(error);
   }
 };
+
+const cancelOrderById = async (req, res) => {
+  try {
+    const orderId = req.query.orderId || " ";
+    const isDeleted = await cancelOrderByIdDal(orderId);
+    console.log(isDeleted);
+    if (isDeleted) {
+      return res.status(200).json({ status: true, message: "Order Cancelled" });
+    }
+    errorHandler({ status: false, message: "Some error Occured" });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
 module.exports = {
   postOrder,
   getOrdersByUserId,
   updateOrderStatus,
+  cancelOrderById
 };

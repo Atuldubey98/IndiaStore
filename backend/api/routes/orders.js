@@ -3,6 +3,7 @@ const {
   postOrder,
   getOrdersByUserId,
   updateOrderStatus,
+  cancelOrderById,
 } = require("../controllers/orders");
 const passport = require("passport");
 require("../../config/passport")(passport);
@@ -19,5 +20,9 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   getOrdersByUserId
 );
-
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  cancelOrderById
+);
 module.exports = router;
