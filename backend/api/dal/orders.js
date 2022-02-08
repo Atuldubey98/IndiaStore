@@ -7,6 +7,9 @@ const { getSubTotal, getGrandTotal } = require("../helper/orders");
 
 const addOrderDal = async (order) => {
   try {
+    if (!order.orderedItems || !order.orderedItems[0].price || !order.orderedItems[0].quantity) {
+        return null
+    }
     const subTotal = getSubTotal(order.orderedItems);
     const tax = subTotal * 0.05;
     const discount = 0;
