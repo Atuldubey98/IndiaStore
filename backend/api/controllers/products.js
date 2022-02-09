@@ -209,16 +209,20 @@ const updateProductCategory = async (req, res) => {
     if (!category) {
       errorHandler({ status: false, message: "Error occured" });
     }
-    await docClient.update({
-      TableName : Products,
-      Key: { productId },
-      ReturnValues: "UPDATED_NEW",
-      UpdateExpression: "set categoryId = :categoryId",
-      ExpressionAttributeValues: {
-        ":categoryId": categoryId,
-      },
-    }).promise();
-    return res.status(200).json({status : true, message : `Category Updated for product`})
+    await docClient
+      .update({
+        TableName: Products,
+        Key: { productId },
+        ReturnValues: "UPDATED_NEW",
+        UpdateExpression: "set categoryId = :categoryId",
+        ExpressionAttributeValues: {
+          ":categoryId": categoryId,
+        },
+      })
+      .promise();
+    return res
+      .status(200)
+      .json({ status: true, message: `Category Updated for product` });
   } catch (error) {
     return res.status(400).json(error);
   }
