@@ -10,7 +10,6 @@ const ARN = require("../../config/config").ARN;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const getUserModel = require("../../models/users");
 const errorHandler = require("../errorHandler");
-const { sns } = require("../awsSetup");
 const { deactivateUserDal } = require("../dal/users");
 const register = async (req, res, next) => {
   try {
@@ -28,18 +27,8 @@ const register = async (req, res, next) => {
     };
 
     const user = await docClient.get(params).promise();
-    const subscribe = await sns
-      .subscribe({
-        Protocol: "EMAIL",
-        TopicArn: ARN,
-        Endpoint: email,
-      })
-      .promise();
     if (user.Item) {
       errorHandler({ message: "User Already Exist", code: 400 });
-    }
-    if (!subscribe.SubscriptionArn) {
-      errorHandler({ message: "Error Occured" });
     }
     const passwordHash = await bcrypt.hash(newUser.password, 10);
     const createUserParams = {
@@ -53,6 +42,7 @@ const register = async (req, res, next) => {
       },
     };
     const createdUser = await docClient.put(createUserParams).promise();
+   
     if (createdUser) {
       return res.status(200).json({
         status: true,
@@ -62,6 +52,7 @@ const register = async (req, res, next) => {
     }
     errorHandler({ message: "Some error occured", code: 400 });
   } catch (error) {
+    console.log(error);
     return res.status(400).json(error);
   }
 };
