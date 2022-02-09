@@ -4,7 +4,7 @@ const { isEmpty } = require("validator");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const TableName = require("../../config/config").Category;
 const errorHandler = require("../errorHandler");
-const { getAllCategories , getCategoryById} = require("../dal/category");
+const { getAllCategories, getCategoryById } = require("../dal/category");
 
 const addCategory = async (req, res) => {
   try {
@@ -42,11 +42,9 @@ const getAllCategory = async (req, res) => {
   try {
     const categories = await getAllCategories();
     if (categories === null) {
-      errorHandler({status : false, message : "There was an error"});
+      errorHandler({ status: false, message: "There was an error" });
     }
-    return res
-      .status(200)
-      .json({ status: true, categories: categories });
+    return res.status(200).json({ status: true, categories: categories });
   } catch (error) {
     res.status(400).json(error);
   }
@@ -56,11 +54,9 @@ const getCategoryByIdS = async (req, res) => {
     const categoryId = req.query.categoryId;
     const category = await getCategoryById(categoryId);
     if (category) {
-      return res
-        .status(200)
-        .json({ status: false, category: category });
+      return res.status(200).json({ status: true, category: category });
     }
-    errorHandler({status : false , message : "Error Occured"})
+    errorHandler({ status: false, message: "Error Occured" });
   } catch (error) {
     return res.status(400).json(error);
   }
