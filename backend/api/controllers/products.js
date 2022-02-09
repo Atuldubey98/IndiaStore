@@ -130,7 +130,7 @@ const updateProduct = async (req, res) => {
 
 const uploadImageById = async (req, res) => {
   try {
-    if (!req.query.productId || !req.file.location) {
+    if (!req.query.productId || !req.file) {
       errorHandler({ status: false, message: "Error Occured" });
     }
     const productId = req.query.productId;
@@ -162,7 +162,6 @@ const uploadImageById = async (req, res) => {
 
     return res.status(200).json({ status: true, updateProduct });
   } catch (error) {
-    console.log(error);
     return res.status(400).json(error);
   }
 };
