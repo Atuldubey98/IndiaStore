@@ -104,7 +104,6 @@ const deactivateUser = async (req, res) => {
     const confirmPassword = req.body.confirmPassword ?? "";
     if (email === "" || email !== req.user.Item.email) {
       errorHandler({ status: false, message: "Error Occured" });
-      console.log("Error Here email");
     }
     const isDeactivated = await deactivateUserDal(
       email,
