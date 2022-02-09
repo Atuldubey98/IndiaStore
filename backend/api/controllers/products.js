@@ -14,6 +14,7 @@ const { getCategoryById } = require("../dal/category");
 const getProduct = async (req, res) => {
   try {
     const productId = req.query.productId;
+
     const product = await getProductByIdDal(productId);
     if (product) {
       return res.status(200).json({ status: true, product: product });
@@ -129,6 +130,9 @@ const updateProduct = async (req, res) => {
 
 const uploadImageById = async (req, res) => {
   try {
+    if (!req.query.productId || !req.file.location) {
+      errorHandler({ status: false, message: "Error Occured" });
+    }
     const productId = req.query.productId;
     const location = req.file.location;
     const params = {
@@ -137,29 +141,28 @@ const uploadImageById = async (req, res) => {
         productId,
       },
     };
-    const product = await docClient.get(params).promise();
-    if (typeof product.Item === "undefined") {
-      const error = new Error();
-      error.status = 404;
-      error.message = "Product Does not exist !";
-      throw error;
+    const product = await getProductByIdDal(productId);
+    if (!product) {
+      errorHandler({
+        status: false,
+        message: "Product has been removed or some error has occured",
+      });
     }
-    if (location) {
-      const updateProduct = await docClient
-        .update({
-          ...params,
-          ReturnValues: "UPDATED_NEW",
-          UpdateExpression: "set productImageURL = :productImageURL",
-          ExpressionAttributeValues: {
-            ":productImageURL": location,
-          },
-        })
-        .promise();
-      if (updateProduct.$response.data) {
-        return res.status(200).json({ status: true, updateProduct });
-      }
-    }
+
+    await docClient
+      .update({
+        ...params,
+        ReturnValues: "UPDATED_NEW",
+        UpdateExpression: "set productImageURL = :productImageURL",
+        ExpressionAttributeValues: {
+          ":productImageURL": location,
+        },
+      })
+      .promise();
+
+    return res.status(200).json({ status: true, updateProduct });
   } catch (error) {
+    console.log(error);
     return res.status(400).json(error);
   }
 };
