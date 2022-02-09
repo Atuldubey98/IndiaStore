@@ -4,7 +4,11 @@ const { isEmpty } = require("validator");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const TableName = require("../../config/config").Category;
 const errorHandler = require("../errorHandler");
-const { getAllCategories, getCategoryById } = require("../dal/category");
+const {
+  getAllCategories,
+  getCategoryById,
+  deleteCategoryByIdDal,
+} = require("../dal/category");
 
 const addCategory = async (req, res) => {
   try {
@@ -62,8 +66,20 @@ const getCategoryByIdS = async (req, res) => {
   }
 };
 
+const deleteCategoryById = async (req, res) => {
+  try {
+    const isDeleted = await deleteCategoryByIdDal(req.query.categoryId);
+    if (isDeleted) {
+      return res.status(200).json({ status: true });
+    }
+    errorHandler({ status: false, message: "Error Occured" });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
 module.exports = {
   addCategory,
   getAllCategory,
   getCategoryByIdS,
+  deleteCategoryById
 };

@@ -45,6 +45,7 @@ const addProductDal = async (product) => {
   }
 };
 
+
 module.exports = {
   getProductByIdDal,
   getProductsDal,
