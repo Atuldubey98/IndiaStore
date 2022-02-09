@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const uuid = require("uuid");
 const TableName = require("../../config/config").Users;
 const SECRET_ACCESS_KEY = require("../../config/config").SECRET_ACCESS_KEY;
-const ARN = require("../../config/config").ARN;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const getUserModel = require("../../models/users");
 const errorHandler = require("../errorHandler");

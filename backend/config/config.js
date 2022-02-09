@@ -8,7 +8,6 @@ const BUCKET = process.env.BUCKET
 const Users = process.env.Users;
 const Category = process.env.Category;
 const Orders = process.env.Orders;
-const ARN = process.env.ARN;
 module.exports = {
     PORT,
     SECRET_ACCESS_KEY,
@@ -19,5 +18,4 @@ module.exports = {
     Users,
     Category,
     Orders,
-    ARN
 }
