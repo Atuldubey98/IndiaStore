@@ -42,8 +42,15 @@ const register = async (req, res, next) => {
       },
     };
     const createdUser = await docClient.put(createUserParams).promise();
-   
-    if (createdUser) {
+    const sns = new AWS.SNS();
+    const subscribe = await sns
+      .subscribe({
+        Protocol: "EMAIL",
+        TopicArn: ARN,
+        Endpoint: email,
+      })
+      .promise();
+    if (createdUser && subscribe.SubscriptionArn) {
       return res.status(200).json({
         status: true,
         message: "User created",
@@ -52,7 +59,6 @@ const register = async (req, res, next) => {
     }
     errorHandler({ message: "Some error occured", code: 400 });
   } catch (error) {
-    console.log(error);
     return res.status(400).json(error);
   }
 };
