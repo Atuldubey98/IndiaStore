@@ -11,6 +11,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const getUserModel = require("../../models/users");
 const errorHandler = require("../errorHandler");
 const { sns } = require("../awsSetup");
+const { deactivateUserDal } = require("../dal/users");
 const register = async (req, res, next) => {
   try {
     const email = req.body.email;
@@ -98,14 +99,14 @@ const login = async (req, res) => {
 
 const deactivateUser = async (req, res) => {
   try {
-    const email = req.body.email ?? '';
-    const password = req.body.password ?? '';
-    const confirmPassword = req.body.confirmPassword ?? '';
-    if (email === '' || email !== req.user.Item.email) {
+    const email = req.body.email ?? "";
+    const password = req.body.password ?? "";
+    const confirmPassword = req.body.confirmPassword ?? "";
+    if (email === "" || email !== req.user.Item.email) {
       errorHandler({ status: false, message: "Error Occured" });
       console.log("Error Here email");
     }
-    const isDeactivated = await deactivateUser(
+    const isDeactivated = await deactivateUserDal(
       email,
       password,
       confirmPassword
@@ -118,7 +119,6 @@ const deactivateUser = async (req, res) => {
     }
     errorHandler({ status: false, message: "Error Occured" });
   } catch (error) {
-    console.log(error);
     return res.status(400).json(error);
   }
 };

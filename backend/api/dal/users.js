@@ -20,10 +20,11 @@ const getUserByIdDal = async (email) => {
     return null;
   }
 };
-const deactivateUserDal = (email, password, confirmPassword) => {
+const deactivateUserDal = async (email, password, confirmPassword) => {
   if (!email || !password || !confirmPassword || password !== confirmPassword) {
     return false;
   }
+
   try {
     const user = await getUserByIdDal(email);
     if (!user) {
@@ -39,7 +40,6 @@ const deactivateUserDal = (email, password, confirmPassword) => {
       .promise();
     return true;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
