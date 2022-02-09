@@ -42,15 +42,8 @@ const register = async (req, res, next) => {
       },
     };
     const createdUser = await docClient.put(createUserParams).promise();
-    const sns = new AWS.SNS();
-    const subscribe = await sns
-      .subscribe({
-        Protocol: "EMAIL",
-        TopicArn: ARN,
-        Endpoint: email,
-      })
-      .promise();
-    if (createdUser && subscribe.SubscriptionArn) {
+
+    if (createdUser) {
       return res.status(200).json({
         status: true,
         message: "User created",
@@ -109,6 +102,7 @@ const deactivateUser = async (req, res) => {
     );
     if (isDeactivated) {
       req.logout();
+
       return res
         .status(200)
         .json({ status: true, message: "Account Deactivated" });
