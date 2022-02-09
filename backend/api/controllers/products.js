@@ -220,7 +220,6 @@ const updateProductCategory = async (req, res) => {
     }).promise();
     return res.status(200).json({status : true, message : `Category Updated for product`})
   } catch (error) {
-    console.log(error);
     return res.status(400).json(error);
   }
 };

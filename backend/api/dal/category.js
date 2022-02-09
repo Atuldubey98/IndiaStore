@@ -11,7 +11,6 @@ const getAllCategories = async () => {
     }
     return categoriesPromise.Items;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };

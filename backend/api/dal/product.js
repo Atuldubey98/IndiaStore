@@ -22,7 +22,6 @@ const getProductByIdDal = async (productId) => {
     }
     return null;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
@@ -42,11 +41,9 @@ const getProductsDal = async () => {
 const addProductDal = async (product) =>{
     try {
         const newProduct = productItem(product);
-        console.log(newProduct);
         await docClient.put({TableName, Item : newProduct}).promise();
         return newProduct;
     } catch (error) {
-      console.log(error);
         return null;
     }
 }

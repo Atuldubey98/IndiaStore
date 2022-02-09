@@ -70,7 +70,6 @@ const getOrdersByUserIdDal = async (userId) => {
     }
     return orders.Items;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
@@ -105,7 +104,6 @@ const updateOrderStatusDal = async (orderId, statusValue) => {
     }
     return false;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };

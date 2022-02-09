@@ -55,7 +55,6 @@ const getCategoryByIdS = async (req, res) => {
   try {
     const categoryId = req.query.categoryId;
     const category = await getCategoryById(categoryId);
-    console.log(category);
     if (category) {
       return res
         .status(200)
