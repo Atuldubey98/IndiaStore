@@ -30,7 +30,9 @@ const documentClient = AWS.config.update({
   region: REGION,
 });
 
+const sns = new AWS.SNS();
 module.exports = {
   documentClient,
   upload,
+  sns
 };

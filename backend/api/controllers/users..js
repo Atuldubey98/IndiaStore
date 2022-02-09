@@ -6,10 +6,11 @@ const jwt = require("jsonwebtoken");
 const uuid = require("uuid");
 const TableName = require("../../config/config").Users;
 const SECRET_ACCESS_KEY = require("../../config/config").SECRET_ACCESS_KEY;
+const ARN = require("../../config/config").ARN;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const getUserModel = require("../../models/users");
 const errorHandler = require("../errorHandler");
-
+const { sns } = require("../awsSetup");
 const register = async (req, res, next) => {
   try {
     const email = req.body.email;
@@ -24,9 +25,20 @@ const register = async (req, res, next) => {
         email,
       },
     };
+
     const user = await docClient.get(params).promise();
+    const subscribe = await sns
+      .subscribe({
+        Protocol: "EMAIL",
+        TopicArn: ARN,
+        Endpoint: email,
+      })
+      .promise();
     if (user.Item) {
       errorHandler({ message: "User Already Exist", code: 400 });
+    }
+    if (!subscribe.SubscriptionArn) {
+      errorHandler({ message: "Error Occured" });
     }
     const passwordHash = await bcrypt.hash(newUser.password, 10);
     const createUserParams = {
@@ -78,15 +90,40 @@ const login = async (req, res) => {
       SECRET_ACCESS_KEY,
       { expiresIn: 36000 }
     );
-    return res
-      .status(200)
-      .json({ status: true, token: `Bearer ${token}` });
+    return res.status(200).json({ status: true, token: `Bearer ${token}` });
   } catch (error) {
     return res.status(400).json(error);
   }
 };
 
+const deactivateUser = async (req, res) => {
+  try {
+    const email = req.body.email ?? '';
+    const password = req.body.password ?? '';
+    const confirmPassword = req.body.confirmPassword ?? '';
+    if (email === '' || email !== req.user.Item.email) {
+      errorHandler({ status: false, message: "Error Occured" });
+      console.log("Error Here email");
+    }
+    const isDeactivated = await deactivateUser(
+      email,
+      password,
+      confirmPassword
+    );
+    if (isDeactivated) {
+      req.logout();
+      return res
+        .status(200)
+        .json({ status: true, message: "Account Deactivated" });
+    }
+    errorHandler({ status: false, message: "Error Occured" });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error);
+  }
+};
 module.exports = {
   register,
   login,
+  deactivateUser,
 };
