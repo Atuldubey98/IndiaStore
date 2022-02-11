@@ -5,8 +5,9 @@ const products = require("./api/routes/products");
 const users = require("./api/routes/users");
 const category = require("./api/routes/category");
 const orders = require("./api/routes/orders");
+const cors = require("cors");
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/v1/products", products);
