@@ -7,6 +7,8 @@ const category = require("./api/routes/category");
 const orders = require("./api/routes/orders");
 const cors = require("cors");
 const app = express();
+
+//Added Comments
 app.use(cors());
 app.use(bodyParser.json());
 app.get("/api/v1", (req, res) => {
