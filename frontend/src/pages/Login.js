@@ -11,7 +11,7 @@ const Login = () => {
     setEmail(e.target.value);
   };
 
-  const onLoginSubmit = (e) => {
+  const onLoginSubmit = async (e) => {
     e.preventDefault();
   };
   return (
