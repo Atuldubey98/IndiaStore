@@ -3,6 +3,7 @@ import { usersActionsTypes } from "../constants/usersActionsTypes";
 const initialState = {};
 
 export const userReducer = (state = initialState, { type, payload }) => {
+  console.log(state);
   switch (type) {
     case usersActionsTypes.LOADING_USER:
       return {
@@ -21,7 +22,12 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        error: "Some error occured",
+        user: null,
+        error: "Login failed !",
+      };
+    default:
+      return {
+        ...state,
       };
   }
 };

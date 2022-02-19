@@ -1,19 +1,19 @@
 import { usersActionsTypes } from "../constants/usersActionsTypes";
 
-export default setUser = (user) => {
+export const setUser = (user) => {
   return {
     type: usersActionsTypes.SET_USER,
-    payload: user
+    payload: user,
   };
 };
 
-export default setUserLoading = () =>{
-    return {
-        type : usersActionsTypes.LOADING_USER
-    }
-}
-export default setUserError = () =>{
-    return {
-        type : usersActionsTypes.SET_USER_ERROR
-    }
-}
+export const setUserLoading = () => {
+  return {
+    type: usersActionsTypes.LOADING_USER,
+  };
+};
+export const setUserError = () => {
+  return {
+    type: usersActionsTypes.SET_USER_ERROR,
+  };
+};
