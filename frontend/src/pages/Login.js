@@ -46,8 +46,14 @@ const Login = () => {
       ) : userAccess.user ? (
         <Navigate to={"/"} />
       ) : (
-        <form onSubmit={onLoginSubmit}>
-          <input type="email" onChange={onEmailChange} />
+        <form autoComplete={`on`} onSubmit={onLoginSubmit}>
+          <span>
+            <label htmlFor="Email">Email : </label>
+          </span>
+          <input type="email" name="email" onChange={onEmailChange} />
+          <span>
+            <label htmlFor="Password">Password : </label>
+          </span>
           <input type="password" onChange={onPasswordChange} />
           <button type="submit">Login</button>
         </form>

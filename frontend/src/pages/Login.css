@@ -1,0 +1,36 @@
+.login {
+    height: 100vh;
+}
+form {
+  display: grid;
+  width: 50%;
+  min-width: 50%;
+  margin: auto;
+  padding-top: 30vh;
+}
+form input {
+  margin: 10px;
+  font-size: medium;
+  padding: 10px;
+  background-color: white;
+}
+
+form button {
+  width: fit-content;
+  margin: auto;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  background-color: rgba(65, 35, 172, 0.57);
+}
+form button:hover {
+  background-color: rgba(65, 35, 172, 0.891);
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    display: grid;
+    width: 70%;
+    margin: auto;
+  }
+}
