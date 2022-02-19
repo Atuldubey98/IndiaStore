@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLoading, setUser } from "./redux/actions/usersAction";
+import PrivateRoute from "./components/PrivateRoute";
 const App = () => {
   const userAccess = useSelector((state) => state.userAccess);
   console.log(userAccess);
@@ -22,7 +23,14 @@ const App = () => {
     <div className="app">
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Homepage />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Homepage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
