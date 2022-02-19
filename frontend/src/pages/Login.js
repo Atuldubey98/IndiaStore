@@ -44,7 +44,11 @@ const Login = () => {
           <input type="password" onChange={onPasswordChange} />
           <button type="submit">Login</button>
         </form>
-      )}
+      )
+      }
+      {
+        userAccess.error && <h3>{`Some error occured !`}</h3>
+      }
     </div>
   );
 };
