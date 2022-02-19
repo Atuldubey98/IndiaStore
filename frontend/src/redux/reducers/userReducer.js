@@ -3,7 +3,6 @@ import { usersActionsTypes } from "../constants/usersActionsTypes";
 const initialState = {};
 
 export const userReducer = (state = initialState, { type, payload }) => {
-  console.log(state);
   switch (type) {
     case usersActionsTypes.LOADING_USER:
       return {

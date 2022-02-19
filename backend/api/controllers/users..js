@@ -59,7 +59,6 @@ const login = async (req, res) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
-
     const params = {
       TableName,
     };

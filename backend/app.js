@@ -10,7 +10,7 @@ const category = require("./api/routes/category");
 const orders = require("./api/routes/orders");
 app.use(bodyParser.json());
 app.get("/api/v1", (req, res) => {
-  return res.status(200).json({ status: true });
+  return res.status(200).json({ status: true , message: "Server is fit and fine" });
 });
 app.use("/api/v1/products", products);
 app.use("/api/v1/users", users);
