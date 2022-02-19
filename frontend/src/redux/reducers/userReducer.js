@@ -1,6 +1,10 @@
 import { usersActionsTypes } from "../constants/usersActionsTypes";
 
-const initialState = {};
+const initialState = {
+  loading: false,
+  error: null,
+  user: null,
+};
 
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {

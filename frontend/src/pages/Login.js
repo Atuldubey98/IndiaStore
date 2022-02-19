@@ -1,12 +1,14 @@
 import { useState } from "react";
 import usersApi from "../api/users";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   setUser,
   setUserError,
   setUserLoading,
 } from "../redux/actions/usersAction";
 const Login = () => {
+  const userAccess = useSelector((state) => state.userAccess);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -22,9 +24,9 @@ const Login = () => {
     e.preventDefault();
     try {
       dispatch(setUserLoading());
-      const data = await usersApi.loginApi(email, password);
-      if (data) {
-        dispatch(setUser({ email, token: data.token }));
+      const response = await usersApi.loginApi(email, password);
+      if (response) {
+        dispatch(setUser({ email, token: response.data.token }));
       } else {
         throw new Error({});
       }
@@ -34,11 +36,15 @@ const Login = () => {
   };
   return (
     <div className="login">
-      <form onSubmit={onLoginSubmit}>
-        <input type="email" onChange={onEmailChange} />
-        <input type="password" onChange={onPasswordChange} />
-        <button type="submit">Login</button>
-      </form>
+      {userAccess.loading ? (
+        <h1>Loading</h1>
+      ) : (
+        <form onSubmit={onLoginSubmit}>
+          <input type="email" onChange={onEmailChange} />
+          <input type="password" onChange={onPasswordChange} />
+          <button type="submit">Login</button>
+        </form>
+      )}
     </div>
   );
 };
