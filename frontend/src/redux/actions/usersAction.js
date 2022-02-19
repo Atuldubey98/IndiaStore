@@ -7,9 +7,10 @@ export const setUser = (user) => {
   };
 };
 
-export const setUserLoading = () => {
+export const setUserLoading = (loading) => {
   return {
     type: usersActionsTypes.LOADING_USER,
+    payload: loading,
   };
 };
 export const setUserError = () => {

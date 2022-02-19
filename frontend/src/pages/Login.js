@@ -23,7 +23,7 @@ const Login = () => {
   const onLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(setUserLoading());
+      dispatch(setUserLoading(true));
       const response = await usersApi.loginApi(email, password);
       if (response) {
         dispatch(setUser({ email, token: response.data.token }));

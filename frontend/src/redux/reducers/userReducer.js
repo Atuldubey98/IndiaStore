@@ -11,7 +11,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
     case usersActionsTypes.LOADING_USER:
       return {
         ...state,
-        loading: true,
+        loading: payload,
         error: null,
       };
     case usersActionsTypes.SET_USER:
