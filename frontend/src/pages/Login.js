@@ -7,11 +7,14 @@ import {
   setUserError,
   setUserLoading,
 } from "../redux/actions/usersAction";
+import { Navigate, useNavigate } from "react-router-dom";
+import Homepage from "./Homepage";
 const Login = () => {
   const userAccess = useSelector((state) => state.userAccess);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -26,7 +29,10 @@ const Login = () => {
       dispatch(setUserLoading(true));
       const response = await usersApi.loginApi(email, password);
       if (response) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("email", email);
         dispatch(setUser({ email, token: response.data.token }));
+        navigate("/", { replace: true });
       } else {
         throw new Error({});
       }
@@ -38,17 +44,16 @@ const Login = () => {
     <div className="login">
       {userAccess.loading ? (
         <h1>Loading</h1>
+      ) : userAccess.user ? (
+        <Navigate to={'/'}/>
       ) : (
         <form onSubmit={onLoginSubmit}>
           <input type="email" onChange={onEmailChange} />
           <input type="password" onChange={onPasswordChange} />
           <button type="submit">Login</button>
         </form>
-      )
-      }
-      {
-        userAccess.error && <h3>{`Some error occured !`}</h3>
-      }
+      )}
+      {userAccess.error && <h3>{`Some error occured !`}</h3>}
     </div>
   );
 };
