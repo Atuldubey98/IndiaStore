@@ -1,14 +1,13 @@
 import { useState } from "react";
 import usersApi from "../api/users";
 import { useDispatch, useSelector } from "react-redux";
-
+import "./Login.css";
 import {
   setUser,
   setUserError,
   setUserLoading,
 } from "../redux/actions/usersAction";
 import { Navigate, useNavigate } from "react-router-dom";
-import Homepage from "./Homepage";
 const Login = () => {
   const userAccess = useSelector((state) => state.userAccess);
   const [password, setPassword] = useState("");
@@ -45,7 +44,7 @@ const Login = () => {
       {userAccess.loading ? (
         <h1>Loading</h1>
       ) : userAccess.user ? (
-        <Navigate to={'/'}/>
+        <Navigate to={"/"} />
       ) : (
         <form onSubmit={onLoginSubmit}>
           <input type="email" onChange={onEmailChange} />
