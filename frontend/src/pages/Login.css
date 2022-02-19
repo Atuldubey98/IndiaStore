@@ -1,5 +1,6 @@
 .login {
     height: 100vh;
+    background-color: rgb(233, 194, 180);
 }
 form {
   display: grid;
