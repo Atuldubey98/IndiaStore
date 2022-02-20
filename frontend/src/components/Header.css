@@ -25,10 +25,31 @@ a:active {
   color: white;
   text-decoration: none;
 }
+
+.header__content {
+  display: flex;
+  align-items: center;
+}
+.header__content input {
+  width: 50vh;
+  height: 4vh;
+  margin-left: 10px;
+  padding: 2px;
+  border: none;
+  font-size: medium;
+}
+.header__content input:focus{
+  border: none;
+}
 @media only screen and (max-width: 600px) {
   .header {
     font-size: x-large;
     padding: 20px;
+  }
+  .header__content input {
+    width: auto;
+    height: 3vh;
+    margin-left: 10px;
   }
   .header a,
   a:hover,
