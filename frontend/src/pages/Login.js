@@ -47,6 +47,7 @@ const Login = () => {
         <Navigate to={"/"} />
       ) : (
         <form autoComplete={`on`} onSubmit={onLoginSubmit}>
+          <h1>India Store</h1>
           <span>
             <label htmlFor="Email">Email : </label>
           </span>

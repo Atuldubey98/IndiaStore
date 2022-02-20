@@ -2,6 +2,10 @@
     height: 100vh;
     background-color: rgb(233, 194, 180);
 }
+form h1{
+  text-align: center;
+  color: rgb(163, 19, 163);
+}
 form {
   display: grid;
   width: 50%;

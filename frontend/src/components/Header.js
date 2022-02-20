@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import {
   ShoppingCart,
@@ -10,14 +10,18 @@ import {
   ExitToApp,
 } from "@material-ui/icons";
 import { Badge } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { setUser } from "../redux/actions/usersAction";
 const Header = () => {
+  const dispatch = useDispatch();
   const count = useSelector((state) => state.cartAccess.cart.length);
   const [search, setSearch] = useState("");
   const onSearchChange = (e) => {
     setSearch(e.target.value);
   };
+
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const handleSearchVisibility = () => {
@@ -27,7 +31,9 @@ const Header = () => {
     setOpen((o) => !o);
   };
   const handleLogout = () => {
-    console.log("Logout");
+    localStorage.clear();
+    dispatch(setUser(null));
+    navigate("/login", { replace: true });
   };
   return (
     <div className="header">
@@ -67,9 +73,7 @@ const Header = () => {
             <div className="header__linkProfile" onClick={handleDropVisiblity}>
               <div className="header__linkDropdown">
                 <Face />
-                <Link to={"/"}>
-                  <span className="header__linksText">Profile</span>
-                </Link>
+                <span className="header__linksText">Profile</span>
               </div>
               <div className="header__linkDropdownItems">
                 {open && (
@@ -77,8 +81,15 @@ const Header = () => {
                     className="header__linkDropdownContent"
                     onClick={handleLogout}
                   >
-                    <ExitToApp />
-                    <span className="header__linkDropdownProfile">Logout</span>
+                    <span className="header__linkDropdownProfile">
+                      <ExitToApp />
+                      Logout
+                    </span>
+
+                    <span className="header__linkDropdownProfile">
+                      <Face />
+                      Profile
+                    </span>
                   </div>
                 )}
               </div>

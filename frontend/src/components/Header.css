@@ -9,8 +9,12 @@
 }
 .header__linkDropdownContent{
   padding: 8px;
-  display: flex;
+  display: grid;
   cursor: pointer;
+}
+.header__linkDropdownProfile{
+  display: flex;
+  align-items: center;
 }
 .header__linkDropdown {
   display: flex;
