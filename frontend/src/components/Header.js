@@ -76,7 +76,7 @@ const Header = () => {
                     onClick={handleLogout}
                   >
                     <ExitToApp />
-                    <span className="header__linkDropdownProfile">Profile</span>
+                    <span className="header__linkDropdownProfile">Logout</span>
                   </div>
                 )}
               </div>
