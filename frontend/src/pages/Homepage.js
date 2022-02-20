@@ -10,6 +10,7 @@ import {
 } from "../redux/actions/productActions";
 import axiosInstance from "../api/axios";
 import Product from "../components/Product";
+import Footer from "../components/Footer";
 const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
   const productsAccess = useSelector((state) => state.productsAccess);
@@ -41,6 +42,7 @@ const Homepage = () => {
         )}
         {productsAccess.error && <h3>Some error occured</h3>}
       </div>
+      <Footer/>
     </div>
   );
 };
