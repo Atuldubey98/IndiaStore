@@ -31,14 +31,16 @@ const Homepage = () => {
   return (
     <div className="homepage">
       <Header />
-      {productsAccess.loading ? (
-        <h1>Loading</h1>
-      ) : (
-        productsAccess.products.map((product) => (
-          <Product key={product.productId} product={product} />
-        ))
-      )}
-      {productsAccess.error && <h3>Some error occured</h3>}
+      <div className="homepage__products">
+        {productsAccess.loading ? (
+          <h1>Loading</h1>
+        ) : (
+          productsAccess.products.map((product) => (
+            <Product key={product.productId} product={product} />
+          ))
+        )}
+        {productsAccess.error && <h3>Some error occured</h3>}
+      </div>
     </div>
   );
 };
