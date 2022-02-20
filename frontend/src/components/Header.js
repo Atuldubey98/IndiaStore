@@ -57,7 +57,7 @@ const Header = () => {
               <span className="header__linksText">Cart</span>
             </Link>
 
-            <Link to={"/"}>
+            <Link to={"/orders"}>
               <ShoppingBasket />
               <span className="header__linksText">Orders</span>
             </Link>
