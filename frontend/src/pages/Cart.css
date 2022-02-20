@@ -1,0 +1,7 @@
+.cart__total {
+  height: 20vh;
+  font-size: xx-large;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgb(82, 80, 80);
+}

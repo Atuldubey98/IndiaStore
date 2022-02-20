@@ -7,8 +7,25 @@
   padding: 8px;
   background-color: rgba(65, 35, 172, 0.891);
 }
+
+.header__linkDropdown {
+  display: flex;
+  align-items: center;
+}
+
+.header__linkDropdownItems {
+  z-index: 2;
+  background-color: rgba(65, 35, 172, 0.891);
+  font-size: larger;
+  position: absolute;
+}
+.header__links a {
+  display: flex;
+  align-items: center;
+}
 .header__links {
   display: flex;
+  align-items: center;
 }
 .header__link:hover {
   background-color: rgb(54, 28, 151);
@@ -41,14 +58,22 @@ a:active {
   border: none;
   font-size: medium;
 }
+.header__links a span{
+  padding : 5px;
+}
 .header__content form {
   display: flex;
 }
 .header__content input:focus {
   border: none;
 }
-
+.header__links{
+  padding: 20px;
+}
 @media only screen and (max-width: 600px) {
+  .header__linkProfile {
+    padding-left: 20px;
+  }
   .header {
     font-size: x-large;
     padding: 20px;
@@ -63,6 +88,11 @@ a:active {
   a:focus,
   a:active {
     margin: 5px;
+  }
+  .header__linksText {
+    display: none;
+  }
+  .header__linkDropdownItems {
     display: none;
   }
 }

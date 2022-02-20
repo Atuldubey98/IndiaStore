@@ -17,10 +17,15 @@ const Header = () => {
   const onSearchChange = (e) => {
     setSearch(e.target.value);
   };
+  const [open, setOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const handleSearchVisibility = () => {
     setIsSearch((s) => !s);
   };
+  const handleDropVisiblity = () => {
+    setOpen((o) => !o);
+  };
+  const handleLogout = () => {};
   return (
     <div className="header">
       <h2>India Store</h2>
@@ -39,23 +44,39 @@ const Header = () => {
           />
         ) : (
           <div className="header__links">
-            <div className="header__link">
+            <Link to={"/"}>
               <Home />
-              <Link to={"/"}>Home</Link>
-            </div>
-            <div className="header__link">
+              <span className="header__linksText">Home</span>
+            </Link>
+
+            <Link to={"/cart"}>
               <Badge badgeContent={count}>
                 <ShoppingCart />
               </Badge>
-              <Link to={"/"}>Cart</Link>
-            </div>
-            <div className="header__link">
+              <span className="header__linksText">Cart</span>
+            </Link>
+
+            <Link to={"/"}>
               <ShoppingBasket />
-              <Link to={"/"}>Orders</Link>
-            </div>
-            <div className="header__link">
-              <Face />
-              <Link to={"/"}>Profile</Link>
+              <span className="header__linksText">Orders</span>
+            </Link>
+
+            <div className="header__linkProfile" onClick={handleDropVisiblity}>
+              <div className="header__linkDropdown">
+                <Face />
+                <Link to={"/"}>
+                  <span className="header__linksText">Profile</span>
+                </Link>
+              </div>
+
+              {open && (
+                <div
+                  className="header__linkDropdownContent"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              )}
             </div>
           </div>
         )}

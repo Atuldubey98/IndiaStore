@@ -1,9 +1,10 @@
 import "./App.css";
 import Login from "./pages/Login";
+import Cart from "./pages/Cart";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserLoading, setUser } from "./redux/actions/usersAction";
 import PrivateRoute from "./components/PrivateRoute";
 const App = () => {
@@ -26,6 +27,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Homepage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
             </PrivateRoute>
           }
         />
