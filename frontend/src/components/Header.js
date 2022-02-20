@@ -26,7 +26,9 @@ const Header = () => {
   const handleDropVisiblity = () => {
     setOpen((o) => !o);
   };
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    console.log("Logout");
+  };
   return (
     <div className="header">
       <h2>India Store</h2>

@@ -6,7 +6,7 @@ const Cart = () => {
   const total = useSelector((state) => {
     let sum = 0;
     state.cartAccess.cart.forEach((product) => {
-      sum += product.productPrice;
+      sum += product.productPrice * product.quantity;
     });
     return sum;
   });
