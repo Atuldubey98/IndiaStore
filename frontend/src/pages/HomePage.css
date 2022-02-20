@@ -3,6 +3,7 @@
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  height: min-content;
 }
 .homepage {
   background-color: rgb(233, 194, 180);
