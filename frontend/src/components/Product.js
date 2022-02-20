@@ -1,18 +1,8 @@
 import "./Product.css";
 import TextTruncate from "react-text-truncate";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions/cartActions";
 const Product = ({ product }) => {
-  const dispatch = useDispatch();
-  const cartAccess = useSelector((state) => state.cartAccess);
-
-  console.log(cartAccess);
-  const onPlusPress = () => {
-    dispatch(addProduct({ productId, quantity: 1 }));
-  };
-  const onMinusPress = () => {
-    dispatch(removeProduct({ productId, quantity: 1 }));
-  };
   const {
     productId,
     productName,
@@ -20,6 +10,18 @@ const Product = ({ product }) => {
     productImageURL,
     productPrice,
   } = product;
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) =>
+    state.cartAccess.cart.length > 0
+      ? state.cartAccess.cart.filter((p) => p.productId === productId)
+      : []
+  );
+  const onPlusPress = () => {
+    dispatch(addProduct({ productId, quantity: 1, productPrice }));
+  };
+  const onMinusPress = () => {
+    dispatch(removeProduct({ productId, quantity: 1, productPrice }));
+  };
   return (
     <div className="product">
       <TextTruncate
@@ -48,7 +50,9 @@ const Product = ({ product }) => {
           >
             +
           </button>
-          <h5 className="product__btnPriceButtonsQty">{0}</h5>
+          <h5 className="product__btnPriceButtonsQty">
+            {cartItem.length > 0 ? cartItem[0].quantity : 0}
+          </h5>
           <button
             onClick={onMinusPress}
             className="product__btnPriceButtonsMinus"
