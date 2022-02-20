@@ -27,8 +27,14 @@ const Product = ({ product }) => {
         truncateText={`...`}
         text={productDescription}
       />
-
-      <strong className="product__productPrice">{productPrice}</strong>
+      <div className="product__btnPrice">
+        <strong className="product__productPrice">{`Rs. ${productPrice}`}</strong>
+        <div className="product__btnPriceButtons">
+          <button className="product__btnPriceButtonsPlus">+</button>
+          <h5 className="product__btnPriceButtonsQty">{1}</h5>
+          <button className="product__btnPriceButtonsMinus">-</button>
+        </div>
+      </div>
     </div>
   );
 };
