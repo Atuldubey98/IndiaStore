@@ -1,4 +1,5 @@
-import './Product.css'
+import "./Product.css";
+import TextTruncate from "react-text-truncate";
 const Product = ({ product }) => {
   const {
     productId,
@@ -9,14 +10,24 @@ const Product = ({ product }) => {
   } = product;
   return (
     <div className="product">
-      <span className="product__productName">{productName}</span>
+      <TextTruncate
+        line={2}
+        element={`h4`}
+        truncateText={`...`}
+        text={productName}
+      />
       <img
         className="product__productImageURL"
         alt={productId}
         src={productImageURL !== "" ? productImageURL : `images/product.jpeg`}
       />
-      <h5 className="product__productDescription">{productDescription}</h5>
-      
+      <TextTruncate
+        line={2}
+        element={`h5`}
+        truncateText={`...`}
+        text={productDescription}
+      />
+
       <strong className="product__productPrice">{productPrice}</strong>
     </div>
   );

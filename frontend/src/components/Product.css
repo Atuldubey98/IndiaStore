@@ -1,17 +1,13 @@
-.product__productName {
-}
-.product__productDescription {
-}
-.product__productPrice {
-}
+
 .product {
   width: min-content;
   border: 1px solid black;
   margin: auto;
   padding: 30px;
   text-overflow: clip;
-  height: max-content;
   background-color: rgb(241, 233, 233);
+  line-height: 1.8;
+  cursor: pointer;
 }
 .product__productImageURL {
   width: 60vh;
@@ -29,5 +25,6 @@
     border: 1px solid black;
     margin: auto;
     padding: 10px;
+    cursor: pointer;
   }
 }
