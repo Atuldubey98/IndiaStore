@@ -1,0 +1,15 @@
+.homepage__products {
+  padding: 30px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px) {
+  .homepage__products {
+    padding: 10px;
+    font-size: xx-large;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

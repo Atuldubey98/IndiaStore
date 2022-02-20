@@ -1,0 +1,33 @@
+.product__productName {
+}
+.product__productDescription {
+}
+.product__productPrice {
+}
+.product {
+  width: min-content;
+  border: 1px solid black;
+  margin: auto;
+  padding: 30px;
+  text-overflow: clip;
+  height: max-content;
+  background-color: rgb(241, 233, 233);
+}
+.product__productImageURL {
+  width: 60vh;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .product__productImageURL {
+    width: 40vh;
+    margin: auto;
+  }
+
+  .product {
+    width: min-content;
+    border: 1px solid black;
+    margin: auto;
+    padding: 10px;
+  }
+}

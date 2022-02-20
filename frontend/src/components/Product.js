@@ -1,9 +1,23 @@
+import './Product.css'
 const Product = ({ product }) => {
-  console.log(product);
+  const {
+    productId,
+    productName,
+    productDescription,
+    productImageURL,
+    productPrice,
+  } = product;
   return (
     <div className="product">
-      <h6>{product.productId}</h6>
-      <span>{product.productName}</span>
+      <span className="product__productName">{productName}</span>
+      <img
+        className="product__productImageURL"
+        alt={productId}
+        src={productImageURL !== "" ? productImageURL : `images/product.jpeg`}
+      />
+      <h5 className="product__productDescription">{productDescription}</h5>
+      
+      <strong className="product__productPrice">{productPrice}</strong>
     </div>
   );
 };

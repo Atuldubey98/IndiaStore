@@ -1,9 +1,10 @@
 .header {
-  height: 10vh;
-  display: flex;
   color: white;
-  justify-content: space-around;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  height: 5vh;
+  padding: 8px;
   background-color: rgba(65, 35, 172, 0.891);
 }
 .header a,
@@ -14,4 +15,16 @@ a:active {
   margin: 10px;
   color: white;
   text-decoration: none;
+}
+@media only screen and (max-width: 600px) {
+  .header {
+    font-size: x-large;
+    padding: 20px;
+  }
+  .header a,
+  a:hover,
+  a:focus,
+  a:active {
+    margin: 5px;
+  }
 }
