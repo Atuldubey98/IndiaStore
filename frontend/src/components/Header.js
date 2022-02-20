@@ -7,6 +7,7 @@ import {
   ShoppingBasket,
   Search,
   Close,
+  ExitToApp,
 } from "@material-ui/icons";
 import { Badge } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -68,15 +69,17 @@ const Header = () => {
                   <span className="header__linksText">Profile</span>
                 </Link>
               </div>
-
-              {open && (
-                <div
-                  className="header__linkDropdownContent"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </div>
-              )}
+              <div className="header__linkDropdownItems">
+                {open && (
+                  <div
+                    className="header__linkDropdownContent"
+                    onClick={handleLogout}
+                  >
+                    <ExitToApp />
+                    <span className="header__linkDropdownProfile">Profile</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
