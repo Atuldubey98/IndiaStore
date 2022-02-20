@@ -10,6 +10,9 @@
 .header__links {
   display: flex;
 }
+.header__link:hover {
+  background-color: rgb(54, 28, 151);
+}
 .header__link {
   align-items: center;
   display: flex;
@@ -38,9 +41,13 @@ a:active {
   border: none;
   font-size: medium;
 }
-.header__content input:focus{
+.header__content form {
+  display: flex;
+}
+.header__content input:focus {
   border: none;
 }
+
 @media only screen and (max-width: 600px) {
   .header {
     font-size: x-large;

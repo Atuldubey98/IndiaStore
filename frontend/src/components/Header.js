@@ -6,6 +6,7 @@ import {
   Face,
   ShoppingBasket,
   Search,
+  Close,
 } from "@material-ui/icons";
 import { Badge } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -24,7 +25,11 @@ const Header = () => {
     <div className="header">
       <h2>India Store</h2>
       <div className="header__content">
-        <Search onClick={handleSearchVisibility} />
+        {!isSearch ? (
+          <Search onClick={handleSearchVisibility} />
+        ) : (
+          <Close onClick={handleSearchVisibility} />
+        )}
         {isSearch ? (
           <input
             placeholder="Search..."
