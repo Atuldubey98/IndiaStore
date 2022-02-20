@@ -1,6 +1,6 @@
 .product {
   width: min-content;
-  border: 1px solid black;
+  border: 1px solid rgb(136, 134, 134);
   margin: auto;
   padding: 30px;
   text-overflow: clip;
@@ -28,11 +28,12 @@
   border-radius: 30px;
   background-color: green;
   color: white;
+  cursor: pointer;
 }
-.product__btnPriceButtonsQty{
-    background-color: rgb(183, 142, 223);
-    padding: 10px;
-    color: white;
+.product__btnPriceButtonsQty {
+  background-color: rgb(183, 142, 223);
+  padding: 10px;
+  color: white;
 }
 .product__btnPriceButtonsMinus {
   border-radius: 30px;
@@ -41,6 +42,7 @@
   background-color: red;
   height: 30px;
   width: 30px;
+  cursor: pointer;
 }
 @media only screen and (max-width: 600px) {
   .product__productImageURL {
