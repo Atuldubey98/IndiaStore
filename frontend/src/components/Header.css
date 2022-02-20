@@ -7,6 +7,14 @@
   padding: 8px;
   background-color: rgba(65, 35, 172, 0.891);
 }
+.header__links {
+  display: flex;
+}
+.header__link {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
 .header a,
 a:hover,
 a:focus,
@@ -26,5 +34,6 @@ a:active {
   a:focus,
   a:active {
     margin: 5px;
+    display: none;
   }
 }
