@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import "./Cart.css";
 
 const Cart = () => {
+
   const total = useSelector((state) => {
     let sum = 0;
     state.cartAccess.cart.forEach((product) => {

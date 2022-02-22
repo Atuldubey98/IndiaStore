@@ -13,7 +13,9 @@ import Product from "../components/Product";
 import Footer from "../components/Footer";
 const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
-  const productsAccess = useSelector((state) => state.productsAccess);
+  const { products, loading, error } = useSelector(
+    (state) => state.productsAccess
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,16 +35,16 @@ const Homepage = () => {
     <div className="homepage">
       <Header />
       <div className="homepage__products">
-        {productsAccess.loading ? (
+        {loading ? (
           <h1>Loading</h1>
         ) : (
-          productsAccess.products.map((product) => (
+          products.map((product) => (
             <Product key={product.productId} product={product} />
           ))
         )}
-        {productsAccess.error && <h3>Some error occured</h3>}
+        {error && <h3>Some error occured</h3>}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -10,20 +10,25 @@ import { setUserLoading, setUser } from "./redux/actions/usersAction";
 import PrivateRoute from "./components/PrivateRoute";
 import jwt_decode from "jwt-decode";
 const App = () => {
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("token") &&
+    jwt_decode(localStorage.getItem("token")).exp * 1000 > Date.now()
+      ? localStorage.getItem("token")
+      : null;
   const email = localStorage.getItem("email");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setUserLoading(true));
-    if (email && token && jwt_decode(token).exp * 1000 > Date.now()) {
+    if (email && token) {
       dispatch(setUser({ email, token }));
+    }else{
+      localStorage.clear();
     }
     dispatch(setUserLoading(false));
   }, [dispatch, email, token]);
   return (
     <div className="app">
       <Routes>
-        <Route path="/login" element={<Login />} />
         <Route
           path="/"
           element={
@@ -32,6 +37,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/cart"
           element={

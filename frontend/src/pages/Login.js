@@ -9,7 +9,7 @@ import {
 } from "../redux/actions/usersAction";
 import { Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
-  const userAccess = useSelector((state) => state.userAccess);
+  const { user, error, loading } = useSelector((state) => state.userAccess);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -41,9 +41,9 @@ const Login = () => {
   };
   return (
     <div className="login">
-      {userAccess.loading ? (
+      {loading ? (
         <h1>Loading</h1>
-      ) : userAccess.user ? (
+      ) : user ? (
         <Navigate to={"/"} />
       ) : (
         <form autoComplete={`on`} onSubmit={onLoginSubmit}>
@@ -59,7 +59,7 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
       )}
-      {userAccess.error && <h3>{`Some error occured !`}</h3>}
+      {error && <h3>{`Some error occured !`}</h3>}
     </div>
   );
 };
