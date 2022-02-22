@@ -48,6 +48,7 @@ const App = () => {
         />
         <Route
           path="/orders"
+          
           element={
             <PrivateRoute>
               <Orders />
