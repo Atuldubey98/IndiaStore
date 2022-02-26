@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import BuyProduct from "../components/BuyProduct";
 import Header from "../components/Header";
 import "./Cart.css";
 
@@ -17,6 +18,7 @@ const Cart = () => {
       <div className="cart__total">
         <strong className="cart__totalDis">{`Total : ${total}`}</strong>
       </div>
+      <BuyProduct/>
     </div>
   );
 };

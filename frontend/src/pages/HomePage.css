@@ -1,9 +1,10 @@
 .homepage__products {
-  padding: 30px;
+  margin: 1em;
   margin: auto;
+  padding: 30px;
   display: flex;
   flex-wrap: wrap;
-  height: min-content;
+  min-height: 90vh;
 }
 .homepage {
   background-color: rgb(233, 194, 180);

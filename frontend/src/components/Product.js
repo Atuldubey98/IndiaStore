@@ -23,7 +23,13 @@ const Product = ({ product }) => {
     dispatch(removeProduct({ productId, quantity: 1, productPrice }));
   };
   return (
-    <div className="product">
+    <div
+      className={
+        cartItem.length > 0 && cartItem[0].quantity > 0
+          ? "productSelected product"
+          : "product"
+      }
+    >
       <TextTruncate
         line={2}
         element={`h4`}
@@ -37,7 +43,7 @@ const Product = ({ product }) => {
       />
       <TextTruncate
         line={2}
-        element={`h5`}
+        element={`p`}
         truncateText={`...`}
         text={productDescription}
       />

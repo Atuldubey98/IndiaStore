@@ -1,8 +1,8 @@
 .cart__total {
-  height: 20vh;
   font-size: xx-large;
   padding: 20pt;
   display: flex;
   align-items: center;
+  min-height: 85vh;
   border-bottom: 2px solid rgb(82, 80, 80);
 }

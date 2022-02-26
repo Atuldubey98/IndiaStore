@@ -10,12 +10,14 @@ import {
 } from "../redux/actions/productActions";
 import axiosInstance from "../api/axios";
 import Product from "../components/Product";
-import Footer from "../components/Footer";
+import BuyProduct from "../components/BuyProduct";
+import { CircularProgress } from "@mui/material";
 const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
   const { products, loading, error } = useSelector(
     (state) => state.productsAccess
   );
+  const { cart } = useSelector((state) => state.cartAccess);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,19 +34,19 @@ const Homepage = () => {
     fetchProducts();
   }, [token, dispatch]);
   return (
-    <div className="homepage">
+    <div className={loading ? "homepageloading" : "homepage"}>
       <Header />
-      <div className="homepage__products">
-        {loading ? (
-          <h1>Loading</h1>
-        ) : (
-          products.map((product) => (
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <div className="homepage__products">
+          {products.map((product) => (
             <Product key={product.productId} product={product} />
-          ))
-        )}
-        {error && <h3>Some error occured</h3>}
-      </div>
-      <Footer />
+          ))}
+          {error && <h3>Some error occured</h3>}
+        </div>
+      )}
+      {cart.length > 0 && <BuyProduct />}
     </div>
   );
 };

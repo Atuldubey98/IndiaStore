@@ -1,0 +1,31 @@
+.buyproduct {
+  background-color: rgba(65, 35, 172, 0.891);
+  height: 10vh;
+  position: sticky;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.buyproduct button {
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 0.767);
+}
+
+.buyproduct_btn{
+  display: flex;
+  align-items: center;
+}
+.buyproduct_btnTxt{
+  margin-left: 20px;
+  font-size: 1rem;
+  color: white;
+}
+
+.buyproduct_total{
+  color: white;
+  font-size: 1rem;
+}

@@ -22,14 +22,11 @@ const Header = () => {
   };
 
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const handleSearchVisibility = () => {
     setIsSearch((s) => !s);
   };
-  const handleDropVisiblity = () => {
-    setOpen((o) => !o);
-  };
+
   const handleLogout = () => {
     localStorage.clear();
     dispatch(setUser(null));
@@ -69,31 +66,6 @@ const Header = () => {
               <ShoppingBasket />
               <span className="header__linksText">Orders</span>
             </Link>
-
-            <div className="header__linkProfile" onClick={handleDropVisiblity}>
-              <div className="header__linkDropdown">
-                <Face />
-                <span className="header__linksText">Profile</span>
-              </div>
-              <div className="header__linkDropdownItems">
-                {open && (
-                  <div
-                    className="header__linkDropdownContent"
-                    onClick={handleLogout}
-                  >
-                    <span className="header__linkDropdownProfile">
-                      <ExitToApp />
-                      Logout
-                    </span>
-
-                    <span className="header__linkDropdownProfile">
-                      <Face />
-                      Profile
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
         )}
       </div>

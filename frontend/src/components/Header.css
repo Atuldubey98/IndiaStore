@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   height: 5vh;
-  padding: 8px;
+  padding: 20px;
   background-color: rgba(65, 35, 172, 0.891);
 }
 .header__linkDropdownContent{
@@ -84,7 +84,7 @@ a:active {
   }
   .header {
     font-size: x-large;
-    padding: 20px;
+    padding: 30px;
   }
   .header__content input {
     width: auto;
