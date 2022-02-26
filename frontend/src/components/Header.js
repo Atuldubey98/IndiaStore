@@ -3,7 +3,6 @@ import "./Header.css";
 import {
   ShoppingCart,
   Home,
-  Face,
   ShoppingBasket,
   Search,
   Close,
@@ -66,6 +65,8 @@ const Header = () => {
               <ShoppingBasket />
               <span className="header__linksText">Orders</span>
             </Link>
+            <ExitToApp onClick={handleLogout} />
+            <span className="header__linksText">Logout</span>
           </div>
         )}
       </div>
