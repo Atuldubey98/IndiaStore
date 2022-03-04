@@ -1,7 +1,10 @@
 const PORT = require("./config/config").PORT;
 const express = require("express");
 const cors = require("cors");
-const app = express();    
+const app = express();
+const morgan = require("morgan");
+const fs = require("fs");
+const path = require("path");
 app.use(cors());
 const bodyParser = require("body-parser");
 const products = require("./api/routes/products");
@@ -9,8 +12,15 @@ const users = require("./api/routes/users");
 const category = require("./api/routes/category");
 const orders = require("./api/routes/orders");
 app.use(bodyParser.json());
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: 'a' }
+);
+app.use(morgan('combined', { stream: accessLogStream }))
 app.get("/api/v1", (req, res) => {
-  return res.status(200).json({ status: true , message: "Server is fit and fine" });
+  return res
+    .status(200)
+    .json({ status: true, message: "Server is fit and fine" });
 });
 app.use("/api/v1/products", products);
 app.use("/api/v1/users", users);
