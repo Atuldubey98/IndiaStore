@@ -1,5 +1,6 @@
 import "./BuyProduct.css";
 import { ShoppingBasket } from "@material-ui/icons";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const BuyProduct = () => {
   const total = useSelector((state) => {
@@ -9,9 +10,13 @@ const BuyProduct = () => {
     });
     return sum;
   });
+  const navigate = useNavigate();
+  const handleOrder = () => {
+    navigate("/orders");
+  };
   return (
     <div className="buyproduct">
-      <button className="buyproduct_btn">
+      <button className="buyproduct_btn" onClick={handleOrder}>
         <ShoppingBasket />
         <span className="buyproduct_btnTxt">Buy</span>
       </button>

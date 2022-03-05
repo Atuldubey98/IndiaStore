@@ -1,7 +1,6 @@
 .product {
   width: min-content;
   height: fit-content;
-  border: 1px solid rgb(136, 134, 134);
   margin: auto;
   padding: 30px;
   text-overflow: clip;
@@ -61,13 +60,12 @@
 @media only screen and (max-width: 600px) {
   .product__productImageURL {
     max-width: 40vh;
-    
+
     margin: auto;
   }
 
   .product {
     width: min-content;
-    border: 1px solid black;
     margin: auto;
     padding: 10px;
   }

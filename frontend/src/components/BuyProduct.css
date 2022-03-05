@@ -8,6 +8,7 @@
   justify-content: space-around;
 }
 
+
 .buyproduct button {
   padding: 10px;
   color: white;
@@ -16,8 +17,14 @@
 }
 
 .buyproduct_btn{
+  cursor: pointer;
   display: flex;
   align-items: center;
+  opacity: 0.9;
+}
+
+.buyproduct_btn:hover{
+  opacity: 1;
 }
 .buyproduct_btnTxt{
   margin-left: 20px;
