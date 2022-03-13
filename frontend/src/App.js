@@ -5,6 +5,8 @@ import Orders from "./pages/Orders";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
+import ProductPage from "./pages/ProductPage";
+
 import { useDispatch } from "react-redux";
 import { setUserLoading, setUser } from "./redux/actions/usersAction";
 import PrivateRoute from "./components/PrivateRoute";
@@ -52,6 +54,15 @@ const App = () => {
           element={
             <PrivateRoute>
               <Orders />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/product/:productId"
+          
+          element={
+            <PrivateRoute>
+              <ProductPage />
             </PrivateRoute>
           }
         />

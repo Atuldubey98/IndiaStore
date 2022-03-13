@@ -1,4 +1,5 @@
 import "./Product.css";
+import { useNavigate } from "react-router-dom";
 import TextTruncate from "react-text-truncate";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct, removeProduct } from "../redux/actions/cartActions";
@@ -11,6 +12,7 @@ const Product = ({ product }) => {
     productPrice,
   } = product;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItem = useSelector((state) =>
     state.cartAccess.cart.length > 0
       ? state.cartAccess.cart.filter((p) => p.productId === productId)
@@ -21,6 +23,9 @@ const Product = ({ product }) => {
   };
   const onMinusPress = () => {
     dispatch(removeProduct({ productId, quantity: 1, productPrice }));
+  };
+  const onProductPage = () => {
+    navigate(`/product/${productId}`);
   };
   return (
     <div
@@ -39,6 +44,7 @@ const Product = ({ product }) => {
       <img
         className="product__productImageURL"
         alt={productId}
+        onClick={onProductPage}
         src={productImageURL !== "" ? productImageURL : `images/product.jpeg`}
       />
       <TextTruncate
