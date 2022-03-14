@@ -42,7 +42,7 @@ const Header = () => {
         )}
         {isSearch ? (
           <input
-            placeholder="Search..."
+          placeholder="Search..."
             name="header__search"
             value={search}
             onChange={onSearchChange}
