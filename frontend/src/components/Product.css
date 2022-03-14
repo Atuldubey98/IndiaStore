@@ -1,13 +1,14 @@
 .product {
-  width: min-content;
-  height: fit-content;
-  border: 1px solid rgb(136, 134, 134);
-  margin: auto;
+  width: 60vh;
+  height: 65vh;
   padding: 30px;
+  margin: 30px auto 0 auto;
   text-overflow: clip;
   background-color: rgb(241, 233, 233);
   line-height: 1.8;
   font-size: large;
+  display: grid;
+  align-items: center;
   border-radius: 5px;
 }
 .productSelected {
@@ -16,8 +17,8 @@
 .product__productImageURL {
   margin: auto;
   object-fit: contain;
-  max-width: 60vh;
-  max-width: 50vh;
+  cursor: pointer;
+  max-width: 95%;
 }
 .product__btnPrice {
   display: flex;
@@ -60,14 +61,11 @@
 }
 @media only screen and (max-width: 600px) {
   .product__productImageURL {
-    max-width: 40vh;
-    
     margin: auto;
   }
 
   .product {
-    width: min-content;
-    border: 1px solid black;
+    width: 90%;
     margin: auto;
     padding: 10px;
   }
