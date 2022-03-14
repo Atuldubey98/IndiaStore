@@ -52,8 +52,11 @@ const ProductPage = () => {
                 : `images/product.jpeg`
             }
           />
-          <strong>{product.productName}</strong>
-          <h5>{product.productDescription}</h5>
+          <div className="product__des">
+            <strong>{product.productName}</strong>
+            <h5>{product.productDescription}</h5>
+            <h4>{`Rs. ${product.productPrice}`}</h4>
+          </div>
         </div>
       )}
     </div>
