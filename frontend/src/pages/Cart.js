@@ -32,7 +32,7 @@ const Cart = () => {
       left: "50%",
       right: "auto",
       height: "50%",
-      width: "60%",
+      width: "80%",
       bottom: "auto",
       marginRight: "-50%",
       overflowY: "scroll",
@@ -101,14 +101,16 @@ const Cart = () => {
           <div className="cart__profile">
             <h2>Delivery Address</h2>
             <form>
-              <input onChange={onNameChange} value={name} placeholder="Name*" />
+              <input type={"text"} onChange={onNameChange} value={name} placeholder="Name*" />
               <input
+                type="tel"
                 onChange={onMobileChange}
                 value={mobile}
                 placeholder="Mobile*"
               />
-              <input onChange={onCityChange} value={city} placeholder="City*" />
+              <input type={"text"} onChange={onCityChange} value={city} placeholder="City*" />
               <input
+                type={"text"}
                 onChange={onCountryChange}
                 value={country}
                 placeholder="Country*"

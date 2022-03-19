@@ -29,7 +29,9 @@
 }
 
 .cart__profile form input{
+  min-width: 95%;
   border: 0.5px solid grey;
+  margin: 10px auto 0 auto;
 }
 
 .cart__profile form input:focus{
