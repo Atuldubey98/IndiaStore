@@ -25,7 +25,7 @@ const Product = ({ product }) => {
     dispatch(removeProduct({ productId, quantity: 1, productPrice }));
   };
   const onProductPage = () => {
-    navigate(`/product/${productId}`);
+    navigate(`/productId=${productId}`);
   };
   return (
     <div

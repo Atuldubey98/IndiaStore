@@ -6,7 +6,7 @@ form h1{
   text-align: center;
   color: rgb(163, 19, 163);
 }
-form {
+.login form {
   display: grid;
   width: 50%;
   min-width: 50%;

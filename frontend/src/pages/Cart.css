@@ -1,6 +1,7 @@
 .cart__total{
   display: flex;
-  margin: 30px;
+  background-color: rgb(226, 222, 213);
+  padding: 30px;
   align-items: center;
   justify-content: space-around;
 }
@@ -16,4 +17,21 @@
 }
 .cart__modalItems{
   margin-bottom: 10px;
+}
+.cart__profile{
+  margin-top: 20px;
+  text-align: center;
+}
+.cart__profile form{
+  display: grid;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cart__profile form input{
+  border: 0.5px solid grey;
+}
+
+.cart__profile form input:focus{
+  outline: none;
 }

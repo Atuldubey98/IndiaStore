@@ -8,10 +8,16 @@ import { ShoppingBasket } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Cart = () => {
+  const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [mobile, setMobile] = useState("");
+
   Modal.setAppElement("#root");
-  const query = useQuery()
+  const query = useQuery();
   const navigate = useNavigate();
   const total = useSelector((state) => {
     let sum = 0;
@@ -29,7 +35,7 @@ const Cart = () => {
       width: "60%",
       bottom: "auto",
       marginRight: "-50%",
-      overflowY:"scroll",
+      overflowY: "scroll",
       transform: "translate(-50%, -50%)",
     },
   };
@@ -44,13 +50,25 @@ const Cart = () => {
     });
     return cartProducts;
   });
-  
- const closeModal = ()=>{
-   navigate('/cart');
- }
-  const openModal = ()=>{
-  navigate("/cart?modal=true")
-}
+
+  const closeModal = () => {
+    navigate("/cart");
+  };
+  const openModal = () => {
+    navigate("/cart?modal=true");
+  };
+  const onCityChange = (e) => {
+    setCity(e.target.value);
+  };
+  const onNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const onCountryChange = (e) => {
+    setCountry(e.target.value);
+  };
+  const onMobileChange = (e) => {
+    setMobile(e.target.value);
+  };
   return (
     <div className="cart">
       <Header />
@@ -58,6 +76,7 @@ const Cart = () => {
         <strong className="cart__totalDis">{`Total : ${total.toFixed(
           2
         )}`}</strong>
+        <h1>{"Cart"}</h1>
         <Button
           disabled={products.length === 0}
           startIcon={<ShoppingBasket />}
@@ -68,7 +87,7 @@ const Cart = () => {
         </Button>
       </div>
       <Modal
-        isOpen={query.get('modal') ? true : false}
+        isOpen={query.get("modal") ? true : false}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Confirm Purchase"
@@ -78,6 +97,23 @@ const Cart = () => {
             {products.map((product) => (
               <CartItem key={product.productId} product={product} />
             ))}
+          </div>
+          <div className="cart__profile">
+            <h2>Delivery Address</h2>
+            <form>
+              <input onChange={onNameChange} value={name} placeholder="Name*" />
+              <input
+                onChange={onMobileChange}
+                value={mobile}
+                placeholder="Mobile*"
+              />
+              <input onChange={onCityChange} value={city} placeholder="City*" />
+              <input
+                onChange={onCountryChange}
+                value={country}
+                placeholder="Country*"
+              />
+            </form>
           </div>
           <div className="cart__modalButtons">
             <Button color="success" variant={"contained"}>
