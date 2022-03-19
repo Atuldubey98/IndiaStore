@@ -18,7 +18,7 @@ const BuyProduct = () => {
     <div className="buyproduct">
       <button className="buyproduct_btn" onClick={handleOrder}>
         <ShoppingBasket />
-        <span className="buyproduct_btnTxt">Buy</span>
+        <span className="buyproduct_btnTxt">Cart</span>
       </button>
       <h4 className="buyproduct_total">{`Total : ${total}`}</h4>
     </div>
