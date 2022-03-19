@@ -1,12 +1,6 @@
-.cart__total {
-  font-size: xx-large;
-  padding: 20pt;
-  display: grid;
-  align-items: center;
-  min-height: 85vh;
-  border-bottom: 2px solid rgb(82, 80, 80);
-}
-.cart__cartItems{
+.cart__total{
   display: flex;
-  flex-wrap: wrap;
+  margin: 30px;
+  align-items: center;
+  justify-content: space-around;
 }

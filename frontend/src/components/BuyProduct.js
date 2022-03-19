@@ -12,7 +12,7 @@ const BuyProduct = () => {
   });
   const navigate = useNavigate();
   const handleOrder = () => {
-    navigate("/orders");
+    navigate("/cart");
   };
   return (
     <div className="buyproduct">
@@ -20,7 +20,7 @@ const BuyProduct = () => {
         <ShoppingBasket />
         <span className="buyproduct_btnTxt">Cart</span>
       </button>
-      <h4 className="buyproduct_total">{`Total : ${total}`}</h4>
+      <h4 className="buyproduct_total">{`Total : ${total.toFixed(2)}`}</h4>
     </div>
   );
 };

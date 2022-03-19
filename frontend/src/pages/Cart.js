@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import BuyProduct from "../components/BuyProduct";
 import Header from "../components/Header";
 import Product from "../components/Product";
 import "./Cart.css";
-
+import { ShoppingBasket } from "@material-ui/icons";
+import { Button } from "@mui/material";
 const Cart = () => {
   const total = useSelector((state) => {
     let sum = 0;
@@ -28,14 +28,14 @@ const Cart = () => {
     <div className="cart">
       <Header />
       <div className="cart__total">
-        <strong className="cart__totalDis">{`Total : ${total}`}</strong>
-        <div className="cart__cartItems">
+        <strong className="cart__totalDis">{`Total : ${total.toFixed(2)}`}</strong>
+        <Button startIcon={<ShoppingBasket/>} variant="contained">Order</Button>
+      </div>
+      <div className="cart__cartItems">
           {products.map((product) => (
             <Product key={product.productId} product={product} />
           ))}
         </div>
-      </div>
-      <BuyProduct />
     </div>
   );
 };
