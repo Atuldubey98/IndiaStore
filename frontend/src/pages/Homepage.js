@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./HomePage.css";
 import { useDispatch } from "react-redux";
@@ -11,14 +11,18 @@ import {
 import axiosInstance from "../api/axios";
 import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
   const { products, loading, error } = useSelector(
     (state) => state.productsAccess
   );
   const { cart } = useSelector((state) => state.cartAccess);
+  const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
+  const onCategoryClick = ()=>{
+
+  }
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -26,6 +30,10 @@ const Homepage = () => {
         const response = await axiosInstance.get("products/all", {
           headers: { Authorization: token },
         });
+        const responseCategory = await axiosInstance.get("category/all", {
+          headers : {Authorization : token}
+        });
+        setCategories(responseCategory.data.categories);
         dispatch(setProduct(response.data.products));
       } catch (error) {
         setProductError(error);
@@ -36,6 +44,12 @@ const Homepage = () => {
   return (
     <div className={loading ? "homepageloading" : "homepage"}>
       <Header />
+      <div className="homepage__filters">
+        <Button variant="contained">All</Button>
+        {categories.map((c) => (
+          <Button onClick={onCategoryClick} key={c.categoryId}>{c.categoryName}</Button>
+        ))}
+      </div>
       {loading ? (
         <CircularProgress />
       ) : (
