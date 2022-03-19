@@ -16,9 +16,8 @@ import { useNavigate, useParams } from "react-router-dom";
 const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
   const navigate = useNavigate();
-  const { products, loading, error } = useSelector(
-    (state) => state.productsAccess
-  );
+  const { loading, error } = useSelector((state) => state.productsAccess);
+
   const { categoryId } = useParams();
   const { cart } = useSelector((state) => state.cartAccess);
   const [categories, setCategories] = useState([]);
@@ -26,6 +25,14 @@ const Homepage = () => {
   const onCategoryClick = (isAll, categoryId) => {
     navigate(isAll ? "/" : `/categoryId/${categoryId}`);
   };
+  console.log(categoryId);
+  const products = useSelector((state) => {
+    return categoryId
+      ? state.productsAccess.products.filter(
+          (product) => product.categoryId === categoryId
+        )
+      : state.productsAccess.products;
+  });
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -48,32 +55,34 @@ const Homepage = () => {
     <div className={loading ? "homepageloading" : "homepage"}>
       <Header />
       <div className="homepage__filters">
-        <Button
-          onClick={() => onCategoryClick(true)}
-          variant={categoryId ? "" : "contained"}
-        >
-          All
-        </Button>
-        {categories.map((c) => (
+        <div className="homepage__filter">
           <Button
-            variant={categoryId === c.categoryId ? "contained" : ""}
-            onClick={() => onCategoryClick(false, c.categoryId)}
-            key={c.categoryId}
+            onClick={() => onCategoryClick(true)}
+            variant={categoryId ? "" : "contained"}
           >
-            {c.categoryName}
+            All
           </Button>
+        </div>
+
+        {categories.map((c) => (
+          <div className="homepage__filter">
+            <Button
+              variant={categoryId === c.categoryId ? "contained" : ""}
+              onClick={() => onCategoryClick(false, c.categoryId)}
+              key={c.categoryId}
+            >
+              {c.categoryName}
+            </Button>
+          </div>
         ))}
       </div>
       {loading ? (
         <CircularProgress />
       ) : (
         <div className="homepage__products">
-          {products.map(
-            (product) =>
-              categoryId === product.categoryId && (
-                <Product key={product.productId} product={product} />
-              )
-          )}
+          {products.map((product) => (
+            <Product key={product.productId} product={product} />
+          ))}
           {error && <h3>Some error occured</h3>}
         </div>
       )}
