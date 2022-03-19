@@ -2,14 +2,17 @@ import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Product from "../components/Product";
 import CartItem from "../components/CartItem";
+import useQuery from "../hooks/useQuery";
 import "./Cart.css";
 import { ShoppingBasket } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
   Modal.setAppElement("#root");
-
+  const query = useQuery()
+  const navigate = useNavigate();
   const total = useSelector((state) => {
     let sum = 0;
     state.cartAccess.cart.forEach((product) => {
@@ -41,14 +44,13 @@ const Cart = () => {
     });
     return cartProducts;
   });
-  const [modalIsOpen, setIsOpen] = useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
+  
+ const closeModal = ()=>{
+   navigate('/cart');
+ }
+  const openModal = ()=>{
+  navigate("/cart?modal=true")
+}
   return (
     <div className="cart">
       <Header />
@@ -66,7 +68,7 @@ const Cart = () => {
         </Button>
       </div>
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={query.get('modal') ? true : false}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Confirm Purchase"

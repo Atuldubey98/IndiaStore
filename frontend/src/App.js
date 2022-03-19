@@ -5,12 +5,11 @@ import Orders from "./pages/Orders";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import ProductPage from "./pages/ProductPage";
-
 import { useDispatch } from "react-redux";
 import { setUserLoading, setUser } from "./redux/actions/usersAction";
 import PrivateRoute from "./components/PrivateRoute";
 import jwt_decode from "jwt-decode";
+import ProductPage from "./pages/ProductPage";
 const App = () => {
   const token =
     localStorage.getItem("token") &&
@@ -70,10 +69,11 @@ const App = () => {
           
           element={
             <PrivateRoute>
-              <ProductPage />
+              <ProductPage/>
             </PrivateRoute>
           }
         />
+        
       </Routes>
     </div>
   );

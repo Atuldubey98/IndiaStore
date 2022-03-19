@@ -5,7 +5,6 @@ import axiosInstance from "../api/axios";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-
 const ProductPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});

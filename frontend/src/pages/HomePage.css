@@ -7,7 +7,7 @@
   display: flex;
   padding: 20px;
   background-color: rgb(226, 222, 213);
-  overflow-x: hidden;
+  overflow-x: scroll;
   justify-content: space-around;
   align-items: center;
   position: sticky;
