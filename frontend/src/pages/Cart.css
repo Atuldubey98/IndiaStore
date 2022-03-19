@@ -9,3 +9,11 @@
   background-color: rgb(226, 222, 213);
   color: rgb(51, 56, 56);
 }
+.cart__modalButtons{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.cart__modalItems{
+  margin-bottom: 10px;
+}

@@ -1,0 +1,13 @@
+.cartitem{
+    box-shadow: 1px 1px 1px 1px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    align-items: center;
+}
+.cartitem__priceQuan{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
