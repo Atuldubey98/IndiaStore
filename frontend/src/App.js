@@ -39,6 +39,14 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/categoryId/:categoryId"
+          element={
+            <PrivateRoute>
+              <Homepage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route
           path="/cart"

@@ -12,17 +12,20 @@ import axiosInstance from "../api/axios";
 import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
 import { Button, CircularProgress } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
+  const navigate = useNavigate();
   const { products, loading, error } = useSelector(
     (state) => state.productsAccess
   );
+  const { categoryId } = useParams();
   const { cart } = useSelector((state) => state.cartAccess);
   const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
-  const onCategoryClick = ()=>{
-
-  }
+  const onCategoryClick = (isAll, categoryId) => {
+    navigate(isAll ? "/" : `/categoryId/${categoryId}`);
+  };
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -31,7 +34,7 @@ const Homepage = () => {
           headers: { Authorization: token },
         });
         const responseCategory = await axiosInstance.get("category/all", {
-          headers : {Authorization : token}
+          headers: { Authorization: token },
         });
         setCategories(responseCategory.data.categories);
         dispatch(setProduct(response.data.products));
@@ -45,18 +48,32 @@ const Homepage = () => {
     <div className={loading ? "homepageloading" : "homepage"}>
       <Header />
       <div className="homepage__filters">
-        <Button variant="contained">All</Button>
+        <Button
+          onClick={() => onCategoryClick(true)}
+          variant={categoryId ? "outlined" : "contained"}
+        >
+          All
+        </Button>
         {categories.map((c) => (
-          <Button onClick={onCategoryClick} key={c.categoryId}>{c.categoryName}</Button>
+          <Button
+            variant={categoryId === c.categoryId ? "contained" : "outlined"}
+            onClick={() => onCategoryClick(false, c.categoryId)}
+            key={c.categoryId}
+          >
+            {c.categoryName}
+          </Button>
         ))}
       </div>
       {loading ? (
         <CircularProgress />
       ) : (
         <div className="homepage__products">
-          {products.map((product) => (
-            <Product key={product.productId} product={product} />
-          ))}
+          {products.map(
+            (product) =>
+              categoryId === product.categoryId && (
+                <Product key={product.productId} product={product} />
+              )
+          )}
           {error && <h3>Some error occured</h3>}
         </div>
       )}
