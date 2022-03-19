@@ -4,3 +4,8 @@
   align-items: center;
   justify-content: space-around;
 }
+.cart__totalDis{
+  padding: 20px;
+  background-color: rgb(226, 222, 213);
+  color: rgb(51, 56, 56);
+}

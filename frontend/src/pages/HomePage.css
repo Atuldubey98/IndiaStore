@@ -3,8 +3,13 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.homepage {
-  background-color: rgb(233, 194, 180);
+.homepage__filters{
+  display: flex;
+  padding: 20px;
+  background-color: rgb(226, 222, 213);
+  overflow-x: hidden;
+  justify-content: space-around;
+  align-items: center;
 }
 @media only screen and (max-width: 600px) {
   .homepage__products {

@@ -29,7 +29,7 @@ const Cart = () => {
       <Header />
       <div className="cart__total">
         <strong className="cart__totalDis">{`Total : ${total.toFixed(2)}`}</strong>
-        <Button startIcon={<ShoppingBasket/>} variant="contained">Order</Button>
+        <Button disabled={ products.length === 0 } startIcon={<ShoppingBasket/>} variant="contained">Order</Button>
       </div>
       <div className="cart__cartItems">
           {products.map((product) => (

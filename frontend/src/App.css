@@ -1,6 +1,10 @@
 * {
   margin: 0;
 }
+.app{
+  background-color: rgb(233, 194, 180);
+  min-height: 100vh;
+}
 button {
   border: none;
 }
