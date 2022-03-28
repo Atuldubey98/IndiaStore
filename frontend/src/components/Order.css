@@ -1,0 +1,26 @@
+.order {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px auto 0 auto;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 30px;
+}
+.order__info {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.order__info {
+  display: grid;
+}
+.order__info h3 {
+  color: crimson;
+}
+@media only screen and (max-width: 600px) {
+  .order {
+    width: auto;
+  }
+}
