@@ -1,43 +1,46 @@
-.cart__cartItems{
+.cart__cartItems {
   display: flex;
   flex-wrap: wrap;
 }
-.cart__total{
+.cart__page {
+  padding: 25px;
+}
+.cart__total {
   display: flex;
   background-color: rgb(226, 222, 213);
   padding: 30px;
   align-items: center;
   justify-content: space-around;
 }
-.cart__totalDis{
+.cart__totalDis {
   padding: 20px;
   background-color: rgb(226, 222, 213);
   color: rgb(51, 56, 56);
 }
-.cart__modalButtons{
+.cart__modalButtons {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.cart__modalItems{
+.cart__modalItems {
   margin-bottom: 10px;
 }
-.cart__profile{
+.cart__profile {
   margin-top: 20px;
   text-align: center;
 }
-.cart__profile form{
+.cart__profile form {
   display: grid;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.cart__profile form input{
+.cart__profile form input {
   min-width: 95%;
   border: 0.5px solid grey;
   margin: 10px auto 0 auto;
 }
 
-.cart__profile form input:focus{
+.cart__profile form input:focus {
   outline: none;
 }

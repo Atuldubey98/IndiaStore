@@ -10,7 +10,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Cart = () => {
+const CartPage = () => {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -50,9 +50,7 @@ const Cart = () => {
     });
     return cartProducts;
   });
-  const onPlaceOrder = ()=>{
-    
-  }
+  const onPlaceOrder = () => {};
   const closeModal = () => {
     navigate("/cart");
   };
@@ -74,68 +72,84 @@ const Cart = () => {
   return (
     <div className="cart">
       <Header />
-      <div className="cart__total">
-        <strong className="cart__totalDis">{`Total : ${total.toFixed(
-          2
-        )}`}</strong>
-        <h1>{"Cart"}</h1>
-        <Button
-          disabled={products.length === 0}
-          startIcon={<ShoppingBasket />}
-          variant="contained"
-          onClick={openModal}
-        >
-          Order
-        </Button>
-      </div>
-      <Modal
-        isOpen={query.get("modal") ? true : false}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Confirm Purchase"
-      >
-        <div className="cart__modal">
-          <div className="cart__modalItems">
-            {products.map((product) => (
-              <CartItem key={product.productId} product={product} />
-            ))}
-          </div>
-          <div className="cart__profile">
-            <h2>Delivery Address</h2>
-            <form>
-              <input type={"text"} onChange={onNameChange} value={name} placeholder="Name*" />
-              <input
-                type="tel"
-                onChange={onMobileChange}
-                value={mobile}
-                placeholder="Mobile*"
-              />
-              <input type={"text"} onChange={onCityChange} value={city} placeholder="City*" />
-              <input
-                type={"text"}
-                onChange={onCountryChange}
-                value={country}
-                placeholder="Country*"
-              />
-            </form>
-          </div>
-          <div className="cart__modalButtons">
-            <Button onClick={onPlaceOrder} color="success" variant={"contained"}>
-              Place Order
-            </Button>
-            <Button onClick={closeModal} color="error" variant={"contained"}>
-              Cancel
-            </Button>
-          </div>
+      <div className="cart__page">
+        <div className="cart__total">
+          <strong className="cart__totalDis">{`Total : ${total.toFixed(
+            2
+          )}`}</strong>
+          <h1>{"Cart"}</h1>
+          <Button
+            disabled={products.length === 0}
+            startIcon={<ShoppingBasket />}
+            variant="contained"
+            onClick={openModal}
+          >
+            Order
+          </Button>
         </div>
-      </Modal>
-      <div className="cart__cartItems">
-        {products.map((product) => (
-          <Product key={product.productId} product={product} />
-        ))}
+        <Modal
+          isOpen={query.get("modal") ? true : false}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Confirm Purchase"
+        >
+          <div className="cart__modal">
+            <div className="cart__modalItems">
+              {products.map((product) => (
+                <CartItem key={product.productId} product={product} />
+              ))}
+            </div>
+            <div className="cart__profile">
+              <h2>Delivery Address</h2>
+              <form>
+                <input
+                  type={"text"}
+                  onChange={onNameChange}
+                  value={name}
+                  placeholder="Name*"
+                />
+                <input
+                  type="tel"
+                  onChange={onMobileChange}
+                  value={mobile}
+                  placeholder="Mobile*"
+                />
+                <input
+                  type={"text"}
+                  onChange={onCityChange}
+                  value={city}
+                  placeholder="City*"
+                />
+                <input
+                  type={"text"}
+                  onChange={onCountryChange}
+                  value={country}
+                  placeholder="Country*"
+                />
+              </form>
+            </div>
+            <div className="cart__modalButtons">
+              <Button
+                onClick={onPlaceOrder}
+                color="success"
+                variant={"contained"}
+              >
+                Place Order
+              </Button>
+              <Button onClick={closeModal} color="error" variant={"contained"}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </Modal>
+        <div className="cart__cartItems">
+          {products.map((product) => (
+            <Product key={product.productId} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default CartPage;
