@@ -65,7 +65,7 @@ const Homepage = () => {
         </div>
 
         {categories.map((c) => (
-          <div className="homepage__filter">
+          <div key={c.categoryId} className="homepage__filter">
             <Button
               variant={categoryId === c.categoryId ? "contained" : ""}
               onClick={() => onCategoryClick(false, c.categoryId)}
