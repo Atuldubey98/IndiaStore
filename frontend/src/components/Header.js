@@ -65,7 +65,7 @@ const Header = () => {
               <ShoppingBasket />
               <span className="header__linksText">Orders</span>
             </Link>
-            <ExitToApp onClick={handleLogout} />
+            <ExitToApp  onClick={handleLogout} />
             <span className="header__linksText">Logout</span>
           </div>
         )}
