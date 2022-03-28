@@ -50,7 +50,9 @@ const Cart = () => {
     });
     return cartProducts;
   });
-
+  const onPlaceOrder = ()=>{
+    
+  }
   const closeModal = () => {
     navigate("/cart");
   };
@@ -118,7 +120,7 @@ const Cart = () => {
             </form>
           </div>
           <div className="cart__modalButtons">
-            <Button color="success" variant={"contained"}>
+            <Button onClick={onPlaceOrder} color="success" variant={"contained"}>
               Place Order
             </Button>
             <Button onClick={closeModal} color="error" variant={"contained"}>

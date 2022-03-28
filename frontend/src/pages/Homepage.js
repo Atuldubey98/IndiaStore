@@ -25,7 +25,7 @@ const Homepage = () => {
   const onCategoryClick = (isAll, categoryId) => {
     navigate(isAll ? "/" : `/categoryId/${categoryId}`);
   };
-  console.log(categoryId);
+
   const products = useSelector((state) => {
     return categoryId
       ? state.productsAccess.products.filter(

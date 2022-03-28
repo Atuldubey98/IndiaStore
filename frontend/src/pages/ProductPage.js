@@ -22,7 +22,6 @@ const ProductPage = () => {
             productId,
           },
         });
-        console.log(response.data.product);
         setProduct(response.data.product);
         setLoading(false);
       } catch (error) {
