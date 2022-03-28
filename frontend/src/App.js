@@ -1,7 +1,7 @@
 import "./App.css";
-import Login from "./pages/Login";
-import Cart from "./pages/Cart";
-import Orders from "./pages/Orders";
+import LoginPage from "./pages/LoginPage";
+import CartPage from "./pages/CartPage";
+import OrdersPage from "./pages/OrdersPage";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
@@ -46,12 +46,12 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/cart"
           element={
             <PrivateRoute>
-              <Cart />
+              <CartPage />
             </PrivateRoute>
           }
         />
@@ -60,7 +60,7 @@ const App = () => {
           
           element={
             <PrivateRoute>
-              <Orders />
+              <OrdersPage />
             </PrivateRoute>
           }
         />

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Product from "../components/Product";
 import CartItem from "../components/CartItem";
 import useQuery from "../hooks/useQuery";
-import "./Cart.css";
+import "./CartPage.css";
 import { ShoppingBasket } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import Modal from "react-modal";
