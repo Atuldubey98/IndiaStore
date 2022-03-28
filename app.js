@@ -8,8 +8,9 @@ const products = require("./api/routes/products");
 const users = require("./api/routes/users");
 const category = require("./api/routes/category");
 const orders = require("./api/routes/orders");
+const path = require("path");
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, 'frontend', 'build')))
 app.get("/api/v1", (req, res) => {
   return res
     .status(200)
