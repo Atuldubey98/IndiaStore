@@ -12,7 +12,6 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: payload,
-        error: null,
       };
     case usersActionsTypes.SET_USER:
       return {
@@ -26,7 +25,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         user: null,
-        error: "Login failed !",
+        error: payload,
       };
     default:
       return {

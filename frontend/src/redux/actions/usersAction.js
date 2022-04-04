@@ -13,8 +13,10 @@ export const setUserLoading = (loading) => {
     payload: loading,
   };
 };
-export const setUserError = () => {
+export const setUserError = (error) => {
+  
   return {
     type: usersActionsTypes.SET_USER_ERROR,
+    payload: error
   };
 };

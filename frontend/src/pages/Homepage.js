@@ -17,7 +17,6 @@ const Homepage = () => {
   const token = useSelector((state) => state.userAccess.user.token);
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.productsAccess);
-  
   const { categoryId } = useParams();
   const { cart } = useSelector((state) => state.cartAccess);
   const [categories, setCategories] = useState([]);

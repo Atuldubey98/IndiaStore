@@ -10,11 +10,16 @@ import {
 import { Button, CircularProgress } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import SnackBarHandler from "../components/SnackBarHandler";
+import useQuery from "../hooks/useQuery";
+
 const Login = () => {
-  const { user, loading } = useSelector((state) => state.userAccess);
+  const { user, error, loading } = useSelector((state) => state.userAccess);
+  const query = useQuery();
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onPasswordChange = (e) => {
@@ -23,6 +28,9 @@ const Login = () => {
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+  const onToggleSignup = (isSignup) => {
+    navigate(isSignup ? "/login?signup=true" : "/login");
   };
 
   const onLoginSubmit = async (e) => {
@@ -36,13 +44,13 @@ const Login = () => {
         dispatch(setUser({ email, token: response.data.token }));
         navigate("/", { replace: true });
       } else {
-        dispatch(setUserError());
+        dispatch(setUserError("Login failed !"));
         setOpen(true);
         throw new Error({});
       }
     } catch (err) {
       setOpen(true);
-      dispatch(setUserError());
+      dispatch(setUserError("Login failed !"));
     }
   };
   const handleClose = (event, reason) => {
@@ -51,6 +59,33 @@ const Login = () => {
     }
 
     setOpen(false);
+  };
+  const onConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+  const onSignup = async () => {
+    try {
+      dispatch(setUserLoading(true));
+      if (email === "" || password === "" || confirmPassword === "") {
+        dispatch(setUserError("Fields cannot be left empty"));
+        setOpen(true);
+        return;
+      }
+      if (confirmPassword !== password) {
+        dispatch(setUserError("Confirm password and Password doesn't match !"));
+        setOpen(true);
+        return;
+      }
+      
+    } catch (err) {
+      console.log(err);
+      setUserError("")
+    } finally {
+      dispatch(setUserLoading(false));
+    }
+  };
+  const onNameChange = (e) => {
+    setName(e.target.value);
   };
   return (
     <div className="login">
@@ -63,27 +98,55 @@ const Login = () => {
           <h1>India Store</h1>
 
           <input
-            placeholder="Email"
+            placeholder="Email*"
             type="email"
             name="email"
+            value={email}
             onChange={onEmailChange}
           />
 
           <input
-            placeholder="Password"
+            placeholder="Password*"
             type="password"
+            value={password}
             onChange={onPasswordChange}
           />
-          <Button size="large" variant="contained" type="submit">
-            Login
+
+          {query.get("signup") && (
+            <input
+              placeholder="Confirm Password*"
+              type="password"
+              value={confirmPassword}
+              onChange={onConfirmPasswordChange}
+            />
+          )}
+          {query.get("signup") && (
+            <input
+              placeholder="Name"
+              type="text"
+              value={name}
+              onChange={onNameChange}
+            />
+          )}
+          {!query.get("signup") && (
+            <Button size="large" variant="contained" type="submit">
+              {"Login"}
+            </Button>
+          )}
+          {query.get("signup") && (
+            <Button size="large" variant="contained" onClick={onSignup}>
+              {"Signup"}
+            </Button>
+          )}
+          <Button
+            onClick={() => onToggleSignup(!query.get("signup"))}
+            size="large"
+          >
+            {query.get("signup") ? "Login instead !" : "Signup instead !"}
           </Button>
         </form>
       )}
-      <SnackBarHandler
-        open={open}
-        handleClose={handleClose}
-        message={"Login failed ! "}
-      />
+      <SnackBarHandler open={open} handleClose={handleClose} message={error} />
     </div>
   );
 };
