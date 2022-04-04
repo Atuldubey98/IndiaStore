@@ -1,41 +1,37 @@
 .login {
-    height: 100vh;
-    background-color: rgb(233, 194, 180);
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
-form h1{
+.login form h1 {
   text-align: center;
-  color: rgb(163, 19, 163);
+  font-style: italic;
 }
 .login form {
   display: grid;
   width: 50%;
-  min-width: 50%;
-  margin: auto;
-  padding-top: 30vh;
+  padding: 20px;
+  background-color: rgba(168, 167, 167, 0.795);
 }
-form input {
+.login form input {
   margin: 10px;
+  border: none;
   font-size: medium;
   padding: 10px;
   background-color: white;
 }
 
-form button {
-  width: fit-content;
+.login form button {
+  min-width: 50%;
+  max-width: 60%;
   margin: auto;
-  padding: 10px;
-  color: white;
-  border-radius: 10px;
-  background-color: rgba(65, 35, 172, 0.57);
+  margin-top: 20px;
 }
-form button:hover {
-  background-color: rgba(65, 35, 172, 0.891);
-}
-
 @media only screen and (max-width: 600px) {
-  form {
+  .login form {
     display: grid;
     width: 70%;
-    margin: auto;
+    padding: 20px;
   }
 }

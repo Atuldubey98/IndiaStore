@@ -7,9 +7,12 @@ import {
   setUserError,
   setUserLoading,
 } from "../redux/actions/usersAction";
+import { Button, CircularProgress } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
+import SnackBarHandler from "../components/SnackBarHandler";
 const Login = () => {
-  const { user, error, loading } = useSelector((state) => state.userAccess);
+  const { user, loading } = useSelector((state) => state.userAccess);
+  const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -33,33 +36,54 @@ const Login = () => {
         dispatch(setUser({ email, token: response.data.token }));
         navigate("/", { replace: true });
       } else {
+        dispatch(setUserError());
+        setOpen(true);
         throw new Error({});
       }
-    } catch (error) {
+    } catch (err) {
+      setOpen(true);
       dispatch(setUserError());
     }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
   return (
     <div className="login">
       {loading ? (
-        <h1>Loading</h1>
+        <CircularProgress />
       ) : user ? (
         <Navigate to={"/"} />
       ) : (
         <form autoComplete={`on`} onSubmit={onLoginSubmit}>
           <h1>India Store</h1>
-          <span>
-            <label htmlFor="Email">Email : </label>
-          </span>
-          <input type="email" name="email" onChange={onEmailChange} />
-          <span>
-            <label htmlFor="Password">Password : </label>
-          </span>
-          <input type="password" onChange={onPasswordChange} />
-          <button type="submit">Login</button>
+
+          <input
+            placeholder="Email"
+            type="email"
+            name="email"
+            onChange={onEmailChange}
+          />
+
+          <input
+            placeholder="Password"
+            type="password"
+            onChange={onPasswordChange}
+          />
+          <Button size="large" variant="contained" type="submit">
+            Login
+          </Button>
         </form>
       )}
-      {error && <h3>{`Some error occured !`}</h3>}
+      <SnackBarHandler
+        open={open}
+        handleClose={handleClose}
+        message={"Login failed ! "}
+      />
     </div>
   );
 };

@@ -52,7 +52,7 @@ const Homepage = () => {
     fetchProducts();
   }, [token, dispatch]);
   return (
-    <div className={loading ? "homepageloading" : "homepage"}>
+    <div className={"homepage"}>
       <Header />
       <div className="homepage__filters">
         <div className="homepage__filter">
@@ -87,8 +87,7 @@ const Homepage = () => {
         </div>
       )}
 
-      {cart.length > 0 && <BuyProduct />}
-      
+      {cart.length > 0 && <BuyProduct />} 
     </div>
   );
 };
