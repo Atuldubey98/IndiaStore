@@ -31,7 +31,7 @@ const CartPage = () => {
       top: "50%",
       left: "50%",
       right: "auto",
-      height: "50%",
+      maxHeight : "90%",
       width: "80%",
       bottom: "auto",
       marginRight: "-50%",

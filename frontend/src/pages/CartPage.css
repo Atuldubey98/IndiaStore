@@ -26,6 +26,8 @@
   margin-bottom: 10px;
 }
 .cart__profile {
+  max-width: 60%;
+  margin: auto;
   margin-top: 20px;
   text-align: center;
 }
@@ -36,7 +38,7 @@
 }
 
 .cart__profile form input {
-  min-width: 95%;
+  min-width: 60%;
   border: 0.5px solid grey;
   margin: 10px auto 0 auto;
 }

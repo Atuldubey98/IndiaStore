@@ -8,7 +8,7 @@ import {
   Close,
   ExitToApp,
 } from "@material-ui/icons";
-import { Badge } from "@mui/material";
+import { Badge} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setUser } from "../redux/actions/usersAction";
@@ -42,7 +42,7 @@ const Header = () => {
         )}
         {isSearch ? (
           <input
-          placeholder="Search..."
+            placeholder="Search..."
             name="header__search"
             value={search}
             onChange={onSearchChange}
@@ -65,8 +65,10 @@ const Header = () => {
               <ShoppingBasket />
               <span className="header__linksText">Orders</span>
             </Link>
-            <ExitToApp  onClick={handleLogout} />
-            <span className="header__linksText">Logout</span>
+            <div className="header__linksLogout" style={{ cursor: 'pointer' }}>
+              <ExitToApp onClick={handleLogout} />
+              <span style={{ fontWeight: 'bold' }} className="header__linksText">Logout</span>
+            </div>
           </div>
         )}
       </div>
