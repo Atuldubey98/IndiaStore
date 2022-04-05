@@ -15,16 +15,8 @@ import { setUser } from "../redux/actions/usersAction";
 const Header = () => {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.cartAccess.cart.length);
-  const [search, setSearch] = useState("");
-  const onSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
 
   const navigate = useNavigate();
-  const [isSearch, setIsSearch] = useState(false);
-  const handleSearchVisibility = () => {
-    setIsSearch((s) => !s);
-  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -35,42 +27,30 @@ const Header = () => {
     <div className="header">
       <h2>India Store</h2>
       <div className="header__content">
-        {!isSearch ? (
-          <Search fontSize="large" onClick={handleSearchVisibility} />
-        ) : (
-          <Close fontSize="large" onClick={handleSearchVisibility} />
-        )}
-        {isSearch ? (
-          <input
-            placeholder="Search..."
-            name="header__search"
-            value={search}
-            onChange={onSearchChange}
-          />
-        ) : (
-          <div className="header__links">
-            <Link to={"/"}>
-              <Home fontSize="large" />
-              <span className="header__linksText">Home</span>
-            </Link>
+        <Search fontSize="large"/>
+        <div className="header__links">
+          <Link to={"/"}>
+            <Home fontSize="large" />
+            <span className="header__linksText">Home</span>
+          </Link>
 
-            <Link to={"/cart"}>
-              <Badge badgeContent={count}>
-                <ShoppingCart fontSize="large" />
-              </Badge>
-              <span className="header__linksText">Cart</span>
-            </Link>
+          <Link to={"/cart"}>
+            <Badge badgeContent={count}>
+              <ShoppingCart fontSize="large" />
+            </Badge>
+            <span className="header__linksText">Cart</span>
+          </Link>
 
-            <Link to={"/orders"}>
-              <ShoppingBasket fontSize="large" />
-              <span className="header__linksText">Orders</span>
-            </Link>
-            <div className="header__linksLogout" style={{ cursor: 'pointer' }}>
-              <ExitToApp fontSize="large" onClick={handleLogout} />
-              <span style={{ fontWeight: 'bold' }} className="header__linksText">Logout</span>
-            </div>
+          <Link to={"/orders"}>
+            <ShoppingBasket fontSize="large" />
+            <span className="header__linksText">Orders</span>
+          </Link>
+          <div className="header__linksLogout" style={{ cursor: 'pointer' }}>
+            <ExitToApp fontSize="large" onClick={handleLogout} />
+            <span style={{ fontWeight: 'bold' }} className="header__linksText">Logout</span>
           </div>
-        )}
+        </div>
+
       </div>
     </div>
   );
