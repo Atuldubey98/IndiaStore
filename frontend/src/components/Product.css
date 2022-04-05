@@ -1,75 +1,46 @@
-.product {
-  width: 60vh;
-  height: 65vh;
-  padding: 30px;
-  margin: 30px auto 0 auto;
-  text-overflow: clip;
-  background-color: rgb(241, 233, 233);
-  line-height: 1.8;
-  font-size: 18px;
+.product{
   display: grid;
+  justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  transition: transform .1s;
+  line-height: 25px;
+  
+  margin: 10px auto;
+  padding: 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  width: 40%;
+  height: 25rem;
 }
-.product:hover{
-  transform: scale(1.02);
-}
-.productSelected {
-  background-color: rgba(168, 167, 167, 0.795);
-}
-.product__productImageURL {
-  margin: auto;
-  object-fit: contain;
-  cursor: pointer;
-  max-width: 95%;
-}
-.product__btnPrice {
+.product__btnPrice{
   display: flex;
   justify-content: space-around;
 }
-.product__btnPriceButtons {
+.product__btnPriceButtons{
   display: flex;
-  margin-left: 10px;
-  align-items: center;
+  justify-content: space-around;
 }
-.product__btnPriceButtonsPlus:hover {
-  background-color: rgb(1, 102, 1);
+.product__btnPriceButtonsQty{
+  padding-left: 20px;
+  padding-right: 20px;
 }
-.product__btnPriceButtonsPlus {
-  height: 30px;
-  width: 30px;
-  margin-right: 10px;
-  border-radius: 30px;
+.product__btnPriceButtonsMinus{
+  background-color: red
+}
+.product__btnPriceButtonsPlus{
   background-color: green;
-  color: white;
-  cursor: pointer;
 }
-.product__btnPriceButtonsQty {
-  background-color: rgb(183, 142, 223);
-  padding: 10px;
-  color: white;
-  border-radius: 15px;
+.product__btnPriceButton{
+  color: wheat;
 }
-.product__btnPriceButtonsMinus:hover {
-  background-color: rgb(230, 0, 0);
+.product__productImageURL > img{
+  object-fit: contain;
+  width: 85%;
+  margin: auto;
 }
-.product__btnPriceButtonsMinus {
-  border-radius: 30px;
-  margin-left: 10px;
-  color: white;
-  background-color: red;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
+.product__productImageURL{
+  margin: 2px auto;
 }
-@media only screen and (max-width: 600px) {  
-  .product {
-    margin: 30px auto 0 auto;
-    padding: 10px;
-    width: 85%;
-  }
-  .product__productImageURL{
-    width: 70%;
+@media screen and (max-width : 600px){
+  .product{
+     width: 90%;
   }
 }

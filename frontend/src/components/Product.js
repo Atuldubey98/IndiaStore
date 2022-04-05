@@ -36,17 +36,19 @@ const Product = ({ product }) => {
       }
     >
       <TextTruncate
+        className={"product__productName"}
         line={2}
         element={`h4`}
         truncateText={`...`}
         text={productName}
       />
-      <img
-        className="product__productImageURL"
-        alt={productId}
-        onClick={onProductPage}
-        src={productImageURL !== "" ? productImageURL : `images/product.jpeg`}
-      />
+      <div className="product__productImageURL">
+        <img
+          alt={productId}
+          onClick={onProductPage}
+          src={productImageURL !== "" ? productImageURL : `images/product.jpeg`}
+        />
+      </div>
       <TextTruncate
         line={2}
         element={`p`}
@@ -58,7 +60,7 @@ const Product = ({ product }) => {
         <div className="product__btnPriceButtons">
           <button
             onClick={onPlusPress}
-            className="product__btnPriceButtonsPlus"
+            className="product__btnPriceButton product__btnPriceButtonsPlus"
           >
             +
           </button>
@@ -67,7 +69,7 @@ const Product = ({ product }) => {
           </h5>
           <button
             onClick={onMinusPress}
-            className="product__btnPriceButtonsMinus"
+            className="product__btnPriceButton product__btnPriceButtonsMinus"
           >
             -
           </button>
