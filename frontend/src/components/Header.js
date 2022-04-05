@@ -8,7 +8,7 @@ import {
   Close,
   ExitToApp,
 } from "@material-ui/icons";
-import { Badge} from "@mui/material";
+import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setUser } from "../redux/actions/usersAction";
@@ -36,9 +36,9 @@ const Header = () => {
       <h2>India Store</h2>
       <div className="header__content">
         {!isSearch ? (
-          <Search onClick={handleSearchVisibility} />
+          <Search fontSize="large" onClick={handleSearchVisibility} />
         ) : (
-          <Close onClick={handleSearchVisibility} />
+          <Close fontSize="large" onClick={handleSearchVisibility} />
         )}
         {isSearch ? (
           <input
@@ -50,23 +50,23 @@ const Header = () => {
         ) : (
           <div className="header__links">
             <Link to={"/"}>
-              <Home />
+              <Home fontSize="large" />
               <span className="header__linksText">Home</span>
             </Link>
 
             <Link to={"/cart"}>
               <Badge badgeContent={count}>
-                <ShoppingCart />
+                <ShoppingCart fontSize="large" />
               </Badge>
               <span className="header__linksText">Cart</span>
             </Link>
 
             <Link to={"/orders"}>
-              <ShoppingBasket />
+              <ShoppingBasket fontSize="large" />
               <span className="header__linksText">Orders</span>
             </Link>
             <div className="header__linksLogout" style={{ cursor: 'pointer' }}>
-              <ExitToApp onClick={handleLogout} />
+              <ExitToApp fontSize="large" onClick={handleLogout} />
               <span style={{ fontWeight: 'bold' }} className="header__linksText">Logout</span>
             </div>
           </div>

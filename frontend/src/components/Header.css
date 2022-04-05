@@ -7,6 +7,9 @@
   padding: 1rem;
   background-color: rgba(65, 35, 172, 0.891);
 }
+.header h2{
+  margin-right: 20px;
+}
 .header__linkDropdownContent{
   padding: 8px;
   display: grid;
@@ -18,6 +21,7 @@
 }
 .header__linksLogout{
   display: flex;
+  margin-left: 20px;
   align-items: center;
 }
 .header__linkDropdown {
@@ -52,56 +56,31 @@ a:hover,
 a:focus,
 a:active {
   font-weight: bolder;
-  margin: 10px;
   color: white;
   text-decoration: none;
 }
 
+.header__content input{
+  border: none;
+  width: 100%;
+}
 .header__content {
   display: flex;
   align-items: center;
 }
-.header__content input {
-  width: 50vh;
-  height: 4vh;
-  margin-left: 10px;
-  padding: 2px;
-  border: none;
+
+.header__links a{
+  margin-left: 20px;
 }
-.header__links a span{
-  padding : 5px;
-}
-.header__content form {
-  display: flex;
-}
-.header__content input:focus {
-  border: none;
-}
-.header__links{
-  padding: 20px;
-}
-@media only screen and (max-width: 600px) {
-  .header__linkProfile {
-    padding-left: 20px;
-  }
+
+@media only screen and (max-width: 600px) { 
   .header {
     padding: 30px;
-  }
-  .header__content input {
-    width: auto;
-    height: 3vh;
-    margin-left: 10px;
-  }
-  .header a,
-  a:hover,
-  a:focus,
-  a:active {
-    margin: 5px;
   }
   .header__linksText {
     display: none;
   }
   .header__linkDropdownItems {
-    display: none;
+    visibility: hidden;
   }
 }
