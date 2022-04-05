@@ -28,7 +28,13 @@ const getProduct = async (req, res) => {
 const getProducts = async (req, res) => {
   try {
     const products = await getProductsDal();
-    return res.status(200).json({ status: true, products: products });
+    return res
+      .status(200)
+      .json({
+        status: true,
+        numberOfItems: products.length,
+        products: products,
+      });
   } catch (error) {
     return res.status(400).json({ status: false, error: error.message });
   }
@@ -180,13 +186,13 @@ const addManyProducts = (req, res) => {
     }
 
     products.forEach(async (p) => {
-      const product = productItem(
-        uuid.v4(),
-        p.productName,
-        p.productDescription,
-        p.productImageURL,
-        p.productPrice
-      );
+      const product = productItem({
+        productId: uuid.v4(),
+        productName: p.productName,
+        productDescription: p.productDescription,
+        productImageURL: p.productImageURL,
+        productPrice: p.productPrice,
+      });
       await docClient
         .put({
           TableName: Products,
@@ -197,7 +203,9 @@ const addManyProducts = (req, res) => {
         .promise();
       counter++;
     });
-    return res.status(200).json({ status: true, message: "Products Created!" });
+    return res
+      .status(200)
+      .json({ status: true, message: "Products Created! " + counter });
   } catch (error) {
     return res.status(400).json(error);
   }

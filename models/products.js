@@ -1,6 +1,6 @@
 const { isEmpty } = require("validator");
 const productItem = (product) => {
-
+  console.log(product);
   if (
     product.productId === undefined ||
     product.productName === undefined ||

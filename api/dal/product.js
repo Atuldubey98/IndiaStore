@@ -45,9 +45,22 @@ const addProductDal = async (product) => {
   }
 };
 
+const addManyProductsDal = async (products) => {
+  try {
+    products.forEach((product, index) => {
+      if (!addProductDal(product)) {
+        return index;
+      }
+    });
+    return products.length;
+  } catch {
+    return 0;
+  }
+};
 
 module.exports = {
   getProductByIdDal,
   getProductsDal,
   addProductDal,
+  addManyProductsDal
 };
