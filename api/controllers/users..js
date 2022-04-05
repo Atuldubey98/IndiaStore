@@ -87,9 +87,9 @@ const login = async (req, res) => {
 
 const deactivateUser = async (req, res) => {
   try {
-    const email = req.body.email ?? "";
-    const password = req.body.password ?? "";
-    const confirmPassword = req.body.confirmPassword ?? "";
+    const email = req.body.email && "";
+    const password = req.body.password && "";
+    const confirmPassword = req.body.confirmPassword && "";
     if (email === "" || email !== req.user.Item.email) {
       errorHandler({ status: false, message: "Error Occured" });
     }

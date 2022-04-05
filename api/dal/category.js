@@ -23,7 +23,7 @@ const getCategoryById = async (categoryId) => {
     const categoryPromise = await docClient
       .get({ TableName, Key: { categoryId } })
       .promise();
-    return categoryPromise.Item ?? null;
+    return categoryPromise.Item;
   } catch (error) {
     return null;
   }

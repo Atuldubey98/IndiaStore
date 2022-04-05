@@ -17,7 +17,7 @@ const getProductByIdDal = async (productId) => {
         },
       })
       .promise();
-    return productResponse.Item ?? null;
+    return productResponse.Item;
   } catch (error) {
     return null;
   }

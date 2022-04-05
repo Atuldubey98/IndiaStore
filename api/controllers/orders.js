@@ -40,8 +40,8 @@ const getOrdersByUserId = async (req, res) => {
 
 const updateOrderStatus = async (req, res) => {
   try {
-    const orderId = req.body.orderId ?? " ";
-    const status = req.body.status ?? " ";
+    const orderId = req.body.orderId && " ";
+    const status = req.body.status && " ";
 
     const updated = await updateOrderStatusDal(orderId, status);
     if (updated) {
@@ -70,7 +70,7 @@ const cancelOrderById = async (req, res) => {
 
 const getOrderById = async (req, res) => {
   try {
-    const orderId = req.query.orderId ?? " ";
+    const orderId = req.query.orderId && " ";
     const order = await getOrderByIdDal(orderId);
     if (!order) {
       errorHandler({ status: false, message: "Order not avalaible" });

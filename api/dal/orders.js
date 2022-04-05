@@ -111,7 +111,7 @@ const updateOrderStatusDal = async (orderId, statusValue) => {
 const getOrderByIdDal = async (orderId) => {
   try {
     const order = await docClient.get({ TableName, Key: { orderId } }).promise();
-    return order.Item ?? null
+    return order.Item && null
   } catch (error) {
     return null
   }
