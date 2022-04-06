@@ -1,7 +1,6 @@
 import "./Order.css";
 import { Button } from "@mui/material";
 const Order = ({ order }) => {
-  console.log(order);
   return (
     <div className="order">
       <div className="order__data">
@@ -23,21 +22,22 @@ const Order = ({ order }) => {
             <h4> Country: {order.mobile}</h4>
           </div>
         </div>
-        <h4 className="order__status order__info">
+        <div className="order__status order__info">
           <h3>
             <b>
               Order status: <span>{order.orderStatus}</span>
             </b>
           </h3>
+          <Button color="secondary" variant="contained">Cancel Order</Button>
           <h3>
             <b>
               Number of items :{" "}
-              <Button variant={"contained"}>{order.orderedItems.length}</Button>
+              <Button>{order.orderedItems.length}</Button>
             </b>
           </h3>
-        </h4>
+        </div>
       </div>
-      <div className="order__data">{order.grandTotal}</div>
+      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }} className="order__data">{`Rs ${order.grandTotal}`}</div>
     </div>
   );
 };

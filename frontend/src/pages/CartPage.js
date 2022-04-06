@@ -143,7 +143,7 @@ const CartPage = () => {
         <div className="cart__cartItems">
           {products && products.length > 0 ? products.map((product) => (
             <Product key={product.productId} product={product} />
-          )) : <div className="">No items in cart</div>}
+          )) : <h1 className="">No items in cart</h1>}
         </div>
       </div>
     </div>

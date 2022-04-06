@@ -1,13 +1,15 @@
 .order {
   background-color: white;
   border-radius: 10px;
+  border: 1px solid lightgrey;
   padding: 10px;
-  margin: 10px auto 0 auto;
   width: 40%;
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   line-height: 30px;
+  cursor: pointer;
 }
 .order__info {
   padding-top: 10px;
@@ -17,7 +19,7 @@
   display: grid;
 }
 .order__info h3 {
-  color: crimson;
+  color: rgb(54, 28, 151);
 }
 @media only screen and (max-width: 600px) {
   .order {

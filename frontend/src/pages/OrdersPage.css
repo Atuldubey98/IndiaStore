@@ -1,8 +1,12 @@
 .orders__home {
-  padding: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   flex-wrap: wrap;
+  margin: auto;
+  padding: 20px;
+}
+.orders{
+  margin: auto;
 }
