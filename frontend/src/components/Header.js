@@ -5,33 +5,34 @@ import {
   Home,
   ShoppingBasket,
   Search,
-  Close,
   ExitToApp,
 } from "@material-ui/icons";
+import useQuery from "../hooks/useQuery";
 import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { setUser } from "../redux/actions/usersAction";
 const Header = () => {
   const dispatch = useDispatch();
+  const query = useQuery();
   const count = useSelector((state) => state.cartAccess.cart.length);
-
   const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.clear();
     dispatch(setUser(null));
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   };
+  const openSearchModal = ()=>{
+    navigate("?searchModal=true")
+  }
   return (
     <div className="header">
       <h2>India Store</h2>
       <div className="header__content">
-        <Search fontSize="large"/>
+        <Search fontSize="large" onClick={openSearchModal}/>
         <div className="header__links">
           <Link to={"/"}>
             <Home fontSize="large" />
-            <span className="header__linksText">Home</span>
+          <span className="header__linksText">Home</span>
           </Link>
 
           <Link to={"/cart"}>

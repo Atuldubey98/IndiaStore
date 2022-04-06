@@ -1,6 +1,8 @@
 .homepage__products {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80vh;
   align-items: center;
 }
 .homepage__filters{

@@ -4,6 +4,7 @@ import Order from "../components/Order";
 import axiosInstance from "../api/axios";
 import "./OrdersPage.css";
 import { useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const Orders = () => {
       <Header />
       <div className="orders__home">
         {loading ? (
-          <div className="orders_loading">{"loading"}</div>
+          <CircularProgress />
         ) : orders && orders.length > 0 ? (
           orders.map((order) => <Order key={order.orderId} order={order} />)
         ) : (

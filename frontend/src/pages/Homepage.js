@@ -28,8 +28,8 @@ const Homepage = () => {
   const products = useSelector((state) => {
     return categoryId
       ? state.productsAccess.products.filter(
-          (product) => product.categoryId === categoryId
-        )
+        (product) => product.categoryId === categoryId
+      )
       : state.productsAccess.products;
   });
   useEffect(() => {
@@ -75,18 +75,16 @@ const Homepage = () => {
           </div>
         ))}
       </div>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <div className="homepage__products">
-          {products.map((product) => (
-            <Product key={product.productId} product={product} />
-          ))}
-          {error && <h3>Some error occured</h3>}
-        </div>
-      )}
-
-      {cart.length > 0 && <BuyProduct />} 
+      <div className="homepage__products">
+        {
+          loading ? <CircularProgress /> :
+            products && products.length > 0 ? products.map((product) => (
+              <Product key={product.productId} product={product} />
+            )) : <h1 className="no_products">{"No products found"}</h1>
+        }
+        {error && <h3>Some error occured</h3>}
+      </div>
+      {cart.length > 0 && <BuyProduct />}
     </div>
   );
 };
