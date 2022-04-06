@@ -57,7 +57,7 @@ const App = () => {
         />
         <Route
           path="/orders"
-          
+
           element={
             <PrivateRoute>
               <OrdersPage />
@@ -66,14 +66,14 @@ const App = () => {
         />
         <Route
           path="/product/:productId"
-          
+
           element={
             <PrivateRoute>
               <ProductPage/>
             </PrivateRoute>
           }
         />
-        
+
       </Routes>
     </div>
   );

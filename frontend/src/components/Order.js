@@ -37,7 +37,9 @@ const Order = ({ order }) => {
           </h3>
         </div>
       </div>
-      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }} className="order__data">{`Rs ${order.grandTotal}`}</div>
+      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }} className="order__data">
+          <h3>{`Rs ${order.grandTotal}`}</h3>
+      </div>
     </div>
   );
 };
