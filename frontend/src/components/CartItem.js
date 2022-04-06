@@ -1,5 +1,6 @@
 import "./CartItem.css";
 import { useSelector } from "react-redux";
+import TextTruncate from "react-text-truncate";
 const CartItem = ({ product }) => {
   const { productId } = product;
   const cartItem = useSelector((state) =>
@@ -10,7 +11,12 @@ const CartItem = ({ product }) => {
   return (
     <div className="cartitem">
       <div className="cartitem__des">
-        <h5>{product.productName}</h5>
+      <TextTruncate
+        line={2}
+        element={`h3`}
+        truncateText={`...`}
+        text={product.productName}
+      />
       </div>
       <div className="cartitem__priceQuan">
         <strong>{`${cartItem[0].quantity}  X ${product.productPrice.toFixed(2)}`}</strong>

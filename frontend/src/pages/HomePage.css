@@ -13,7 +13,20 @@
   align-items: center;
   position: sticky;
 }
-
+.homepage__search{
+  margin: 20px auto;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  display: inline;
+}
+.homepage__search input{
+  border: none; 
+  font-size: 1.2rem; 
+  height: 3rem;
+}
+.homepage__search input:focus{
+  outline: none;
+}
 @media only screen and (max-width: 600px) {
   .homepage__products {
     padding: 10px;

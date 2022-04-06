@@ -17,6 +17,16 @@
   background-color: rgb(226, 222, 213);
   color: rgb(51, 56, 56);
 }
+.cart__cartItems{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.cart__modal{
+  font-size: 1.2rem;
+  max-height: 80%;
+}
 .cart__modalButtons {
   display: flex;
   justify-content: space-around;
@@ -26,21 +36,20 @@
   margin-bottom: 10px;
 }
 .cart__profile {
-  max-width: 60%;
   margin: auto;
-  margin-top: 20px;
+  font-size: 1.5rem;
   text-align: center;
 }
 .cart__profile form {
   display: grid;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: auto;
 }
-
+.cart__profile h2{
+  margin: 30px;
+}
 .cart__profile form input {
-  min-width: 60%;
-  border: 0.5px solid grey;
-  margin: 10px auto 0 auto;
+  margin: 10px auto;
+  font-size: 1.1rem;
 }
 
 .cart__profile form input:focus {

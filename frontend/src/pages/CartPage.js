@@ -31,8 +31,7 @@ const CartPage = () => {
       top: "50%",
       left: "50%",
       right: "auto",
-      maxHeight : "90%",
-      width: "80%",
+      maxHeight: "90%",
       bottom: "auto",
       marginRight: "-50%",
       overflowY: "scroll",
@@ -50,7 +49,7 @@ const CartPage = () => {
     });
     return cartProducts;
   });
-  const onPlaceOrder = () => {};
+  const onPlaceOrder = () => { };
   const closeModal = () => {
     navigate("/cart");
   };
@@ -77,7 +76,6 @@ const CartPage = () => {
           <strong className="cart__totalDis">{`Total : ${total.toFixed(
             2
           )}`}</strong>
-          <h1>{"Cart"}</h1>
           <Button
             disabled={products.length === 0}
             startIcon={<ShoppingBasket />}
@@ -143,9 +141,9 @@ const CartPage = () => {
           </div>
         </Modal>
         <div className="cart__cartItems">
-          {products.map((product) => (
+          {products && products.length > 0 ? products.map((product) => (
             <Product key={product.productId} product={product} />
-          ))}
+          )) : <div className="">No items in cart</div>}
         </div>
       </div>
     </div>

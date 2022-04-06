@@ -7,13 +7,11 @@ import {
   Search,
   ExitToApp,
 } from "@material-ui/icons";
-import useQuery from "../hooks/useQuery";
 import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/actions/usersAction";
 const Header = () => {
   const dispatch = useDispatch();
-  const query = useQuery();
   const count = useSelector((state) => state.cartAccess.cart.length);
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -24,6 +22,7 @@ const Header = () => {
   const openSearchModal = ()=>{
     navigate("?searchModal=true")
   }
+  
   return (
     <div className="header">
       <h2>India Store</h2>
