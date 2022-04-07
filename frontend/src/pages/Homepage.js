@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import "./HomePage.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import useQuery from '../hooks/useQuery';
+import useQuery from "../hooks/useQuery";
 import {
   setProduct,
   setProductLoading,
@@ -18,7 +18,7 @@ import { Button, CircularProgress, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 const Homepage = () => {
-  Modal.setAppElement("#root")
+  Modal.setAppElement("#root");
   const token = useSelector((state) => state.userAccess.user.token);
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.productsAccess);
@@ -33,8 +33,8 @@ const Homepage = () => {
   const products = useSelector((state) => {
     return query.get("categoryId")
       ? state.productsAccess.products.filter(
-        (product) => product.categoryId === query.get("categoryId")
-      )
+          (product) => product.categoryId === query.get("categoryId")
+        )
       : state.productsAccess.products;
   });
   const closeModal = () => {
@@ -49,9 +49,9 @@ const Homepage = () => {
       bottom: "auto",
       marginRight: "-50%",
       overflowY: "scroll",
-      display: 'grid',
-      justify: 'center',
-      alignItems: 'center',
+      display: "grid",
+      justify: "center",
+      alignItems: "center",
       transform: "translate(-50%, -50%)",
     },
   };
@@ -89,33 +89,44 @@ const Homepage = () => {
         {categories.map((c) => (
           <div key={c.categoryId} className="homepage__filter">
             <Button
-              variant={query.get("categoryId") === c.categoryId ? "contained" : ""}
+              variant={
+                query.get("categoryId") === c.categoryId ? "contained" : ""
+              }
               onClick={() => onCategoryClick(false, c.categoryId)}
               key={c.categoryId}
             >
-              {`${c.categoryName} (${query.get("categoryId") === c.categoryId && products ? products.length : 0})`}
+              {`${c.categoryName} (${
+                query.get("categoryId") === c.categoryId && products
+                  ? products.length
+                  : 0
+              })`}
             </Button>
           </div>
         ))}
       </div>
       <div className="homepage__products">
-        {
-          loading ? <CircularProgress /> :
-            products && products.length > 0 ? products.map((product) => (
-              <Product key={product.productId} product={product} />
-            )) : <h1 className="no_products">{"No products found"}</h1>
-        }
+        {loading ? (
+          <CircularProgress />
+        ) : products && products.length > 0 ? (
+          products.map((product) => (
+            <Product key={product.productId} product={product} />
+          ))
+        ) : (
+          <h1 className="no_products">{"No products found"}</h1>
+        )}
         <Modal
           isOpen={query.get("searchModal") ? true : false}
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Search"
         >
-          <h1 style={{ margin: 'auto' }} ><i>India Store Search</i></h1>
+          <h1 style={{ margin: "auto" }}>
+            <i>India Store Search</i>
+          </h1>
           <div className="homepage__search">
             <input placeholder="Enter search item..." />
             <IconButton>
-              <Search fontSize="large"/>
+              <Search fontSize="large" />
             </IconButton>
           </div>
         </Modal>

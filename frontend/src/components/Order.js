@@ -28,17 +28,21 @@ const Order = ({ order }) => {
               Order status: <span>{order.orderStatus}</span>
             </b>
           </h3>
-          <Button color="secondary" variant="contained">Cancel Order</Button>
+          <Button color="secondary" variant="contained">
+            Cancel Order
+          </Button>
           <h3>
             <b>
-              Number of items :{" "}
-              <Button>{order.orderedItems.length}</Button>
+              Number of items : <Button>{order.orderedItems.length}</Button>
             </b>
           </h3>
         </div>
       </div>
-      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }} className="order__data">
-          <h3>{`Rs ${order.grandTotal}`}</h3>
+      <div
+        style={{ fontSize: "1.2rem", fontWeight: "bold" }}
+        className="order__data"
+      >
+        <h3>{`Rs ${order.grandTotal}`}</h3>
       </div>
     </div>
   );

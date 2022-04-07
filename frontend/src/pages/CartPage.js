@@ -49,7 +49,7 @@ const CartPage = () => {
     });
     return cartProducts;
   });
-  const onPlaceOrder = () => { };
+  const onPlaceOrder = () => {};
   const closeModal = () => {
     navigate("/cart");
   };
@@ -141,9 +141,13 @@ const CartPage = () => {
           </div>
         </Modal>
         <div className="cart__cartItems">
-          {products && products.length > 0 ? products.map((product) => (
-            <Product key={product.productId} product={product} />
-          )) : <h1 className="">No items in cart</h1>}
+          {products && products.length > 0 ? (
+            products.map((product) => (
+              <Product key={product.productId} product={product} />
+            ))
+          ) : (
+            <h1 className="">No items in cart</h1>
+          )}
         </div>
       </div>
     </div>

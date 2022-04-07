@@ -8,7 +8,7 @@ import {
   setUserLoading,
 } from "../redux/actions/usersAction";
 import { Button, CircularProgress } from "@mui/material";
-import { Navigate, useNavigate , useLocation} from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import SnackBarHandler from "../components/SnackBarHandler";
 import useQuery from "../hooks/useQuery";
 
@@ -76,10 +76,9 @@ const Login = () => {
         setOpen(true);
         return;
       }
-
     } catch (err) {
       console.log(err);
-      setUserError("")
+      setUserError("");
     } finally {
       dispatch(setUserLoading(false));
     }

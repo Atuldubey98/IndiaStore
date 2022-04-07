@@ -22,7 +22,7 @@ const App = () => {
     dispatch(setUserLoading(true));
     if (email && token) {
       dispatch(setUser({ email, token }));
-    }else{
+    } else {
       localStorage.clear();
     }
     dispatch(setUserLoading(false));
@@ -57,7 +57,6 @@ const App = () => {
         />
         <Route
           path="/orders"
-
           element={
             <PrivateRoute>
               <OrdersPage />
@@ -66,14 +65,12 @@ const App = () => {
         />
         <Route
           path="/product/:productId"
-
           element={
             <PrivateRoute>
-              <ProductPage/>
+              <ProductPage />
             </PrivateRoute>
           }
         />
-
       </Routes>
     </div>
   );
