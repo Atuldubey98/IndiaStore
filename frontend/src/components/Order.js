@@ -29,7 +29,7 @@ const Order = ({ order }) => {
             </b>
           </h3>
           <Button color="secondary" variant="contained">
-            Cancel Order
+            Open Order
           </Button>
           <h3>
             <b>

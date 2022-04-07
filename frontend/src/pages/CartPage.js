@@ -5,17 +5,18 @@ import CartItem from "../components/CartItem";
 import useQuery from "../hooks/useQuery";
 import "./CartPage.css";
 import { ShoppingBasket } from "@material-ui/icons";
-import { Button } from "@mui/material";
+import { Button , CircularProgress} from "@mui/material";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import axiosInstance from "../api/axios";
+import PhoneInput from 'react-phone-number-input/input'
 const CartPage = () => {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [mobile, setMobile] = useState("");
-
+  const [mobile, setMobile] = useState();
+  const [loading, setLoading] = useState(false);
   Modal.setAppElement("#root");
   const query = useQuery();
   const navigate = useNavigate();
@@ -43,13 +44,48 @@ const CartPage = () => {
     state.cartAccess.cart.forEach((cartItem) => {
       state.productsAccess.products.forEach((product) => {
         if (product.productId === cartItem.productId) {
-          cartProducts.push(product);
+          cartProducts.push({...product, quantity : cartItem.quantity});
         }
       });
     });
     return cartProducts;
   });
-  const onPlaceOrder = () => {};
+  const token = useSelector((state) => state.userAccess.user.token);
+
+  const onPlaceOrder = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    closeModal();
+    try {
+
+      const orderedItems = products.map(p=>{
+        return {
+          price : p.productPrice,
+          productId : p.productId,
+          quantity : p.quantity
+        }
+      })
+      const order = {
+        name,
+        city,
+        country,
+        mobile,
+        orderedItems
+      }
+
+      const { data } = await axiosInstance.post("/orders",order, {   headers: {
+          Authorization: token,
+      }});
+      setLoading(false)
+      if (data.status) {
+        navigate("/orders");
+      }else{
+        console.log("Error");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const closeModal = () => {
     navigate("/cart");
   };
@@ -65,13 +101,11 @@ const CartPage = () => {
   const onCountryChange = (e) => {
     setCountry(e.target.value);
   };
-  const onMobileChange = (e) => {
-    setMobile(e.target.value);
-  };
+
   return (
     <div className="cart">
       <Header />
-      <div className="cart__page">
+      {loading ? <CircularProgress/> : (<div className="cart__page">
         <div className="cart__total">
           <strong className="cart__totalDis">{`Total : ${total.toFixed(
             2
@@ -99,18 +133,18 @@ const CartPage = () => {
             </div>
             <div className="cart__profile">
               <h2>Delivery Address</h2>
-              <form>
+              <form onSubmit={onPlaceOrder}>
                 <input
                   type={"text"}
                   onChange={onNameChange}
                   value={name}
                   placeholder="Name*"
                 />
-                <input
-                  type="tel"
-                  onChange={onMobileChange}
+                <PhoneInput
+                  country="IN"
+                  onChange={setMobile}
+                  placeholder={"Mobile*"}
                   value={mobile}
-                  placeholder="Mobile*"
                 />
                 <input
                   type={"text"}
@@ -124,19 +158,19 @@ const CartPage = () => {
                   value={country}
                   placeholder="Country*"
                 />
+                <div className="cart__modalButtons">
+                  <Button
+                    type="submit"
+                    color="success"
+                    variant={"contained"}
+                  >
+                    Place Order
+                  </Button>
+                  <Button onClick={closeModal} color="error" variant={"contained"}>
+                    Cancel
+                  </Button>
+                </div>
               </form>
-            </div>
-            <div className="cart__modalButtons">
-              <Button
-                onClick={onPlaceOrder}
-                color="success"
-                variant={"contained"}
-              >
-                Place Order
-              </Button>
-              <Button onClick={closeModal} color="error" variant={"contained"}>
-                Cancel
-              </Button>
             </div>
           </div>
         </Modal>
@@ -149,7 +183,7 @@ const CartPage = () => {
             <h1 className="">No items in cart</h1>
           )}
         </div>
-      </div>
+      </div>)}
     </div>
   );
 };

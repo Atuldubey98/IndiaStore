@@ -15,11 +15,9 @@ const Orders = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const responseOrders = await axiosInstance.get("/orders", {
-          headers: {
+        const responseOrders = await axiosInstance.get("/orders", { headers: {
             Authorization: token,
-          },
-        });
+        }});
         setOrders(responseOrders.data.orders);
       } catch (error) {
         setError(error);

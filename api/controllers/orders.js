@@ -16,6 +16,7 @@ const postOrder = async (req, res) => {
       orderId,
       userId: req.user.Item.id,
     });
+
     if (order) {
       return res.status(200).json({ status: true, order: order });
     }
