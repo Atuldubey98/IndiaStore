@@ -14,6 +14,9 @@ const addCategory = async (req, res) => {
   try {
     const categoryName = req.body.categoryName;
     const categoryDescription = req.body.categoryDescription;
+    const createdAt = Date.now();
+    const modifiedAt = Date.now();
+    const deletedAt = 0;
     const categoryId = uuid.v4();
     if (
       isEmpty(categoryName) ||
@@ -30,7 +33,14 @@ const addCategory = async (req, res) => {
     await docClient
       .put({
         TableName,
-        Item: { categoryId, categoryName, categoryDescription },
+        Item: {
+          categoryId,
+          categoryName,
+          categoryDescription,
+          modifiedAt,
+          deletedAt,
+          createdAt,
+        },
       })
       .promise();
     return res.status(201).json({
@@ -42,15 +52,37 @@ const addCategory = async (req, res) => {
   }
 };
 
+const deleteManyCategoriesById = async (req, res) => {
+  try {
+    let categoriesCount = 0;
+    const categories = [];
+    const { categoryIds } = req.body;
+
+    for (let i=0; i < categoryIds.length; i++) {
+      const isDeleted = await deleteCategoryByIdDal(categoryIds[i]);
+      categoriesCount += isDeleted ? 1 : 0;
+      if (!isDeleted) {
+        categories.push(categoryIds[i]);
+      }
+    }
+    return res.status(200).json({status : true , categoriesLeft : categories, deleted : categoriesCount})
+  } catch (error) {
+      return res.status(400).json(error);
+  }
+};
 const getAllCategory = async (req, res) => {
   try {
     const categories = await getAllCategories();
     if (categories === null) {
       errorHandler({ status: false, message: "There was an error" });
     }
-    return res.status(200).json({ status: true, categories: categories });
+    return res.status(200).json({
+      status: true,
+      noOfCategories: categories.length,
+      categories: categories,
+    });
   } catch (error) {
-    res.status(400).json(error);
+    return res.status(400).json(error);
   }
 };
 const getCategoryByIdS = async (req, res) => {
@@ -81,5 +113,6 @@ module.exports = {
   addCategory,
   getAllCategory,
   getCategoryByIdS,
-  deleteCategoryById
+  deleteCategoryById,
+  deleteManyCategoriesById,
 };
