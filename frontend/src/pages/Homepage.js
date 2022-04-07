@@ -40,7 +40,10 @@ const Homepage = () => {
   const closeModal = () => {
     navigate("/");
   };
-
+  const onSearchFormSubmit = (e)=>{
+    e.preventDefault();
+    console.log(search);
+  }
   const customStyles = {
     content: {
       top: "50%",
@@ -73,6 +76,10 @@ const Homepage = () => {
     };
     fetchProducts();
   }, [token, dispatch]);
+  const [search, setSearch] = useState('');
+  const onSearchChange = (e)=>{
+    setSearch(e.target.value);
+  }
   return (
     <div className={"homepage"}>
       <Header />
@@ -124,10 +131,18 @@ const Homepage = () => {
             <i>India Store Search</i>
           </h1>
           <div className="homepage__search">
-            <input placeholder="Enter search item..." />
-            <IconButton>
-              <Search fontSize="large" />
-            </IconButton>
+            <form onSubmit={onSearchFormSubmit}>
+              <input
+                onChange={onSearchChange}
+                value={search}
+                type="text"
+                name="search"
+                placeholder="Enter search item..."
+              />
+              <IconButton type="submit" >
+                <Search fontSize="large" />
+              </IconButton>
+            </form>
           </div>
         </Modal>
         {error && <h3>Some error occured</h3>}

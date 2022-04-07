@@ -2,7 +2,7 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  line-height: 25px;  
+  line-height: 25px;
   margin: 10px auto;
   padding: 1rem;
   font-size: clamp(1.2rem, 2.5vw, 1rem);

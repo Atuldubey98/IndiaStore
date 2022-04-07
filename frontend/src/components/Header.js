@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 import {
   ShoppingCart,
@@ -11,6 +11,7 @@ import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/actions/usersAction";
 const Header = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const count = useSelector((state) => state.cartAccess.cart.length);
   const navigate = useNavigate();
@@ -22,12 +23,12 @@ const Header = () => {
   const openSearchModal = ()=>{
     navigate("?searchModal=true")
   }
-  
+
   return (
     <div className="header">
       <h2>India Store</h2>
       <div className="header__content">
-        <Search fontSize="large" onClick={openSearchModal}/>
+        {location.pathname === "/" && <Search fontSize="large" onClick={openSearchModal}/>}
         <div className="header__links">
           <Link to={"/"}>
             <Home fontSize="large" />
