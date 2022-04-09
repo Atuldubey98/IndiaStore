@@ -8,7 +8,7 @@ const {
   getAllCategories,
   getCategoryById,
   deleteCategoryByIdDal,
-} = require("../dal/category");
+} = require("../dal/categoryDal");
 
 const addCategory = async (req, res) => {
   try {

@@ -4,7 +4,7 @@ const {
   updateOrderStatusDal,
   cancelOrderByIdDal,
   getOrderByIdDal,
-} = require("../dal/orders");
+} = require("../dal/ordersDal");
 const uuid = require("uuid");
 const errorHandler = require("../errorHandler");
 const postOrder = async (req, res) => {

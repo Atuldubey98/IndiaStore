@@ -6,11 +6,11 @@ const {
   getProductsDal,
   getProductByIdDal,
   addProductDal,
-} = require("../dal/product");
+} = require("../dal/productDal");
 const docClient = new AWS.DynamoDB.DocumentClient();
-const productItem = require("../../models/products");
+const productItem = require("../../models/productsModel");
 const errorHandler = require("../errorHandler");
-const { getCategoryById } = require("../dal/category");
+const { getCategoryById } = require("../dal/categoryDal");
 const getProduct = async (req, res) => {
   try {
     const productId = req.query.productId;

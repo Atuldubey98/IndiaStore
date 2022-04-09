@@ -5,7 +5,7 @@ const {
   updateOrderStatus,
   cancelOrderById,
   getOrderById,
-} = require("../controllers/orders");
+} = require("../controllers/ordersController");
 const passport = require("passport");
 require("../../config/passport")(passport);
 const router = express.Router();

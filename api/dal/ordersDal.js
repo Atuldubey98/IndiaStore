@@ -1,7 +1,7 @@
 var AWS = require("aws-sdk");
 const TableName = require("../../config/config").Orders;
 const docClient = new AWS.DynamoDB.DocumentClient();
-const getOrders = require("../../models/orders");
+const getOrders = require("../../models/ordersModel");
 const uuid = require("uuid");
 const { getSubTotal, getGrandTotal } = require("../helper/orders");
 

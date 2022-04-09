@@ -11,7 +11,7 @@ const {
   uploadImageById,
   addManyProducts,
   updateProductCategory,
-} = require("../controllers/products");
+} = require("../controllers/productsController");
 
 const router = express.Router();
 

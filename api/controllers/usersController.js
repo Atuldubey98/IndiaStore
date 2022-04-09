@@ -7,9 +7,9 @@ const uuid = require("uuid");
 const TableName = require("../../config/config").Users;
 const SECRET_ACCESS_KEY = require("../../config/config").SECRET_ACCESS_KEY;
 const docClient = new AWS.DynamoDB.DocumentClient();
-const getUserModel = require("../../models/users");
+const getUserModel = require("../../models/usersModel");
 const errorHandler = require("../errorHandler");
-const { deactivateUserDal } = require("../dal/users");
+const { deactivateUserDal } = require("../dal/usersDal");
 const register = async (req, res, next) => {
   try {
     const email = req.body.email;

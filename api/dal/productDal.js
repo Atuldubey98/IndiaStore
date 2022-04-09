@@ -1,7 +1,7 @@
 var AWS = require("aws-sdk");
 const TableName = require("../../config/config").Products;
 const docClient = new AWS.DynamoDB.DocumentClient();
-const productItem = require("../../models/products");
+const productItem = require("../../models/productsModel");
 const { isEmpty } = require("validator");
 
 const getProductByIdDal = async (productId) => {
