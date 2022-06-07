@@ -1,6 +1,6 @@
 const express = require("express");
-const passport = require("passport");
-require("../../config/passport")(passport);
+const { isAuthenticated } = require("../../middlewares/auth");
+
 
 const {
   addCategory,
@@ -23,7 +23,7 @@ router.post("/", addCategory);
 //@route GET /api/v1/category/all
 //@desc get all category
 //@access private
-router.get("/all", getAllCategory);
+router.get("/all", isAuthenticated, getAllCategory);
 
 //@route POST /api/v1/category?categoryId=123
 //@desc GET categoryById
@@ -36,7 +36,6 @@ router.get("/", getCategoryByIdS);
 
 router.delete(
   "/",
-  passport.authenticate("jwt", { session: false }),
   deleteCategoryById
 );
 

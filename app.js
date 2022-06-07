@@ -2,13 +2,18 @@ const PORT = require("./config/config").PORT;
 const express = require("express");
 const cors = require("cors");
 const app = express();
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin : "http://localhost:3000"
+}));
 const bodyParser = require("body-parser");
 const products = require("./api/routes/products");
 const users = require("./api/routes/users");
 const category = require("./api/routes/category");
 const orders = require("./api/routes/orders");
+const cookieParser = require("cookie-parser");
 const path = require("path");
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'frontend', 'build')))
 app.get("/api/v1", (req, res) => {

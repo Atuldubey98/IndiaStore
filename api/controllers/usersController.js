@@ -1,5 +1,3 @@
-const passport = require("passport");
-require("../../config/passport")(passport);
 const bcrypt = require("bcrypt");
 const AWS = require("aws-sdk");
 const jwt = require("jsonwebtoken");
@@ -76,11 +74,15 @@ const login = async (req, res) => {
         email: user.Item.email,
         name: user.Item.name,
       },
-      SECRET_ACCESS_KEY,
+      process.env.JWT_SECRET,
       { expiresIn: 36000 }
     );
-    return res.status(200).json({ status: true, token: `Bearer ${token}` });
+    return res
+      .status(200)
+      .cookie("token", token, { httpOnly: true })
+      .json({ status: true, token: `Bearer ${token}` });
   } catch (error) {
+    console.log(error);
     return res.status(400).json(error);
   }
 };
@@ -90,7 +92,7 @@ const deactivateUser = async (req, res) => {
     const email = req.body.email && "";
     const password = req.body.password && "";
     const confirmPassword = req.body.confirmPassword && "";
-    if (email === "" || email !== req.user.Item.email) {
+    if (email === "" || email !== req.user.email) {
       errorHandler({ status: false, message: "Error Occured" });
     }
     const isDeactivated = await deactivateUserDal(

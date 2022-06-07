@@ -14,7 +14,7 @@ const postOrder = async (req, res) => {
     const order = await addOrderDal({
       ...req.body,
       orderId,
-      userId: req.user.Item.id,
+      userId: req.user.id,
     });
 
     if (order) {
@@ -28,7 +28,7 @@ const postOrder = async (req, res) => {
 
 const getOrdersByUserId = async (req, res) => {
   try {
-    const userId = req.user.Item.id;
+    const userId = req.user.id;
     const orders = await getOrdersByUserIdDal(userId);
     if (orders) {
       return res.status(200).json({ status: false, orders: orders });
