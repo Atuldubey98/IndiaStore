@@ -9,15 +9,12 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ message: "No orders fetched" });
-  const token = useSelector((state) => state.userAccess.user.token);
-
+ 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const responseOrders = await axiosInstance.get("/orders", { headers: {
-            Authorization: token,
-        }});
+        const responseOrders = await axiosInstance.get("/orders");
         setOrders(responseOrders.data.orders);
       } catch (error) {
         setError(error);
@@ -26,7 +23,7 @@ const Orders = () => {
       }
     };
     fetchOrders();
-  }, [token]);
+  }, []);
   return (
     <div className="orders">
       <Header />

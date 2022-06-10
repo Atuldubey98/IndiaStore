@@ -3,7 +3,7 @@ exports.isAuthenticated = (req, res, next)=>{
     try {
         const {token} = req.cookies;
         if (!token) {
-            throw new Error("The token has expired");
+            throw new Error("Login again to continue");
         }
         console.log({token});
         console.log(process.env.JWT_SECRET);
@@ -11,6 +11,6 @@ exports.isAuthenticated = (req, res, next)=>{
         req.user = {email, name, id};
         next()     
     } catch (error) {
-        next(error);
+        return res.status(401).json(error);
     }
 }

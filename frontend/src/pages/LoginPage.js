@@ -39,8 +39,7 @@ const Login = () => {
       dispatch(setUserLoading(true));
       const response = await usersApi.loginApi(email, password);
       if (response) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("email", email);
+      
         dispatch(setUser({ email, token: response.data.token }));
         navigate("/", { replace: true });
       } else {

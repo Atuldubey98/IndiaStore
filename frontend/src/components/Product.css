@@ -2,20 +2,16 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  line-height: 25px;
-  margin: 10px auto;
-  padding: 1rem;
+  padding: 10px;
+  cursor: pointer;
   font-size: clamp(1.2rem, 2.5vw, 1rem);
-  width: 40%;
   height: 25rem;
   box-shadow: 2px 2px 5px grey;
-}
-.product:hover{
-  box-shadow: 20px 20px 50px grey;;
 }
 .product__btnPrice{
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .product__btnPriceButtons{
   display: flex;
@@ -38,7 +34,7 @@
 }
 .product__productImageURL > img{
   object-fit: contain;
-  width: 85%;
+  width: 300px;
   margin: auto;
 }
 .product__productImageURL{

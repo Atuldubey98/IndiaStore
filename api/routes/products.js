@@ -1,4 +1,5 @@
 const express = require("express");
+const { isAuthenticated } = require("../../middlewares/auth");
 const { upload } = require("../awsSetup");
 
 const {
@@ -15,30 +16,17 @@ const {
 const router = express.Router();
 
 router.get("/", getProduct);
-router.post("/" ,addProduct);
-router.post(
-  "/all",
-  addManyProducts
-);
-router.delete(
-  "/",
-  deleteById
-);
-router.patch(
-  "/",
-  updateProduct
-);
-router.get(
-  "/all",
-  getProducts
-);
+router.post("/", addProduct);
+router.post("/all", isAuthenticated, addManyProducts);
+router.delete("/", isAuthenticated, deleteById);
+router.patch("/", isAuthenticated, updateProduct);
+router.get("/all", isAuthenticated, getProducts);
 router.post(
   "/upload",
+
+  isAuthenticated,
   upload.single("avatar"),
   uploadImageById
 );
-router.post(
-  "/category",
-  updateProductCategory
-);
+router.post("/category", isAuthenticated, updateProductCategory);
 module.exports = router;

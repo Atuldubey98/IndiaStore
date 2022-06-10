@@ -1,4 +1,5 @@
 const express = require("express");
+const { isAuthenticated } = require("../../middlewares/auth");
 const {
   postOrder,
   getOrdersByUserId,
@@ -9,7 +10,7 @@ const {
 
 const router = express.Router();
 
-router.post("/", postOrder);
+router.post("/", isAuthenticated, postOrder);
 router.post(
   "/status",
 
@@ -17,18 +18,19 @@ router.post(
 );
 router.get(
   "/",
-
+  isAuthenticated,
   getOrdersByUserId
 );
 
 router.get(
   "/byOrderId",
-
+  isAuthenticated,
   getOrderById
 );
 
 router.delete(
   "/",
+  isAuthenticated,
   cancelOrderById
 );
 module.exports = router;

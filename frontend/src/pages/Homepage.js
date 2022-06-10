@@ -10,7 +10,6 @@ import {
   setProductError,
 } from "../redux/actions/productActions";
 import Modal from "react-modal";
-
 import axiosInstance from "../api/axios";
 import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
@@ -19,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 const Homepage = () => {
   Modal.setAppElement("#root");
-  const token = useSelector((state) => state.userAccess.user.token);
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.productsAccess);
   const query = useQuery();
@@ -62,12 +60,8 @@ const Homepage = () => {
     const fetchProducts = async () => {
       try {
         dispatch(setProductLoading(true));
-        const response = await axiosInstance.get("products/all", {
-          headers: { Authorization: token },
-        });
-        const responseCategory = await axiosInstance.get("category/all", {
-          headers: { Authorization: token },
-        });
+        const response = await axiosInstance.get("products/all");
+        const responseCategory = await axiosInstance.get("category/all");
         setCategories(responseCategory.data.categories);
         dispatch(setProduct(response.data.products));
       } catch (error) {
@@ -75,7 +69,7 @@ const Homepage = () => {
       }
     };
     fetchProducts();
-  }, [token, dispatch]);
+  }, [dispatch]);
   const [search, setSearch] = useState('');
   const onSearchChange = (e)=>{
     setSearch(e.target.value);

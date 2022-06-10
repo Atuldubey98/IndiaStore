@@ -3,21 +3,19 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import Header from "../components/Header";
-import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 const ProductPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
-  const token = useSelector((state) => state.userAccess.user.token);
 
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
         const response = await axiosInstance.get("products/", {
-          headers: { Authorization: token },
           params: {
             productId,
           },
@@ -31,7 +29,7 @@ const ProductPage = () => {
     };
 
     fetchProduct();
-  }, [productId, token]);
+  }, [productId]);
   return loading ? (
     <CircularProgress />
   ) : (

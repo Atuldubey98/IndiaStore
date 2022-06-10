@@ -50,8 +50,7 @@ const CartPage = () => {
     });
     return cartProducts;
   });
-  const token = useSelector((state) => state.userAccess.user.token);
-
+  
   const onPlaceOrder = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -73,9 +72,7 @@ const CartPage = () => {
         orderedItems
       }
 
-      const { data } = await axiosInstance.post("/orders",order, {   headers: {
-          Authorization: token,
-      }});
+      const { data } = await axiosInstance.post("/orders",order);
       setLoading(false)
       if (data.status) {
         navigate("/orders");
