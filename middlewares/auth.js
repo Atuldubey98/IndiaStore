@@ -5,8 +5,6 @@ exports.isAuthenticated = (req, res, next)=>{
         if (!token) {
             throw new Error("Login again to continue");
         }
-        console.log({token});
-        console.log(process.env.JWT_SECRET);
         const {email, name, id} = jwt.verify(token, process.env.JWT_SECRET );
         req.user = {email, name, id};
         next()     
