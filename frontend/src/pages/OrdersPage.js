@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import Order from "../components/Order";
 import axiosInstance from "../api/axios";
 import "./OrdersPage.css";
-import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
