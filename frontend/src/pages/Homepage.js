@@ -105,7 +105,7 @@ const Homepage = () => {
           </div>
         ))}
       </div>
-      <div className="homepage__products">
+      <div className={loading ? "homepage__load" : "homepage__products" }>
         {loading ? (
           <CircularProgress />
         ) : products && products.length > 0 ? (

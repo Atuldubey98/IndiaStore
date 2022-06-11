@@ -1,13 +1,8 @@
 import { useSelector } from "react-redux";
-import LoginPage from '../pages/LoginPage'
-import {CircularProgress} from '@mui/material'
+import { Navigate } from "react-router-dom";
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useSelector((state) => state.userAccess);
-  if (loading) {
-    return <CircularProgress/>
-  }else{
-    return user ? children : <LoginPage/>
-  }
+  const { user} = useSelector((state) => state.userAccess);
+  return user ? children : <Navigate to={"/login"}/>
 };
 
 export default PrivateRoute;

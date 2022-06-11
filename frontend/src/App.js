@@ -8,11 +8,21 @@ import Homepage from "./pages/Homepage";
 import PrivateRoute from "./components/PrivateRoute";
 
 import ProductPage from "./pages/ProductPage";
+import axiosInstance from "./api/axios";
+import { useDispatch } from "react-redux";
+import { setUserError } from "./redux/actions/usersAction";
 const App = () => {
-  
+  const dispatch = useDispatch();
   useEffect(() => {
-    
-  }, []);
+  (
+    async ()=>{
+      const {status, data} = await axiosInstance.get("users/me");
+      if (status === 400) {
+        dispatch(setUserError("No user found"));
+      }
+    }
+  )();  
+  }, [dispatch]);
   return (
     <div className="app">
       <Routes>
