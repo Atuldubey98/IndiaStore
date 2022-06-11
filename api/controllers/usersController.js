@@ -115,9 +115,9 @@ const deactivateUser = async (req, res) => {
 
 const me = async (req, res)=>{
   try {
-    if(req && req.user)
+    if(req && req.user && req.cookies && req.cookies.token)
     {
-      return  res.status(200).json({status : true});
+      return  res.status(200).json({email : req.user.email, token : req.cookies.token});
     }
     return res.status(400).json({status :false});
   } catch (error) {
