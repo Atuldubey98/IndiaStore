@@ -1,10 +1,10 @@
 .cart__cartItems {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  min-height: 100vh;
+  gap: 20px;
 }
-.cart__page {
-  padding: 25px;
-}
+
 .cart__total {
   display: flex;
   background-color: rgb(226, 222, 213);
@@ -17,12 +17,8 @@
   background-color: rgb(226, 222, 213);
   color: rgb(51, 56, 56);
 }
-.cart__cartItems {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+
+
 .cart__modal {
   font-size: 1.2rem;
   max-height: 80%;
