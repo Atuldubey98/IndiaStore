@@ -50,6 +50,7 @@ const Product = ({ product }) => {
         />
       </div>
       <TextTruncate
+        className="product__productDescription"
         line={2}
         element={`p`}
         truncateText={`...`}

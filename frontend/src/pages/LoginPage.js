@@ -39,7 +39,7 @@ const Login = () => {
       dispatch(setUserLoading(true));
       const response = await usersApi.loginApi(email, password);
       if (response) {
-      
+        console.log(response.data);
         dispatch(setUser({ email, token: response.data.token }));
         navigate("/", { replace: true });
       } else {
@@ -87,7 +87,7 @@ const Login = () => {
   };
   const location = useLocation();
   return (
-    <div className="login">
+    <div className={"login"}>
       {loading ? (
         <CircularProgress />
       ) : user ? (

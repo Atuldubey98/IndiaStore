@@ -9,16 +9,20 @@ import {
 } from "@material-ui/icons";
 import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../redux/actions/usersAction";
+import { setUser, setUserLoading } from "../redux/actions/usersAction";
+import axiosInstance from "../api/axios";
 const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const count = useSelector((state) => state.cartAccess.cart.length);
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.clear();
-    dispatch(setUser(null));
-    navigate("/", { replace: true });
+  const handleLogout = async () => {
+    dispatch(setUserLoading(true));
+    const {status} = await axiosInstance.post("users/logout",{});
+    if (status === 200) {
+      dispatch(setUser(null));
+      navigate("/login", { replace: true });
+    }
   };
   const openSearchModal = ()=>{
     navigate("?searchModal=true")

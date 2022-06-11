@@ -8,6 +8,12 @@
   margin: 20px;
   align-items: center;
 }
+.homepage__load{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
 .homepage__filters{
   display: flex;
   padding: 20px;
