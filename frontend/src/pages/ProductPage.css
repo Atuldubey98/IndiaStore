@@ -3,9 +3,11 @@
   display: flex;
   flex-wrap: wrap;
 }
-.product__productImageURL {
+.product__pageProduct .product__productImageURL {
   max-width: 300px;
   flex: 5;
+  border-radius: 5px;
+  border: 1px dashed blue;
 }
 .product__pageProduct .product__decription{
   flex: 7;
@@ -14,4 +16,5 @@
 }
 .product__decription .product__head{
   color: rebeccapurple;
+  padding-bottom: 10px;
 }

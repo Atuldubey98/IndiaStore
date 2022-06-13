@@ -5,7 +5,7 @@
   justify-content: space-between;
   height: 5vh;
   padding: 1rem;
-  background-color: rgba(65, 35, 172, 0.891);
+  background-color: var(--primary-color)
 }
 .header h2{
   margin-right: 20px;

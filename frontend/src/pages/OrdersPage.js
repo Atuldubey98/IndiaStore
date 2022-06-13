@@ -8,7 +8,9 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ message: "No orders fetched" });
- 
+  useEffect(() => {
+    document.title = "India Store - Orders";
+  }, []);
   useEffect(() => {
     const fetchOrders = async () => {
       try {

@@ -1,11 +1,9 @@
 .orders__home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   margin: auto;
   padding: 20px;
+  flex-wrap: wrap;
 }
 .orders{
   margin: auto;

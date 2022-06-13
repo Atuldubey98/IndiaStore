@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usersApi from "../api/users";
 import { useDispatch, useSelector } from "react-redux";
 import "./LoginPage.css";
@@ -86,6 +86,9 @@ const Login = () => {
     setName(e.target.value);
   };
   const location = useLocation();
+  useEffect(() => {
+    document.title = "India Store - Authentication";
+  }, []);
   return (
     <div className={"login"}>
       {loading ? (

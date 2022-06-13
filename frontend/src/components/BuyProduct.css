@@ -1,5 +1,5 @@
 .buyproduct {
-  background-color: rgba(65, 35, 172, 0.891);
+  background-color: var(--primary-color);
   height: 10vh;
   position: sticky;
   bottom: 0px;

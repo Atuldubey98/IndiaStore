@@ -9,7 +9,6 @@ const ProductPage = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
-
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -20,6 +19,7 @@ const ProductPage = () => {
           },
         });
         setProduct(response.data.product);
+        document.title = response.data.product.productName;
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -48,9 +48,18 @@ const ProductPage = () => {
             }
           />
           <div className="product__decription">
-            <span className="product__head">Item : </span><strong>{product.productName}</strong>
-            <span className="product__head">Item Description : </span><h5>{product.productDescription} Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi quam, fugit repellendus eveniet quas similique corporis, velit, atque impedit repellat nesciunt sequi ullam numquam! Minus nobis dolores quasi ea voluptatibus.</h5>
-            <span className="product__head">Item Price</span><h4>${product.productPrice}`</h4>
+            <span className="product__head">Item : </span>
+            <h5>{product.productName}</h5>
+            <span className="product__head">Item Description : </span>
+            <h5>
+              {product.productDescription} Lorem ipsum dolor, sit amet
+              consectetur adipisicing elit. Eligendi quam, fugit repellendus
+              eveniet quas similique corporis, velit, atque impedit repellat
+              nesciunt sequi ullam numquam! Minus nobis dolores quasi ea
+              voluptatibus.
+            </h5>
+            <span className="product__head">Item Price</span>
+            <h4>${product.productPrice}`</h4>
           </div>
         </div>
       )}

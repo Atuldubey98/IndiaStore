@@ -73,8 +73,10 @@
   }
   .homepage__filterCat {
     display: flex;
-    overflow-x: auto;
     padding-bottom: 10px;
+  }
+  .homepage__filterCat::-webkit-scrollbar{
+    display: none;
   }
   .homepage__priceFilter {
     width: 80%;

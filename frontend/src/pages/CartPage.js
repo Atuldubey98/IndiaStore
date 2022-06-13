@@ -8,7 +8,7 @@ import { ShoppingBasket } from "@material-ui/icons";
 import { Button , CircularProgress} from "@mui/material";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import PhoneInput from 'react-phone-number-input/input'
 const CartPage = () => {
@@ -97,7 +97,9 @@ const CartPage = () => {
   const onCountryChange = (e) => {
     setCountry(e.target.value);
   };
-
+  useEffect(()=>{
+    document.title = "India Store - Cart"
+  },[])
   return (
     <div className="cart">
       <Header />

@@ -66,6 +66,9 @@ const Homepage = () => {
     },
   };
   useEffect(() => {
+    document.title = "India Store - Products";
+  }, []);
+  useEffect(() => {
     (async () => {
       try {
         dispatch(setProductLoading(true));

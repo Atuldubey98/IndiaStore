@@ -3,12 +3,12 @@
   border-radius: 10px;
   border: 1px solid lightgrey;
   padding: 10px;
-  width: 40%;
-  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  line-height: 30px;
+  height: auto;
+  margin: 5px;
+  width: 350px;
 }
 .order__info {
   padding-top: 10px;
