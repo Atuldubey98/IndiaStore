@@ -14,11 +14,14 @@ import axiosInstance from "../api/axios";
 import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
 import { Button, CircularProgress, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Search } from "@material-ui/icons";
+import Slider from "@mui/material/Slider";
 const Homepage = () => {
   Modal.setAppElement("#root");
+  const [price, setPrice] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
   const { loading, error } = useSelector((state) => state.productsAccess);
   const query = useQuery();
   const { cart } = useSelector((state) => state.cartAccess);
@@ -29,11 +32,15 @@ const Homepage = () => {
   };
 
   const products = useSelector((state) => {
-    return query.get("categoryId")
+    let ps = query.has("categoryId")
       ? state.productsAccess.products.filter(
-          (product) => product.categoryId === query.get("categoryId")
+          (p) => p.categoryId === query.get("categoryId")
         )
       : state.productsAccess.products;
+    ps = query.has("max")
+      ? ps.filter((p) => p.productPrice <= query.get("max"))
+      : ps;
+    return ps;
   });
   const closeModal = () => {
     navigate("/");
@@ -49,7 +56,6 @@ const Homepage = () => {
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
-      overflowY: "scroll",
       display: "grid",
       justify: "center",
       alignItems: "center",
@@ -73,40 +79,85 @@ const Homepage = () => {
   const onSearchChange = (e) => {
     setSearch(e.target.value);
   };
+  const onPriceChange = (e) => {
+    setPrice(e.target.value);
+  };
+  const onPriceFilter = () => {
+    navigate(`${location.pathname}?max=${price}`);
+  };
   return (
     <div className={"homepage"}>
       <Header />
       <div className="homepage__container">
         <div className="homepage__filters">
-          <h3 className="homepage__cathead">
-            Categories
-          </h3>
-          <div className="homepage__filter">
-            <Button
-              onClick={() => onCategoryClick(true, query.get("categoryId"))}
-              variant={query.get("categoryId") ? "outlined" : "contained"}
-            >
-              All
-            </Button>
-          </div>
-
-          {categories.map((c) => (
-            <div key={c.categoryId} className="homepage__filter">
+          <div className="homepage__filterCat">
+            <h3 className="homepage__cathead">Categories</h3>
+            <div className="homepage__filter">
               <Button
-                variant={
-                  query.get("categoryId") === c.categoryId ? "contained" : "outlined"
-                }
-                onClick={() => onCategoryClick(false, c.categoryId)}
-                key={c.categoryId}
+                onClick={() => onCategoryClick(true, query.get("categoryId"))}
+                variant={query.get("categoryId") ? "outlined" : "contained"}
               >
-                {`${c.categoryName} (${
-                  query.get("categoryId") === c.categoryId && products
-                    ? products.length
-                    : 0
-                })`}
+                All
               </Button>
             </div>
-          ))}
+
+            {categories.map((c) => (
+              <div key={c.categoryId} className="homepage__filter">
+                <Button
+                  variant={
+                    query.get("categoryId") === c.categoryId
+                      ? "contained"
+                      : "outlined"
+                  }
+                  onClick={() => onCategoryClick(false, c.categoryId)}
+                  key={c.categoryId}
+                >
+                  {`${c.categoryName} (${
+                    query.get("categoryId") === c.categoryId && products
+                      ? products.length
+                      : 0
+                  })`}
+                </Button>
+              </div>
+            ))}
+          </div>
+          {!loading && products.length !== 0 && (
+            <div className="homepage__filterCat">
+              <h3 className="homepage__cathead">Price Range</h3>
+              <div className="homepage__priceFilter">
+                <Slider
+                  max={Math.max.apply(
+                    null,
+                    products.map((p) => p.productPrice)
+                  )}
+                  min={Math.min.apply(
+                    null,
+                    products.map((p) => p.productPrice)
+                  )}
+                  value={price}
+                  onChange={onPriceChange}
+                  valueLabelDisplay={"auto"}
+                />
+                <div className="homepage__prices">
+                  <h4>
+                    {Math.min.apply(
+                      null,
+                      products.map((p) => p.productPrice)
+                    )}
+                  </h4>
+                  <h4>
+                    {Math.max.apply(
+                      null,
+                      products.map((p) => p.productPrice)
+                    )}
+                  </h4>
+                </div>
+                <Button onClick={onPriceFilter} variant="contained">
+                  Apply
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
         <div className={loading ? "homepage__load" : "homepage__products"}>
           {loading ? (
@@ -124,9 +175,9 @@ const Homepage = () => {
             style={customStyles}
             contentLabel="Search"
           >
-            <h1 style={{ margin: "auto" }}>
-              <i>India Store Search</i>
-            </h1>
+            <h2 style={{ margin: "auto" }}>
+              <i>India Store - Search</i>
+            </h2>
             <div className="homepage__search">
               <form onSubmit={onSearchFormSubmit}>
                 <input
