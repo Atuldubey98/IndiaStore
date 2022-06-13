@@ -13,7 +13,7 @@ const CartItem = ({ product }) => {
       <div className="cartitem__des">
       <TextTruncate
         line={2}
-        element={`h3`}
+        element={`p`}
         truncateText={`...`}
         text={product.productName}
       />

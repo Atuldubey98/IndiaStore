@@ -1,5 +1,4 @@
 .cartitem{
-    border: 1px solid lightgrey;
     display: flex;
     justify-content: space-between;
     text-align: left;
@@ -7,7 +6,6 @@
 }
 .cartitem__des{
     padding: 20px;
-    border-right: 1px solid lightgray;
 }
 .cartitem__priceQuan{
     display: flex;

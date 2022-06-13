@@ -1,23 +1,17 @@
 .product__pageProduct {
+  padding: 20px;
   display: flex;
-  width: 80%;
-  align-items: center;
-  justify-content: center;
-  line-height: 30px;
-  font-size: 18px;
-  margin: auto;
-  padding-top: 10px;
+  flex-wrap: wrap;
 }
 .product__productImageURL {
-  max-width: 60vh;
-  max-height: 70vh;
-  object-fit: contain;
-  padding-right: 10px;
+  max-width: 300px;
+  flex: 5;
 }
-@media only screen and (max-width: 600px) {
-  .product__pageProduct {
-    display: block;
-    width: 90%;
-    font-size: 25px;
-  }
+.product__pageProduct .product__decription{
+  flex: 7;
+  margin: 10px;
+  min-width: 300px;
+}
+.product__decription .product__head{
+  color: rebeccapurple;
 }

@@ -4,6 +4,7 @@ import "./HomePage.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import useQuery from "../hooks/useQuery";
+
 import {
   setProduct,
   setProductLoading,
@@ -15,11 +16,13 @@ import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
 import { Button, CircularProgress, IconButton } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Search } from "@material-ui/icons";
+import { Search, FilterList, KeyboardArrowUpSharp } from "@material-ui/icons";
 import Slider from "@mui/material/Slider";
 const Homepage = () => {
   Modal.setAppElement("#root");
   const [price, setPrice] = useState(0);
+  const [openFilters, setOpenFilters] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
   const { loading, error } = useSelector((state) => state.productsAccess);
@@ -89,76 +92,95 @@ const Homepage = () => {
     <div className={"homepage"}>
       <Header />
       <div className="homepage__container">
-        <div className="homepage__filters">
-          <div className="homepage__filterCat">
-            <h3 className="homepage__cathead">Categories</h3>
-            <div className="homepage__filter">
-              <Button
-                onClick={() => onCategoryClick(true, query.get("categoryId"))}
-                variant={query.get("categoryId") ? "outlined" : "contained"}
-              >
-                All
-              </Button>
-            </div>
-
-            {categories.map((c) => (
-              <div key={c.categoryId} className="homepage__filter">
-                <Button
-                  variant={
-                    query.get("categoryId") === c.categoryId
-                      ? "contained"
-                      : "outlined"
-                  }
-                  onClick={() => onCategoryClick(false, c.categoryId)}
-                  key={c.categoryId}
-                >
-                  {`${c.categoryName} (${
-                    query.get("categoryId") === c.categoryId && products
-                      ? products.length
-                      : 0
-                  })`}
-                </Button>
-              </div>
-            ))}
-          </div>
-          {!loading && products.length !== 0 && (
+        {openFilters ? (
+          <div className="homepage__filters">
+            <IconButton
+              onClick={() => {
+                setOpenFilters((o) => !o);
+              }}
+            >
+              <KeyboardArrowUpSharp />
+            </IconButton>
             <div className="homepage__filterCat">
-              <h3 className="homepage__cathead">Price Range</h3>
-              <div className="homepage__priceFilter">
-                <Slider
-                  max={Math.max.apply(
-                    null,
-                    products.map((p) => p.productPrice)
-                  )}
-                  min={Math.min.apply(
-                    null,
-                    products.map((p) => p.productPrice)
-                  )}
-                  value={price}
-                  onChange={onPriceChange}
-                  valueLabelDisplay={"auto"}
-                />
-                <div className="homepage__prices">
-                  <h4>
-                    {Math.min.apply(
-                      null,
-                      products.map((p) => p.productPrice)
-                    )}
-                  </h4>
-                  <h4>
-                    {Math.max.apply(
-                      null,
-                      products.map((p) => p.productPrice)
-                    )}
-                  </h4>
-                </div>
-                <Button onClick={onPriceFilter} variant="contained">
-                  Apply
+              <h3 className="homepage__cathead">Categories</h3>
+              <div className="homepage__filter">
+                <Button
+                  onClick={() => onCategoryClick(true, query.get("categoryId"))}
+                  variant={query.get("categoryId") ? "outlined" : "contained"}
+                >
+                  All
                 </Button>
               </div>
+
+              {categories.map((c) => (
+                <div key={c.categoryId} className="homepage__filter">
+                  <Button
+                    variant={
+                      query.get("categoryId") === c.categoryId
+                        ? "contained"
+                        : "outlined"
+                    }
+                    onClick={() => onCategoryClick(false, c.categoryId)}
+                    key={c.categoryId}
+                  >
+                    {`${c.categoryName} (${
+                      query.get("categoryId") === c.categoryId && products
+                        ? products.length
+                        : 0
+                    })`}
+                  </Button>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+            {!loading && products.length !== 0 && (
+              <div className="homepage__filterCat">
+                <h3 className="homepage__cathead">Price Range</h3>
+                <div className="homepage__priceFilter">
+                  <Slider
+                    max={Math.max.apply(
+                      null,
+                      products.map((p) => p.productPrice)
+                    )}
+                    min={Math.min.apply(
+                      null,
+                      products.map((p) => p.productPrice)
+                    )}
+                    value={price}
+                    onChange={onPriceChange}
+                    valueLabelDisplay={"auto"}
+                  />
+                  <div className="homepage__prices">
+                    <h4>
+                      {Math.min.apply(
+                        null,
+                        products.map((p) => p.productPrice)
+                      )}
+                    </h4>
+                    <h4>
+                      {Math.max.apply(
+                        null,
+                        products.map((p) => p.productPrice)
+                      )}
+                    </h4>
+                  </div>
+                  <Button onClick={onPriceFilter} variant="contained">
+                    Apply
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="home__filters">
+            <IconButton
+              onClick={() => {
+                setOpenFilters((o) => !o);
+              }}
+            >
+              <FilterList />
+            </IconButton>
+          </div>
+        )}
         <div className={loading ? "homepage__load" : "homepage__products"}>
           {loading ? (
             <CircularProgress />

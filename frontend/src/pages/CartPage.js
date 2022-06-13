@@ -50,7 +50,6 @@ const CartPage = () => {
     });
     return cartProducts;
   });
-  
   const onPlaceOrder = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -177,7 +176,7 @@ const CartPage = () => {
               <Product key={product.productId} product={product} />
             ))
           ) : (
-            <h1 className="">No items in cart</h1>
+            <h1 className="">Add items to cart</h1>
           )}
         </div>
       </div>)}

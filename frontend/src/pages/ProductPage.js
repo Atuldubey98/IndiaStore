@@ -10,7 +10,6 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
 
-  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -48,10 +47,10 @@ const ProductPage = () => {
                 : `images/product.jpeg`
             }
           />
-          <div className="product__des">
-            <strong>{product.productName}</strong>
-            <h5>{product.productDescription}</h5>
-            <h4>{` ${product.productPrice}`}</h4>
+          <div className="product__decription">
+            <span className="product__head">Item : </span><strong>{product.productName}</strong>
+            <span className="product__head">Item Description : </span><h5>{product.productDescription} Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi quam, fugit repellendus eveniet quas similique corporis, velit, atque impedit repellat nesciunt sequi ullam numquam! Minus nobis dolores quasi ea voluptatibus.</h5>
+            <span className="product__head">Item Price</span><h4>${product.productPrice}`</h4>
           </div>
         </div>
       )}
