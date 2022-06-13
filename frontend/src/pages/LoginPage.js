@@ -11,6 +11,7 @@ import { Button, CircularProgress } from "@mui/material";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import SnackBarHandler from "../components/SnackBarHandler";
 import useQuery from "../hooks/useQuery";
+import { Store } from "@material-ui/icons";
 
 const Login = () => {
   const { user, error, loading } = useSelector((state) => state.userAccess);
@@ -97,8 +98,9 @@ const Login = () => {
         <Navigate to={location.pathname && "/"} />
       ) : (
         <form autoComplete={`on`} onSubmit={onLoginSubmit}>
-          <h1>India Store</h1>
-
+          <div className="header__logo">
+            <Store fontSize={"large"}/> <h1>India Store</h1>
+          </div>
           <input
             placeholder="Email*"
             type="email"

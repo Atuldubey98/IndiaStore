@@ -12,7 +12,7 @@ const Orders = () => {
     document.title = "India Store - Orders";
   }, []);
   useEffect(() => {
-    const fetchOrders = async () => {
+    (async () => {
       try {
         setLoading(true);
         const responseOrders = await axiosInstance.get("/orders");
@@ -22,13 +22,12 @@ const Orders = () => {
       } finally {
         setLoading(false);
       }
-    };
-    fetchOrders();
+    })();
   }, []);
   return (
     <div className="orders">
       <Header />
-      <div className="orders__home">
+      <div className={loading ? "orders__load": "orders__home"}>
         {loading ? (
           <CircularProgress />
         ) : orders && orders.length > 0 ? (

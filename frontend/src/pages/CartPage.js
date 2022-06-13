@@ -5,12 +5,13 @@ import CartItem from "../components/CartItem";
 import useQuery from "../hooks/useQuery";
 import "./CartPage.css";
 import { ShoppingBasket } from "@material-ui/icons";
-import { Button , CircularProgress} from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
-import PhoneInput from 'react-phone-number-input/input'
+import PhoneInput from "react-phone-number-input/input";
+import SimilarProducts from "../components/SimilarProducts";
 const CartPage = () => {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
@@ -35,7 +36,7 @@ const CartPage = () => {
       maxHeight: "90%",
       bottom: "auto",
       marginRight: "-50%",
-      overflowY: "scroll",
+      overflowY: "auto",
       transform: "translate(-50%, -50%)",
     },
   };
@@ -44,7 +45,7 @@ const CartPage = () => {
     state.cartAccess.cart.forEach((cartItem) => {
       state.productsAccess.products.forEach((product) => {
         if (product.productId === cartItem.productId) {
-          cartProducts.push({...product, quantity : cartItem.quantity});
+          cartProducts.push({ ...product, quantity: cartItem.quantity });
         }
       });
     });
@@ -55,27 +56,26 @@ const CartPage = () => {
     e.preventDefault();
     closeModal();
     try {
-
-      const orderedItems = products.map(p=>{
+      const orderedItems = products.map((p) => {
         return {
-          price : p.productPrice,
-          productId : p.productId,
-          quantity : p.quantity
-        }
-      })
+          price: p.productPrice,
+          productId: p.productId,
+          quantity: p.quantity,
+        };
+      });
       const order = {
         name,
         city,
         country,
         mobile,
-        orderedItems
-      }
+        orderedItems,
+      };
 
-      const { data } = await axiosInstance.post("/orders",order);
-      setLoading(false)
+      const { data } = await axiosInstance.post("/orders", order);
+      setLoading(false);
       if (data.status) {
         navigate("/orders");
-      }else{
+      } else {
         console.log("Error");
       }
     } catch (e) {
@@ -97,91 +97,101 @@ const CartPage = () => {
   const onCountryChange = (e) => {
     setCountry(e.target.value);
   };
-  useEffect(()=>{
-    document.title = "India Store - Cart"
-  },[])
+  useEffect(() => {
+    document.title = "India Store - Cart";
+  }, []);
   return (
     <div className="cart">
       <Header />
-      {loading ? <CircularProgress/> : (<div className="cart__page">
-        <div className="cart__total">
-          <strong className="cart__totalDis">{`Total : ${total.toFixed(
-            2
-          )}`}</strong>
-          <Button
-            disabled={products.length === 0}
-            startIcon={<ShoppingBasket />}
-            variant="contained"
-            onClick={openModal}
-          >
-            Order
-          </Button>
-        </div>
-        <Modal
-          isOpen={query.get("modal") ? true : false}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Confirm Purchase"
-        >
-          <div className="cart__modal">
-            <div className="cart__modalItems">
-              {products.map((product) => (
-                <CartItem key={product.productId} product={product} />
-              ))}
-            </div>
-            <div className="cart__profile">
-              <h2>Delivery Address</h2>
-              <form onSubmit={onPlaceOrder}>
-                <input
-                  type={"text"}
-                  onChange={onNameChange}
-                  value={name}
-                  placeholder="Name*"
-                />
-                <PhoneInput
-                  country="IN"
-                  onChange={setMobile}
-                  placeholder={"Mobile*"}
-                  value={mobile}
-                />
-                <input
-                  type={"text"}
-                  onChange={onCityChange}
-                  value={city}
-                  placeholder="City*"
-                />
-                <input
-                  type={"text"}
-                  onChange={onCountryChange}
-                  value={country}
-                  placeholder="Country*"
-                />
-                <div className="cart__modalButtons">
-                  <Button
-                    type="submit"
-                    color="success"
-                    variant={"contained"}
-                  >
-                    Place Order
-                  </Button>
-                  <Button onClick={closeModal} color="error" variant={"contained"}>
-                    Cancel
-                  </Button>
-                </div>
-              </form>
-            </div>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <div className="cart__page">
+          <div className="cart__total">
+            <strong className="cart__totalDis">{`Total : ${total.toFixed(
+              2
+            )}`}</strong>
+            <Button
+              disabled={products.length === 0}
+              startIcon={<ShoppingBasket />}
+              variant="contained"
+              onClick={openModal}
+            >
+              Order
+            </Button>
           </div>
-        </Modal>
-        <div className="cart__cartItems">
-          {products && products.length > 0 ? (
-            products.map((product) => (
-              <Product key={product.productId} product={product} />
-            ))
-          ) : (
-            <h1 className="">Add items to cart</h1>
-          )}
+          <Modal
+            isOpen={query.get("modal") ? true : false}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Confirm Purchase"
+          >
+            <div className="cart__modal">
+              <div className="cart__modalItems">
+                {products.map((product) => (
+                  <CartItem key={product.productId} product={product} />
+                ))}
+              </div>
+              <div className="cart__profile">
+                <h2>Delivery Address</h2>
+                <form onSubmit={onPlaceOrder}>
+                  <input
+                    type={"text"}
+                    onChange={onNameChange}
+                    value={name}
+                    placeholder="Name*"
+                  />
+                  <PhoneInput
+                    country="IN"
+                    onChange={setMobile}
+                    placeholder={"Mobile*"}
+                    value={mobile}
+                  />
+                  <input
+                    type={"text"}
+                    onChange={onCityChange}
+                    value={city}
+                    placeholder="City*"
+                  />
+                  <input
+                    type={"text"}
+                    onChange={onCountryChange}
+                    value={country}
+                    placeholder="Country*"
+                  />
+                  <div className="cart__modalButtons">
+                    <Button type="submit" color="success" variant={"contained"}>
+                      Place Order
+                    </Button>
+                    <Button
+                      onClick={closeModal}
+                      color="error"
+                      variant={"contained"}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </Modal>
+
+          <div
+            className={
+              products && products.length > 0 ? "cart__cartItems" : "cart__no"
+            }
+          >
+            {products && products.length > 0 ? (
+              products.map((product) => (
+                <Product key={product.productId} product={product} />
+              ))
+            ) : (
+              <h1 className="">Add items to cart</h1>
+            )}
+          </div>
+          <SimilarProducts />
         </div>
-      </div>)}
+      )}
     </div>
   );
 };

@@ -1,0 +1,28 @@
+.similar {
+  border-top: 2px dashed lightgray;
+}
+.similar .similar__icons
+{
+    display: flex;
+    align-items: center;
+}
+.similar__products{
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+.similar__product{
+    width: 300px;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.similar__products::-webkit-scrollbar{
+    display: none;
+}
+.similar__product img{
+    max-width: 250px;
+    height: 250px;
+}

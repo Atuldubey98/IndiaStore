@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import Header from "../components/Header";
 import { CircularProgress } from "@mui/material";
+import SimilarProducts from "../components/SimilarProducts";
 const ProductPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
@@ -63,6 +64,7 @@ const ProductPage = () => {
           </div>
         </div>
       )}
+      <SimilarProducts/>
     </div>
   );
 };

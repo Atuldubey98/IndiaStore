@@ -4,7 +4,14 @@
   margin: auto;
   padding: 20px;
   flex-wrap: wrap;
+  height: 85vh;
 }
 .orders{
   margin: auto;
+}
+.orders__load{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
 }

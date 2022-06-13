@@ -22,7 +22,6 @@ const Homepage = () => {
   Modal.setAppElement("#root");
   const [price, setPrice] = useState(0);
   const [openFilters, setOpenFilters] = useState(false);
-
   const navigate = useNavigate();
   const location = useLocation();
   const { loading, error } = useSelector((state) => state.productsAccess);

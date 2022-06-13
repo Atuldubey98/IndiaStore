@@ -6,6 +6,7 @@ import {
   ShoppingBasket,
   Search,
   ExitToApp,
+  Store,
 } from "@material-ui/icons";
 import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,7 +31,9 @@ const Header = () => {
 
   return (
     <div className="header">
-      <h2>India Store</h2>
+      <div className="header__logo">
+            <Store fontSize={"large"}/> <h1>India Store</h1>
+          </div>
       <div className="header__content">
         {location.pathname === "/" && <Search fontSize="large" onClick={openSearchModal}/>}
         <div className="header__links">
