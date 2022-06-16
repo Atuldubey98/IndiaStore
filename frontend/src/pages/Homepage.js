@@ -16,11 +16,17 @@ import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
 import { Button, CircularProgress, IconButton } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Search, FilterList, KeyboardArrowUpSharp, Close } from "@material-ui/icons";
+import {
+  Search,
+  FilterList,
+  KeyboardArrowUpSharp,
+  Close,
+} from "@material-ui/icons";
 import Slider from "@mui/material/Slider";
 const Homepage = () => {
   Modal.setAppElement("#root");
   const [price, setPrice] = useState(0);
+
   const [openFilters, setOpenFilters] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,7 +55,6 @@ const Homepage = () => {
   };
   const onSearchFormSubmit = (e) => {
     e.preventDefault();
-    console.log(search);
   };
   const customStyles = {
     content: {
@@ -199,12 +204,14 @@ const Homepage = () => {
             style={customStyles}
             contentLabel="Search"
           >
-            <h2 style={{ margin: "auto" }}>
+            <h2 className="searchModal__head">
               <i>India Store - Search</i>
-              <IconButton onClick={closeModal}><Close/></IconButton>
+              <IconButton onClick={closeModal}>
+                <Close />
+              </IconButton>
             </h2>
             <div className="homepage__search">
-              <form onSubmit={onSearchFormSubmit}>
+              <form autoComplete="off" onSubmit={onSearchFormSubmit}>
                 <input
                   onChange={onSearchChange}
                   value={search}

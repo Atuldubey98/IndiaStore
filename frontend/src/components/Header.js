@@ -36,42 +36,69 @@ const Header = () => {
       </div>
       <div className="header__content">
         {location.pathname === "/" && (
-          <IconButton>
-            <Search
-              style={style}
-              fontSize="medium"
-              onClick={openSearchModal}
-            />
+          <IconButton onClick={openSearchModal}>
+            <Search style={style} fontSize="medium" />
           </IconButton>
         )}
         <div className="header__links">
           <Link to={"/"}>
             <IconButton>
-              <Home fontSize="medium" style={style}/>
-              <span style={{ fontWeight: "bold", color: "white", fontSize: "medium" }} className="header__linksText">Home</span>
+              <Home fontSize="medium" style={style} />
+              <span
+                style={{
+                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: "medium",
+                }}
+                className="header__linksText"
+              >
+                Home
+              </span>
             </IconButton>
           </Link>
 
           <Link to={"/cart"}>
             <IconButton>
-              <Badge badgeContent={count}>
+              <Badge style={style} badgeContent={count}>
                 <ShoppingCart style={style} fontSize="medium" />
               </Badge>
-              <span style={{ fontWeight: "bold", color: "white", fontSize: "medium" }} className="header__linksText">Cart</span>
+              <span
+                style={{
+                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: "medium",
+                }}
+                className="header__linksText"
+              >
+                Cart
+              </span>
             </IconButton>
           </Link>
 
           <Link to={"/orders"}>
             <IconButton>
               <ShoppingBasket style={style} fontSize="medium" />
-              <span style={{ fontWeight: "bold", color: "white", fontSize: "medium" }} className="header__linksText">Orders</span>
+              <span
+                style={{
+                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: "medium",
+                }}
+                className="header__linksText"
+              >
+                Orders
+              </span>
             </IconButton>
           </Link>
-          <div  className="header__linksLogout" style={{ cursor: "pointer" }}>
-            <IconButton>
-              <ExitToApp style={style}fontSize="medium" onClick={handleLogout} />
+          <div className="header__linksLogout" style={{ cursor: "pointer" }}>
+            <IconButton onClick={handleLogout}>
+              <ExitToApp style={style} fontSize="medium" />
               <span
-                style={{ fontWeight: "bold", color: "white", fontSize: "medium" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: "medium",
+                }}
                 className="header__linksText"
               >
                 Logout
