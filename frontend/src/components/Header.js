@@ -32,29 +32,29 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__logo">
-            <Store fontSize={"large"}/> <h1>India Store</h1>
+            <Store fontSize={"medium"}/> <h2>India Store</h2>
           </div>
       <div className="header__content">
-        {location.pathname === "/" && <Search fontSize="large" onClick={openSearchModal}/>}
+        {location.pathname === "/" && <Search fontSize="medium" onClick={openSearchModal}/>}
         <div className="header__links">
           <Link to={"/"}>
-            <Home fontSize="large" />
+            <Home fontSize="medium" />
           <span className="header__linksText">Home</span>
           </Link>
 
           <Link to={"/cart"}>
             <Badge badgeContent={count}>
-              <ShoppingCart fontSize="large" />
+              <ShoppingCart fontSize="medium" />
             </Badge>
             <span className="header__linksText">Cart</span>
           </Link>
 
           <Link to={"/orders"}>
-            <ShoppingBasket fontSize="large" />
+            <ShoppingBasket fontSize="medium" />
             <span className="header__linksText">Orders</span>
           </Link>
           <div className="header__linksLogout" style={{ cursor: 'pointer' }}>
-            <ExitToApp fontSize="large" onClick={handleLogout} />
+            <ExitToApp fontSize="medium" onClick={handleLogout} />
             <span style={{ fontWeight: 'bold' }} className="header__linksText">Logout</span>
           </div>
         </div>

@@ -2,7 +2,7 @@ import { Button} from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import SnackbarContent from "@mui/material/SnackbarContent";
 import React from "react";
-const SnackBarHandler = ({ open, handleClose, message }) => {
+const SnackBarHandler = ({ open, handleClose, message , backgroundColor}) => {
   const action = (
     <React.Fragment>
       <Button color="secondary" size="small" onClick={handleClose}>
@@ -17,7 +17,7 @@ const SnackBarHandler = ({ open, handleClose, message }) => {
       onClose={handleClose}
       action={action}
     >
-      <SnackbarContent style={{ backgroundColor: "red" }} message={message} />
+      <SnackbarContent style={{ backgroundColor}} message={message} />
     </Snackbar>
   );
 };

@@ -12,12 +12,16 @@ import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import SnackBarHandler from "../components/SnackBarHandler";
 import useQuery from "../hooks/useQuery";
 import { Store } from "@material-ui/icons";
+import axiosInstance from "../api/axios";
 
 const Login = () => {
   const { user, error, loading } = useSelector((state) => state.userAccess);
   const query = useQuery();
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState();
+  const [messageOpen, setMessageOpen] = useState(false);
+
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -40,7 +44,6 @@ const Login = () => {
       dispatch(setUserLoading(true));
       const response = await usersApi.loginApi(email, password);
       if (response) {
-        console.log(response.data);
         dispatch(setUser({ email, token: response.data.token }));
         navigate("/", { replace: true });
       } else {
@@ -57,7 +60,7 @@ const Login = () => {
     if (reason === "clickaway") {
       return;
     }
-
+    setMessageOpen(false);
     setOpen(false);
   };
   const onConfirmPasswordChange = (e) => {
@@ -76,9 +79,18 @@ const Login = () => {
         setOpen(true);
         return;
       }
+      const response = await axiosInstance.post("users/register", {
+        email,
+        name,
+        password,
+        confirmPassword,
+      });
+      if (response.status === 200) {
+        setMessage("User registered ! Login to continue");
+      }
     } catch (err) {
-      console.log(err);
-      setUserError("");
+      dispatch(setUserError("Error registering the user"))
+      setOpen(true);
     } finally {
       dispatch(setUserLoading(false));
     }
@@ -99,7 +111,7 @@ const Login = () => {
       ) : (
         <form autoComplete={`on`} onSubmit={onLoginSubmit}>
           <div className="header__logo">
-            <Store fontSize={"large"}/> <h1>India Store</h1>
+            <Store fontSize={"large"} /> <h1>India Store</h1>
           </div>
           <input
             placeholder="Email*"
@@ -150,7 +162,18 @@ const Login = () => {
           </Button>
         </form>
       )}
-      <SnackBarHandler open={open} handleClose={handleClose} message={error} />
+      <SnackBarHandler
+        open={open}
+        handleClose={handleClose}
+        message={error}
+        backgroundColor={"red"}
+      />
+      <SnackBarHandler
+        open={messageOpen}
+        handleClose={handleClose}
+        message={message}
+        backgroundColor={"green"}
+      />
     </div>
   );
 };
