@@ -8,7 +8,7 @@ import {
   ExitToApp,
   Store,
 } from "@material-ui/icons";
-import { Badge } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, setUserLoading } from "../redux/actions/usersAction";
 import axiosInstance from "../api/axios";
@@ -19,46 +19,66 @@ const Header = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     dispatch(setUserLoading(true));
-    const {status} = await axiosInstance.post("users/logout",{});
+    const { status } = await axiosInstance.post("users/logout", {});
     if (status === 200) {
       dispatch(setUser(null));
       navigate("/login", { replace: true });
     }
   };
-  const openSearchModal = ()=>{
-    navigate("?searchModal=true")
-  }
-
+  const openSearchModal = () => {
+    navigate("?searchModal=true");
+  };
+  const style = { color: "white" };
   return (
     <div className="header">
       <div className="header__logo">
-            <Store fontSize={"medium"}/> <h2>India Store</h2>
-          </div>
+        <Store fontSize={"medium"} /> <h2>India Store</h2>
+      </div>
       <div className="header__content">
-        {location.pathname === "/" && <Search fontSize="medium" onClick={openSearchModal}/>}
+        {location.pathname === "/" && (
+          <IconButton>
+            <Search
+              style={style}
+              fontSize="medium"
+              onClick={openSearchModal}
+            />
+          </IconButton>
+        )}
         <div className="header__links">
           <Link to={"/"}>
-            <Home fontSize="medium" />
-          <span className="header__linksText">Home</span>
+            <IconButton>
+              <Home fontSize="medium" style={style}/>
+              <span style={{ fontWeight: "bold", color: "white", fontSize: "medium" }} className="header__linksText">Home</span>
+            </IconButton>
           </Link>
 
           <Link to={"/cart"}>
-            <Badge badgeContent={count}>
-              <ShoppingCart fontSize="medium" />
-            </Badge>
-            <span className="header__linksText">Cart</span>
+            <IconButton>
+              <Badge badgeContent={count}>
+                <ShoppingCart style={style} fontSize="medium" />
+              </Badge>
+              <span style={{ fontWeight: "bold", color: "white", fontSize: "medium" }} className="header__linksText">Cart</span>
+            </IconButton>
           </Link>
 
           <Link to={"/orders"}>
-            <ShoppingBasket fontSize="medium" />
-            <span className="header__linksText">Orders</span>
+            <IconButton>
+              <ShoppingBasket style={style} fontSize="medium" />
+              <span style={{ fontWeight: "bold", color: "white", fontSize: "medium" }} className="header__linksText">Orders</span>
+            </IconButton>
           </Link>
-          <div className="header__linksLogout" style={{ cursor: 'pointer' }}>
-            <ExitToApp fontSize="medium" onClick={handleLogout} />
-            <span style={{ fontWeight: 'bold' }} className="header__linksText">Logout</span>
+          <div  className="header__linksLogout" style={{ cursor: "pointer" }}>
+            <IconButton>
+              <ExitToApp style={style}fontSize="medium" onClick={handleLogout} />
+              <span
+                style={{ fontWeight: "bold", color: "white", fontSize: "medium" }}
+                className="header__linksText"
+              >
+                Logout
+              </span>
+            </IconButton>
           </div>
         </div>
-
       </div>
     </div>
   );

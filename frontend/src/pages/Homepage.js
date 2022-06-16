@@ -16,7 +16,7 @@ import Product from "../components/Product";
 import BuyProduct from "../components/BuyProduct";
 import { Button, CircularProgress, IconButton } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Search, FilterList, KeyboardArrowUpSharp } from "@material-ui/icons";
+import { Search, FilterList, KeyboardArrowUpSharp, Close } from "@material-ui/icons";
 import Slider from "@mui/material/Slider";
 const Homepage = () => {
   Modal.setAppElement("#root");
@@ -201,6 +201,7 @@ const Homepage = () => {
           >
             <h2 style={{ margin: "auto" }}>
               <i>India Store - Search</i>
+              <IconButton onClick={closeModal}><Close/></IconButton>
             </h2>
             <div className="homepage__search">
               <form onSubmit={onSearchFormSubmit}>

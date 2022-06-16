@@ -8,9 +8,6 @@
   height: 25rem;
   box-shadow: 2px 2px 5px rgba(65, 35, 172, 0.891);
 }
-.product__productName{
-  padding: 10px;
-}
 .product__productDescription
 {
   padding: 10px;

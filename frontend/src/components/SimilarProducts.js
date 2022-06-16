@@ -1,22 +1,33 @@
 import { KeyboardArrowDown, KeyboardArrowUpRounded } from "@material-ui/icons";
 import { IconButton } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import "./SimilarProducts.css";
 const SimilarProducts = () => {
   const products = useSelector((state) => state.productsAccess.products);
   const [openSimilar, setOpenSimilar] = useState(true);
+  const ref = useRef();
   const length = products.length / 2;
+  useEffect(() => {
+    const similarRef = ref.current;
+    similarRef.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      similarRef.scrollLeft += e.deltaY;
+    });
+    return () => {
+      similarRef.removeEventListener("wheel", () => {});
+    };
+  }, []);
   return (
     <div className="similar">
       <div className="similar__icons">
         <IconButton onClick={() => setOpenSimilar((o) => !o)}>
           {openSimilar ? <KeyboardArrowDown /> : <KeyboardArrowUpRounded />}
         </IconButton>
-        <p>Similar Products</p>
+        <p className="similar__head">Similar Products</p>
       </div>
       {openSimilar && (
-        <div className="similar__products">
+        <div ref={ref} className="similar__products">
           {length > 0 &&
             products.map(
               (p, index) =>

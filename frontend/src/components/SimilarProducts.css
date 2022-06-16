@@ -1,6 +1,9 @@
 .similar {
   border-top: 2px dashed lightgray;
 }
+.similar__head{
+    font-weight: bold;
+}
 .similar .similar__icons
 {
     display: flex;
@@ -9,11 +12,16 @@
 .similar__products{
     display: flex;
     overflow-x: scroll;
+    overflow-y: hidden;
     scroll-behavior: smooth;
+}
+.similar__productDes{
+    text-align: center;
 }
 .similar__product{
     width: 300px;
     margin-right: 10px;
+    cursor: pointer;
     border: 1px solid lightgray;
     display: flex;
     flex-direction: column;
