@@ -8,7 +8,7 @@ import {
   ExitToApp,
   Store,
 } from "@material-ui/icons";
-import { Badge, IconButton } from "@mui/material";
+import { Badge, } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, setUserLoading } from "../redux/actions/usersAction";
 import axiosInstance from "../api/axios";
@@ -36,74 +36,64 @@ const Header = () => {
       </div>
       <div className="header__content">
         {location.pathname === "/" && (
-          <IconButton onClick={openSearchModal}>
-            <Search style={style} fontSize="medium" />
-          </IconButton>
+          <Search onClick={openSearchModal} style={style} fontSize="medium" />
         )}
         <div className="header__links">
           <Link to={"/"}>
-            <IconButton>
-              <Home fontSize="medium" style={style} />
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "medium",
-                }}
-                className="header__linksText"
-              >
-                Home
-              </span>
-            </IconButton>
+            <Home fontSize="medium" style={style} />
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                fontSize: "medium",
+              }}
+              className="header__linksText"
+            >
+              Home
+            </span>
           </Link>
 
           <Link to={"/cart"}>
-            <IconButton>
-              <Badge style={style} badgeContent={count}>
-                <ShoppingCart style={style} fontSize="medium" />
-              </Badge>
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "medium",
-                }}
-                className="header__linksText"
-              >
-                Cart
-              </span>
-            </IconButton>
+            <Badge style={style} badgeContent={count}>
+              <ShoppingCart style={style} fontSize="medium" />
+            </Badge>
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                fontSize: "medium",
+              }}
+              className="header__linksText"
+            >
+              Cart
+            </span>
           </Link>
 
           <Link to={"/orders"}>
-            <IconButton>
-              <ShoppingBasket style={style} fontSize="medium" />
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "medium",
-                }}
-                className="header__linksText"
-              >
-                Orders
-              </span>
-            </IconButton>
+            <ShoppingBasket style={style} fontSize="medium" />
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                fontSize: "medium",
+              }}
+              className="header__linksText"
+            >
+              Orders
+            </span>
           </Link>
           <div className="header__linksLogout" style={{ cursor: "pointer" }}>
-            <IconButton onClick={handleLogout}>
-              <ExitToApp style={style} fontSize="medium" />
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "medium",
-                }}
-                className="header__linksText"
-              >
-                Logout
-              </span>
-            </IconButton>
+            <ExitToApp onClick={handleLogout} style={style} fontSize="medium" />
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                fontSize: "medium",
+              }}
+              className="header__linksText"
+            >
+              Logout
+            </span>
           </div>
         </div>
       </div>
