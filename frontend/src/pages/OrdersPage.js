@@ -7,7 +7,7 @@ import { CircularProgress } from "@mui/material";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({ message: "No orders fetched" });
+  const [error, setError] = useState();
   useEffect(() => {
     document.title = "India Store - Orders";
   }, []);
@@ -15,10 +15,10 @@ const Orders = () => {
     (async () => {
       try {
         setLoading(true);
-        const responseOrders = await axiosInstance.get("/orders");
+        const responseOrders = await axiosInstance.get("orders");
         setOrders(responseOrders.data.orders);
-      } catch (error) {
-        setError(error);
+      } catch (er) {
+        setError("No orders found");
       } finally {
         setLoading(false);
       }
@@ -27,15 +27,13 @@ const Orders = () => {
   return (
     <div className="orders">
       <Header />
-      <div className={loading ? "orders__load": "orders__home"}>
+      <div className={loading ? "orders__load" : "orders__home"}>
         {loading ? (
           <CircularProgress />
         ) : orders && orders.length > 0 ? (
           orders.map((order) => <Order key={order.orderId} order={order} />)
         ) : (
-          <div className="order_error">
-            <h1>{error.message}</h1>
-          </div>
+          <div className="order_error">{error}</div>
         )}
       </div>
     </div>
