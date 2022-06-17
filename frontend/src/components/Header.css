@@ -74,7 +74,7 @@ a:active {
   margin-left: 20px;
 }
 .header__linksText{
-  padding-left: 10px;
+  padding-left: 3px;
 }
 @media only screen and (max-width: 600px) { 
   .header {
