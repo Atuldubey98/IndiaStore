@@ -3,6 +3,12 @@
   display: flex;
   flex-wrap: wrap;
 }
+.product__load{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
 .product__pageProduct .product__productImageURL {
   max-width: 300px;
   flex: 5;

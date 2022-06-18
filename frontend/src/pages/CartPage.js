@@ -7,8 +7,8 @@ import "./CartPage.css";
 import { ShoppingBasket } from "@material-ui/icons";
 import { Button, CircularProgress } from "@mui/material";
 import Modal from "react-modal";
-import { useNavigate } from "react-router-dom";
-import {  useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import PhoneInput from "react-phone-number-input/input";
 import SimilarProducts from "../components/SimilarProducts";
@@ -101,17 +101,17 @@ const CartPage = () => {
   useEffect(() => {
     document.title = "India Store - Cart";
   }, []);
-  
+
   return (
     <div className="cart">
       <Header />
-      {query.has("sidemenu") && <SideMenu/>}
+      {query.has("sidemenu") && <SideMenu />}
       {loading ? (
         <CircularProgress />
       ) : (
         <div className="cart__page">
           <div className="cart__total">
-            <strong className="cart__totalDis">{`Total : ${total.toFixed(
+            <strong className="cart__totalDis">{`Total : Rs. ${total.toFixed(
               2
             )}`}</strong>
             <Button
@@ -189,7 +189,14 @@ const CartPage = () => {
                 <Product key={product.productId} product={product} />
               ))
             ) : (
-              <h1 className="">Add items to cart</h1>
+              <div className="cart__empty">
+                <img src="images/empty-cart" alt="empty-cart" />
+                <div className="cart__emptyData">
+                  <h2>You cart need some items</h2>
+                  <p>Fill your cart with the best of India Store</p>
+                  <Link to={"/"}><h4>Start Shopping</h4></Link>
+                </div>
+              </div>
             )}
           </div>
           <SimilarProducts />

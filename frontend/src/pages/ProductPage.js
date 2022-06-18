@@ -34,7 +34,7 @@ const ProductPage = () => {
   }, [productId]);
   const query = useQuery();
   return (
-    <div className="product__page">
+    <div className={"product__page" }>
       <Header />
       {query.has("sidemenu") && <SideMenu/>}
       {loading ? (
@@ -64,7 +64,7 @@ const ProductPage = () => {
               voluptatibus.
             </h5>
             <span className="product__head">Item Price</span>
-            <h4>${product.productPrice}`</h4>
+            <h4>Rs. {product.productPrice}</h4>
           </div>
         </div>
       )}

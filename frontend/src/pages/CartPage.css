@@ -18,12 +18,40 @@
   color: rgb(51, 56, 56);
 }
 
-.cart__no{
+.cart__no {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+.cart__empty {
+  display: flex;
+  background-color: beige;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  width: 70%;
+}
+.cart__empty img {
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+.cart__empty .cart__emptyData{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.cart__emptyData p {
+  font-size: 18px;
+  color: crimson;
+}
+.cart__emptyData a{
+  color: black;
+}
+.cart__empty h2{
+  font-size: 30px;
+}
 .cart__modal {
   font-size: 1.2rem;
   max-height: 80%;
