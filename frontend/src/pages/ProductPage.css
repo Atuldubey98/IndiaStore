@@ -3,12 +3,7 @@
   display: flex;
   flex-wrap: wrap;
 }
-.product__load{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-}
+
 .product__pageProduct .product__productImageURL {
   max-width: 300px;
   flex: 5;
@@ -18,6 +13,23 @@
 .product__pageProduct .product__decription{
   flex: 7;
   margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.product__head{
+  font-weight: 900;
+}
+.product__decription .product__data{
+  flex: 9;
+  min-width: 300px;
+}
+.prod__priceName .product__price{
+  color: darkgoldenrod;
+  font-size: 30px;
+}
+.product__decription .prod__priceName{
+  flex: 3;
   min-width: 300px;
 }
 .product__decription .product__head{

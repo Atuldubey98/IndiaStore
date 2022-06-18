@@ -2,10 +2,12 @@ import { KeyboardArrowDown, KeyboardArrowUpRounded } from "@material-ui/icons";
 import { IconButton } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./SimilarProducts.css";
 const SimilarProducts = () => {
   const products = useSelector((state) => state.productsAccess.products);
   const [openSimilar, setOpenSimilar] = useState(true);
+  const navigate = useNavigate();
   const ref = useRef();
   const length = products.length / 2;
   useEffect(() => {
@@ -18,6 +20,9 @@ const SimilarProducts = () => {
       similarRef.removeEventListener("wheel", () => {});
     };
   }, []);
+  const goToProductPage = (productId) => {
+    navigate(`/product/${productId}`);
+  };
   return (
     <div className="similar">
       <div className="similar__icons">
@@ -32,7 +37,11 @@ const SimilarProducts = () => {
             products.map(
               (p, index) =>
                 index < length && (
-                  <div key={p.productId} className="similar__product">
+                  <div
+                    onClick={() => goToProductPage(p.productId)}
+                    key={p.productId}
+                    className="similar__product"
+                  >
                     <img src={p.productImageURL} alt={p.productId} />
                     <div className="similar__productDes">
                       <strong>{p.productName}</strong>

@@ -34,9 +34,9 @@ const ProductPage = () => {
   }, [productId]);
   const query = useQuery();
   return (
-    <div className={"product__page" }>
+    <div className={"product__page"}>
       <Header />
-      {query.has("sidemenu") && <SideMenu/>}
+      {query.has("sidemenu") && <SideMenu />}
       {loading ? (
         <CircularProgress />
       ) : error.message ? (
@@ -53,18 +53,22 @@ const ProductPage = () => {
             }
           />
           <div className="product__decription">
-            <span className="product__head">Item : </span>
-            <h5>{product.productName}</h5>
-            <span className="product__head">Item Description : </span>
-            <h5>
-              {product.productDescription} Lorem ipsum dolor, sit amet
-              consectetur adipisicing elit. Eligendi quam, fugit repellendus
-              eveniet quas similique corporis, velit, atque impedit repellat
-              nesciunt sequi ullam numquam! Minus nobis dolores quasi ea
-              voluptatibus.
-            </h5>
-            <span className="product__head">Item Price</span>
-            <h4>Rs. {product.productPrice}</h4>
+            <div className="prod__priceName">
+              <span className="product__head">Item : </span>
+              <h2>{product.productName}</h2>
+              <span className="product__head">Item Price : </span>
+              <span>Rs. </span><span className="product__price">{product.productPrice}</span>
+            </div>
+            <div className="product__data">
+              <span className="product__head">Item Description : </span>
+              <p>
+                {product.productDescription} Lorem ipsum dolor, sit amet
+                consectetur adipisicing elit. Eligendi quam, fugit repellendus
+                eveniet quas similique corporis, velit, atque impedit repellat
+                nesciunt sequi ullam numquam! Minus nobis dolores quasi ea
+                voluptatibus.
+              </p>
+            </div>
           </div>
         </div>
       )}

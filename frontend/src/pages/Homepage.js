@@ -28,7 +28,7 @@ const Homepage = () => {
   Modal.setAppElement("#root");
   const [price, setPrice] = useState(0);
 
-  const [openFilters, setOpenFilters] = useState(false);
+  const [openFilters, setOpenFilters] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const { loading, error } = useSelector((state) => state.productsAccess);
@@ -96,12 +96,12 @@ const Homepage = () => {
   const onPriceFilter = () => {
     navigate(`${location.pathname}?max=${price}`);
   };
- 
+
   return (
     <div className={"homepage"}>
       <Header />
       <div className="homepage__container">
-        {openFilters ? (
+        {!loading && openFilters ? (
           <div className="homepage__filters">
             <IconButton
               onClick={() => {
@@ -141,43 +141,42 @@ const Homepage = () => {
                 </div>
               ))}
             </div>
-            {!loading && products.length !== 0 && (
-              <div className="homepage__filterCat">
-                <h3 className="homepage__cathead">Price Range</h3>
-                <div className="homepage__priceFilter">
-                  <Slider
-                    max={Math.max.apply(
+
+            <div className="homepage__filterCat">
+              <h3 className="homepage__cathead">Price Range</h3>
+              <div className="homepage__priceFilter">
+                <Slider
+                  max={Math.max.apply(
+                    null,
+                    products.map((p) => p.productPrice)
+                  )}
+                  min={Math.min.apply(
+                    null,
+                    products.map((p) => p.productPrice)
+                  )}
+                  value={price}
+                  onChange={onPriceChange}
+                  valueLabelDisplay={"auto"}
+                />
+                <div className="homepage__prices">
+                  <h4>
+                    {Math.min.apply(
                       null,
                       products.map((p) => p.productPrice)
                     )}
-                    min={Math.min.apply(
+                  </h4>
+                  <h4>
+                    {Math.max.apply(
                       null,
                       products.map((p) => p.productPrice)
                     )}
-                    value={price}
-                    onChange={onPriceChange}
-                    valueLabelDisplay={"auto"}
-                  />
-                  <div className="homepage__prices">
-                    <h4>
-                      {Math.min.apply(
-                        null,
-                        products.map((p) => p.productPrice)
-                      )}
-                    </h4>
-                    <h4>
-                      {Math.max.apply(
-                        null,
-                        products.map((p) => p.productPrice)
-                      )}
-                    </h4>
-                  </div>
-                  <Button onClick={onPriceFilter} variant="contained">
-                    Apply
-                  </Button>
+                  </h4>
                 </div>
+                <Button onClick={onPriceFilter} variant="contained">
+                  Apply Less than
+                </Button>
               </div>
-            )}
+            </div>
           </div>
         ) : (
           <div className="home__filters">
@@ -190,7 +189,7 @@ const Homepage = () => {
             </IconButton>
           </div>
         )}
-        {query.has("sidemenu") && <SideMenu/>}
+        {query.has("sidemenu") && <SideMenu />}
         <div className={loading ? "homepage__load" : "homepage__products"}>
           {loading ? (
             <CircularProgress />
