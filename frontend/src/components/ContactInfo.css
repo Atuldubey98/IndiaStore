@@ -1,0 +1,20 @@
+.contact__info {
+  margin: 10px 0px 10px 0px;
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  padding: 20px;
+  position: relative;
+}
+.contact__info:hover {
+  box-shadow: 2px 2px #888888;
+}
+.contact__info:hover .contact__infoBtn {
+  display: block;
+}
+.contact__infoBtn {
+  position: absolute;
+  z-index: 99;
+  right: -21px;
+  display: none;
+  top: -18px;
+}

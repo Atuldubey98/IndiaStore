@@ -39,10 +39,12 @@ const SideMenu = () => {
             <span className="menu__text">Orders</span>
           </div>
         </Link>
-        <div className="menu__item">
-          <Avatar sx={{ width: "25px", height: "25px" }} />
-          <span className="menu__text">Profile</span>
-        </div>
+        <Link to={"/profile"}>
+          <div className="menu__item">
+            <Avatar sx={{ width: "25px", height: "25px" }} />
+            <span className="menu__text">Profile</span>
+          </div>
+        </Link>
         <div className="menu__item">
           <ExitToApp />
           <span className="menu__text">Logout</span>

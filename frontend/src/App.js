@@ -11,6 +11,7 @@ import ProductPage from "./pages/ProductPage";
 import axiosInstance from "./api/axios";
 import { useDispatch } from "react-redux";
 import { setUser, setUserError, setUserLoading } from "./redux/actions/usersAction";
+import ProfilePage from "./pages/ProfilePage";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -74,7 +75,7 @@ const App = () => {
           path="/profile"
           element={
             <PrivateRoute>
-              <ProductPage />
+              <ProfilePage />
             </PrivateRoute>
           }
         />

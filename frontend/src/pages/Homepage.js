@@ -28,7 +28,7 @@ const Homepage = () => {
   Modal.setAppElement("#root");
   const [price, setPrice] = useState(0);
 
-  const [openFilters, setOpenFilters] = useState(true);
+  const [openFilters, setOpenFilters] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { loading, error } = useSelector((state) => state.productsAccess);
@@ -39,13 +39,17 @@ const Homepage = () => {
   const onCategoryClick = (isAll, categoryId) => {
     navigate(isAll ? "/" : `/?categoryId=${categoryId}`);
   };
-
   const products = useSelector((state) => {
-    let ps = query.has("categoryId")
+    let ps = query.has("s")
       ? state.productsAccess.products.filter(
-          (p) => p.categoryId === query.get("categoryId")
+          (p) =>
+            p.productName.includes(query.get("s")) ||
+            p.productDescription.includes(query.get("s"))
         )
       : state.productsAccess.products;
+    ps = query.has("categoryId")
+      ? ps.filter((p) => p.categoryId === query.get("categoryId"))
+      : ps;
     ps = query.has("max")
       ? ps.filter((p) => p.productPrice <= query.get("max"))
       : ps;
@@ -56,6 +60,7 @@ const Homepage = () => {
   };
   const onSearchFormSubmit = (e) => {
     e.preventDefault();
+    navigate(`${location.pathname}?s=${search}`);
   };
   const customStyles = {
     content: {
