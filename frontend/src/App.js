@@ -70,6 +70,14 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <ProductPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
