@@ -5,6 +5,8 @@ import axiosInstance from "../api/axios";
 import Header from "../components/Header";
 import { CircularProgress } from "@mui/material";
 import SimilarProducts from "../components/SimilarProducts";
+import SideMenu from "../components/SideMenu";
+import useQuery from "../hooks/useQuery";
 const ProductPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
@@ -30,12 +32,14 @@ const ProductPage = () => {
 
     fetchProduct();
   }, [productId]);
-  return loading ? (
-    <CircularProgress />
-  ) : (
+  const query = useQuery();
+  return (
     <div className="product__page">
       <Header />
-      {error.message ? (
+      {query.has("sidemenu") && <SideMenu/>}
+      {loading ? (
+        <CircularProgress />
+      ) : error.message ? (
         error.message
       ) : (
         <div className="product__pageProduct">
@@ -64,7 +68,7 @@ const ProductPage = () => {
           </div>
         </div>
       )}
-      <SimilarProducts/>
+      <SimilarProducts />
     </div>
   );
 };

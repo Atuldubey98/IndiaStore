@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Header from "../components/Header";
 import Order from "../components/Order";
 import axiosInstance from "../api/axios";
 import "./OrdersPage.css";
 import { CircularProgress } from "@mui/material";
+
+import SideMenu from "../components/SideMenu";
+import useQuery from "../hooks/useQuery";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,9 +27,11 @@ const Orders = () => {
       }
     })();
   }, []);
+  const query = useQuery();
   return (
     <div className="orders">
       <Header />
+      {query.has("sidemenu") && <SideMenu/>}
       <div className={loading ? "orders__load" : "orders__home"}>
         {loading ? (
           <CircularProgress />

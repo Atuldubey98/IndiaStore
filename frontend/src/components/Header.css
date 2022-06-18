@@ -70,6 +70,11 @@ a:active {
   align-items: center;
 }
 
+.header__logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .header__links a{
   margin-left: 20px;
 }

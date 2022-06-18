@@ -23,6 +23,7 @@ import {
   Close,
 } from "@material-ui/icons";
 import Slider from "@mui/material/Slider";
+import SideMenu from "../components/SideMenu";
 const Homepage = () => {
   Modal.setAppElement("#root");
   const [price, setPrice] = useState(0);
@@ -95,6 +96,7 @@ const Homepage = () => {
   const onPriceFilter = () => {
     navigate(`${location.pathname}?max=${price}`);
   };
+ 
   return (
     <div className={"homepage"}>
       <Header />
@@ -188,6 +190,7 @@ const Homepage = () => {
             </IconButton>
           </div>
         )}
+        {query.has("sidemenu") && <SideMenu/>}
         <div className={loading ? "homepage__load" : "homepage__products"}>
           {loading ? (
             <CircularProgress />

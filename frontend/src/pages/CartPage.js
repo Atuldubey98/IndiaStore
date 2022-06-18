@@ -8,10 +8,11 @@ import { ShoppingBasket } from "@material-ui/icons";
 import { Button, CircularProgress } from "@mui/material";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import PhoneInput from "react-phone-number-input/input";
 import SimilarProducts from "../components/SimilarProducts";
+import SideMenu from "../components/SideMenu";
 const CartPage = () => {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
@@ -100,9 +101,11 @@ const CartPage = () => {
   useEffect(() => {
     document.title = "India Store - Cart";
   }, []);
+  
   return (
     <div className="cart">
       <Header />
+      {query.has("sidemenu") && <SideMenu/>}
       {loading ? (
         <CircularProgress />
       ) : (

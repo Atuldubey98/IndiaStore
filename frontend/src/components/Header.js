@@ -6,14 +6,19 @@ import {
   ShoppingBasket,
   Search,
   ExitToApp,
-  Store,
+  Menu,
 } from "@material-ui/icons";
-import { Badge, } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, setUserLoading } from "../redux/actions/usersAction";
 import axiosInstance from "../api/axios";
+import { ApplicationContext } from "../contexts/ApplicationContext";
+import { useContext } from "react";
+
 const Header = () => {
   const location = useLocation();
+  const {  handleOpenSideMenu } = useContext(ApplicationContext);
+  
   const dispatch = useDispatch();
   const count = useSelector((state) => state.cartAccess.cart.length);
   const navigate = useNavigate();
@@ -32,7 +37,10 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__logo">
-        <Store fontSize={"medium"} /> <h2>India Store</h2>
+        <IconButton onClick={handleOpenSideMenu}>
+          <Menu style={style} />
+        </IconButton>
+        <h2>India Store</h2>
       </div>
       <div className="header__content">
         {location.pathname === "/" && (
@@ -97,6 +105,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

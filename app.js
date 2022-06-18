@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors({
   credentials: true,
-  origin : ["http://localhost:3000","https://indiastore-app.herokuapp.com"]
+  origin : ["http://localhost:3000","https://indiastore-app.herokuapp.com", "http://192.168.1.16:3000"]
 }));
 const bodyParser = require("body-parser");
 const products = require("./api/routes/products");
