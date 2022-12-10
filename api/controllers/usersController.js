@@ -113,28 +113,29 @@ const deactivateUser = async (req, res) => {
   }
 };
 
-const me = async (req, res)=>{
+const me = async (req, res) => {
   try {
-    if(req && req.user && req.cookies && req.cookies.token)
-    {
-      return  res.status(200).json({email : req.user.email, token : req.cookies.token});
+    if (req && req.user && req.cookies && req.cookies.token) {
+      return res
+        .status(200)
+        .json({ email: req.user.email, token: req.cookies.token });
     }
-    return res.status(400).json({status :false});
+    return res.status(400).json({ status: false });
   } catch (error) {
-    return res.status(400).json({status :false});
+    return res.status(400).json({ status: false });
   }
-}
-const logout = async (req, res)=>{
+};
+const logout = async (req, res) => {
   res.cookie("token", null, {
-    expires : new Date(Date.now()),
-    httpOnly :  true
-  })
-  return res.status(200).json({status: true, message : "Logged out"});
-}
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+  return res.status(200).json({ status: true, message: "Logged out" });
+};
 module.exports = {
   register,
   login,
   deactivateUser,
   me,
-  logout
+  logout,
 };

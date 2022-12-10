@@ -5,22 +5,22 @@
   justify-content: space-between;
   height: 5vh;
   padding: 1rem;
-  background-color: var(--primary-color)
+  background-color: var(--primary-color);
 }
 
-.header h2{
+.header h2 {
   margin-right: 20px;
 }
-.header__linkDropdownContent{
+.header__linkDropdownContent {
   padding: 8px;
   display: grid;
   cursor: pointer;
 }
-.header__linkDropdownProfile{
+.header__linkDropdownProfile {
   display: flex;
   align-items: center;
 }
-.header__linksLogout{
+.header__linksLogout {
   display: flex;
   margin-left: 20px;
   align-items: center;
@@ -61,7 +61,7 @@ a:active {
   text-decoration: none;
 }
 
-.header__content input{
+.header__content input {
   border: none;
   width: 100%;
 }
@@ -70,18 +70,18 @@ a:active {
   align-items: center;
 }
 
-.header__logo{
+.header__logo {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.header__links a{
+.header__links a {
   margin-left: 20px;
 }
-.header__linksText{
+.header__linksText {
   padding-left: 3px;
 }
-@media only screen and (max-width: 600px) { 
+@media only screen and (max-width: 600px) {
   .header {
     padding: 30px;
   }

@@ -17,8 +17,8 @@ import { useContext } from "react";
 
 const Header = () => {
   const location = useLocation();
-  const {  handleOpenSideMenu } = useContext(ApplicationContext);
-  
+  const { handleOpenSideMenu } = useContext(ApplicationContext);
+
   const dispatch = useDispatch();
   const count = useSelector((state) => state.cartAccess.cart.length);
   const navigate = useNavigate();
@@ -105,7 +105,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };
